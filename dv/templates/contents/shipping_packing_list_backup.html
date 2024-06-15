@@ -1,0 +1,553 @@
+<div class="w3-container w3-hide" id="shipping_packing_list_header" style="width:100%;max-width:1000px">
+    <div class="w3-third">
+        <h5 class="w3-opacity">
+            <b>Packing List</b>
+        </h5>
+
+    </div>
+    <div class="w3-third">
+        <div class="w3-half">
+            <h5 class="w3-opacity">
+                <b>PDF</b>
+            </h5>
+            <div class="w3-full w3-bar">
+                <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_shippingpackinglist()" style="width:50%"> Print </button>
+            </div>
+        </div>
+        <div class="w3-half">
+            <h5 class="w3-opacity">
+                <b>SIGN</b>
+            </h5>
+            <input type="checkbox" id="shipping_packing_list_sign_check">
+        </div>
+    </div>
+    <div class="w3-third">
+        <div class="w3-full">
+            <h5 class="w3-opacity">
+                <b>TITLE</b>
+            </h5>
+            <select id="shipping_packing_pdf_title" class="w3-small">
+                <option value="PACKING LIST">PACKING LIST</option>
+                <option value="WEIGHT LIST">WEIGHT LIST</option>
+                <option value="DETAIL PACKING LIST">DETAIL PACKING LIST</option>
+                <option value="DETAIL WEIGHT LIST">DETAIL WEIGHT LIST</option>            
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right " id="shipping_packing_list" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_packing_list_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_packing_list_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Shipper / Exporter
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_packing_list_shipper" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> For Account Risk of Messrs
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_packing_list_account" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Notify Party
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_packing_list_Notify" name="Days" style=" resize : none;"> </textarea>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Loading
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_packing_list_Loading" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Final Destination
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_packing_list_Destination" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Vessel/Flight
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="shipping_packing_list_Vessel" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i> Sailing on or about
+                    </div>
+                    <input type="text" id="date_shipping_packing_list_sailing" class="w3-input ht_25 max_width_200">
+                </div>
+
+            </div>
+            <div class="w3-half">
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> No. date of invoice
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="shipping_packing_list_invoice" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+                    <input type="text" id="date_shipping_packing_list_invoice" class="w3-input ht_25 max_width_200">
+                </div>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Remark
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="shipping_packing_list_remark" name="Days" style=" resize : none; height:270px;"> </textarea>
+            </div>
+        </div>
+        <!-- end of second row -->
+        <hr>
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <div class="w3-full">
+                <pre><u>Marks and numbers</u>          <u>Description of goods</u>                <u>Net weight</u>                 <u>Gross weight</u>        <u>Measurement</u></pre>
+                <textarea class="w3-input w3-border" id="shipping_packing_list_goods" style="resize:none;height:200px;width:900px; overflow-x:auto;overflow-y:auto;"></textarea>
+            </div>
+
+
+            <div class="w3-half row1_text_color">
+                <i class="fa fa-pencil"></i>
+                <u> Packing List </u>
+                <i class="fa fa-print"></i> print
+
+                <input type="checkbox" id="shipping_packing_list_check_weight">
+            </div>
+            <div class="w3-half">
+                <select id="shipping_packing_list_kind" class="bootstrap3 w3-small readonly">
+                    <option value="BALE">BALE</option>                        
+                    <option value="CARTON">CARTON</option>                        
+                    <option value="BOX">BOX</option>                        
+                    <option value="PALLET">PALLET</option>
+                    <option value="BAG">BAG</option>                
+                </select>
+            </div>
+            <div class="w3-col">
+                <textarea class="w3-input w3-border" id="shipping_packing_list_kind_contents" style="resize:none;line-height:1.6;overflow-y:hidden;height:200px;"></textarea>
+            </div>
+
+            <div class="w3-half row1_text_color">
+                <i class="fa fa-pencil"></i>
+                <u> Title 1: </u>
+            </div>
+            <div class="w3-half">
+                <select id="shipping_packing_list_title1" class="bootstrap3 w3-small readonly">
+                    <option value="0">PACKING LIST</option>                        
+                    <option value="1">DETAIL PACKING LIST</option>                        
+                    <option value="2">WEIGHT LIST</option>                        
+                    <option value="3">WEIGHT DETAIL LIST</option>                    
+                </select>
+            </div>
+
+            <div class="w3-half row1_text_color">
+                <i class="fa fa-pencil"></i>
+                <u> Title 2:</u>
+            </div>
+            <div class="w3-half">
+                <select id="shipping_packing_list_title2" class="bootstrap3 w3-small readonly">
+                    <option value="0">PACKING LIST</option>                        
+                    <option value="1">DETAIL PACKING LIST</option>                        
+                    <option value="2">WEIGHT LIST</option>                        
+                    <option value="3">WEIGHT DETAIL LIST</option> 
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end of w3-container -->
+
+<img src="../static/images/00001.bmp" id='doimage_shipping_packing_list' class="w3-hide">
+
+<script>
+    $(function() {
+        $("#date_shipping_packing_list_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_packing_list_invoice").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+
+    shipping_packing_list_kind = $('#shipping_packing_list_kind').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    shipping_packing_list_kind.setValue('BALE', false);
+
+    shipping_packing_list_title1 = $('#shipping_packing_list_title1').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    shipping_packing_list_title1.setValue(0, true);
+
+    shipping_packing_list_title2 = $('#shipping_packing_list_title2').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    shipping_packing_list_title2.setValue(0, true);
+
+
+    $('#shipping_packing_pdf_title').selectize({
+        plugins: ['restore_on_backspace'],
+        delimiter: ',',
+        persist: false,
+        create: function(input) {
+            return {
+                value: input,
+                text: input
+            }
+        }
+    });
+
+    function pdfPrint_shippingpackinglist() {
+
+        // set variable
+        var vtitle = $("#shipping_packing_pdf_title").val();
+        var v1 = $("#shipping_packing_list_shipper").val();
+        var v2 = $("#shipping_packing_list_account").val();
+        var v3 = $("#shipping_packing_list_Notify").val();
+        var v4 = $("#shipping_packing_list_Loading").val();
+        var v5 = $("#shipping_packing_list_Destination").val();
+        var v6 = $("#shipping_packing_list_Vessel").val();
+        var v7 = $("#date_shipping_packing_list_sailing").val();
+        var v8 = $("#shipping_packing_list_invoice").val();
+        var v9 = $("#date_shipping_packing_list_invoice").val();
+        var v89 = String(v8) + '  ' + String(v9);
+        var v10 = $("#shipping_packing_list_remark").val();
+        var v11 = $("#shipping_packing_list_goods").val();
+
+        var arr = v11.split('\n');
+        var isize = arr.length;
+        var arr1 = [];
+        for (var i = 0; i < isize; i++) {
+            arrt = [];
+
+            if (arr[i].substr(0, 28).search('--') != -1) {
+                arr_ = String('-').padEnd(21, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(0, 28));
+            }
+
+            if (arr[i].substr(28, 37).search('--') != -1) {
+                arr_ = String('-').padEnd(32, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(28, 37));
+            }
+
+            if (arr[i].substr(65, 26).search('--') != -1) {
+                arr_ = String('-').padEnd(11, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(65, 26));
+            }
+
+            if (arr[i].substr(91, 20).search('--') != -1) {
+                arr_ = String('-').padEnd(10, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(91, 20));
+            }
+
+            if (arr[i].substr(111, 20).search('--') != -1) {
+                arr_ = String('-').padEnd(20, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(111, 20));
+            }
+
+            arr1.push(arrt);
+        }
+
+
+        var rows = [];
+
+        for (var i = 0; i < isize; i++) {
+
+            rows.push([arr1[i][0], arr1[i][1], arr1[i][2], arr1[i][3], arr1[i][4]]);
+        }
+
+        var dd = {
+
+            table: {
+                widths: [100, 150, 60, 60, '*'],
+                fontSize: 8,
+                alignment: 'center',
+                margin: [0, 0, 0, 0],
+                body: rows
+
+            },
+            fontSize: 8,
+            alignment: 'center',
+            layout: 'noBorders',
+            margin: [0, 0, 0, 0]
+        }
+
+        // image 
+        var canvas = document.createElement('canvas');
+        var img = document.getElementById('doimage_shipping_packing_list');
+        canvas.height = img.naturalHeight;
+        canvas.width = img.naturalWidth;
+        var ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var base64String2 = canvas.toDataURL();
+
+        var ee = {
+            image: base64String2,
+            width: 100,
+            height: 50,
+            absolutePosition: {
+                x: 380,
+                y: 680
+            }
+        }
+        if (document.getElementById("shipping_packing_list_sign_check").checked == true) {
+            ee = {
+                image: base64String2,
+                width: 100,
+                height: 50,
+                absolutePosition: {
+                    x: 380,
+                    y: 680
+                }
+            }
+        } else {
+            ee = {
+                alignment: 'right',
+                margin: [0, 0, 30, 0],
+                text: 'Signed by '
+            }
+
+        }
+
+        // weight details
+        vff = $("#shipping_packing_list_kind_contents").val();
+        var ff = {
+            text: vff,
+            fontSize: 8,
+
+            layout: 'noBorders',
+            margin: [0, 0, 0, 0]
+        };
+        if (document.getElementById("shipping_packing_list_check_weight").checked == true) {
+            ff = {
+                text: vff,
+                fontSize: 8,
+
+                layout: 'noBorders',
+                margin: [0, 0, 0, 0]
+            }
+        } else {
+            ff = {
+
+            }
+        }
+
+        //28, 37, 26,20, 1
+
+
+        var docDefinition2 = {
+
+            content: [{
+                        alignment: 'center',
+                        text: '\n' + vtitle + '\n',
+                        bold: true,
+                        fontSize: 30
+                    }, {
+                        color: '#444',
+                        table: {
+                            widths: [150, 150, '*'],
+                            heights: [25, 25, 50, 50, 25, 25],
+                            body: [
+                                [{
+                                    border: [true, true, true, false],
+                                    colSpan: 2,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Shipper/Exporter\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v1
+                                    }]
+                                }, '', {
+                                    bold: true,
+                                    text: [{
+                                        bold: true,
+                                        text: 'No. & date\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v89
+                                    }]
+                                }],
+                                ['', '', {
+                                    rowSpan: 5,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Remark\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v10
+                                    }]
+                                }],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'For Account & Risk of Messrs.\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v2
+                                    }]
+                                }, '', ''],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Notify party\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v3
+                                    }]
+                                }, '', ''],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Port of Loading\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v4
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Final desitination\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v5
+                                    }]
+                                }, ''],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Vessel / Flight\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v6
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Sailing on or about\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v7
+                                    }]
+                                }, ''],
+                            ]
+                        } // table layout
+                    }, {
+                        color: '#123',
+                        table: {
+                            widths: [100, 150, 60, 60, '*'],
+                            heights: [15, 100, 40],
+                            body: [
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Marks and numbers\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: 'Description of goods\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Net weight\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Gross weight\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Measurement\n',
+                                        }]
+
+
+                                    }
+
+                                ]
+                            ]
+                        } // table layout
+                    },
+                    dd,
+                    ff, {
+                        text: '\n\n\n\n\n\n\n\n\n                          '
+                    },
+                    ee
+
+                ] // end of content
+
+        }; // end of docDefinition2
+
+        var pdf_name = 'Packing List in shipping.pdf';
+
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+
+
+
+    } // end of pdfPrint()
+</script>

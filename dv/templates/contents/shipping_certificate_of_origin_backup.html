@@ -1,0 +1,230 @@
+
+<div class="w3-container w3-hide" id="shipping_certificate_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Certificate of Origin</b>
+        </h5>
+
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>PDF</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+              <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_shippingcertificate()" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right  " id="shipping_certificate" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_certificate_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_certificate_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-full">                
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    <u>Seller</u>
+                </div>                
+                <textarea class="w3-input w3-border" id="shipping_certificate_seller"   style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    <u>Consignee</u>
+                </div>                
+                <textarea class="w3-input w3-border" id="shipping_certificate_consignee"  style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    <u>Particulars of Transport</u>
+                </div>
+                <textarea class="w3-input w3-border" id="shipping_certificate_particulars"    style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    <u>Remarks</u>
+                </div>
+                <textarea class="w3-input w3-border" id="shipping_certificate_remarks"    style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-full row1_text_color">
+                    <pre><u>Marks and numbers</u>          <u>Description of goods</u>                <u>Net weight</u>                 <u>Gross weight</u>        <u>Measurement</u></pre>                    
+                    <textarea class="w3-input w3-border" id="shipping_certificate_marks"  style="resize:none;height:200px;width:900px; overflow-x:auto;overflow-y:auto;"></textarea>                
+                </div>
+                
+
+        </div><!-- end of second row -->
+
+        
+    </div>
+</div><!-- end of w3-container -->
+</div>
+
+
+<script>
+function pdfPrint_shippingcertificate()
+{
+    var v1 = $("#shipping_certificate_seller").val();
+    var v2 = $("#shipping_certificate_consignee").val();
+    var v3 = $("#shipping_certificate_particulars").val();
+    var v4 = $("#shipping_certificate_remarks").val();
+    var v5 = $("#shipping_certificate_marks").val();
+
+    var arr = v5.split('\n');
+    var isize = arr.length;
+    var arr1=[];
+    for(var i = 0 ; i < isize ; i++)
+    {
+        arrt = [];
+        
+        if(arr[i].substr(0,28). search('--') != -1)
+        {
+            arr_ = String('-').padEnd(21,'-');
+            arrt.push(arr_);
+        }
+        else 
+        {
+            arrt.push(arr[i].substr(0,28));
+        }
+
+        if(arr[i].substr(28,37). search('--') != -1)
+        {
+            arr_ = String('-').padEnd(32,'-');
+            arrt.push(arr_);
+        }
+        else{
+            arrt.push(arr[i].substr(28,37));
+        }
+
+        if(arr[i].substr(65,26). search('--') != -1)
+        {
+            arr_ = String('-').padEnd(11,'-');
+            arrt.push(arr_);
+        }
+        else{
+            arrt.push(arr[i].substr(65,26));
+        }
+        
+        if(arr[i].substr(91,20). search('--') != -1)
+        {
+            arr_ = String('-').padEnd(10,'-');
+            arrt.push(arr_);
+        }
+        else{
+            arrt.push(arr[i].substr(91,20));
+        }
+
+        if(arr[i].substr(111,20). search('--') != -1)
+        {
+            arr_ = String('-').padEnd(20,'-');
+            arrt.push(arr_);
+        }
+        else{
+            arrt.push(arr[i].substr(111,20));
+        }
+
+        arr1.push(arrt);
+    }
+    
+    
+    var rows = [];    
+
+    for(var i =0 ; i<isize ; i++) {
+    
+       rows.push([arr1[i][0], arr1[i][1],arr1[i][2],arr1[i][3],arr1[i][4]]);
+    }
+
+    var dd = {
+        
+            table: {
+                    widths: [100, 150, 60, 60, '*'],                    
+                    fontSize: 8,
+                    alignment: 'center',
+                    margin: [0, 0, 0, 0],
+                    body: rows
+
+                }
+                ,
+            fontSize:8,
+            alignment: 'center',
+            layout: 'noBorders',
+            margin: [0, 0, 0, 0]
+    }
+
+    var docDefinition2 = {
+          content: [
+            {
+                alignment: 'left',
+                text: v1,            
+                fontSize: 10
+            },
+            {
+                text:'\n\n\n\n'
+            },
+            {
+                alignment: 'left',
+                text: v2,            
+                fontSize: 10
+            },
+            {
+                text:'\n\n\n\n'
+            },
+            {
+                alignment: 'right',
+                text: 'THE REPUBLIC OF KOREA',            
+                fontSize: 10
+            },
+            {
+                text:'\n\n\n\n'
+            },
+            {
+                columns : [
+                    {
+                        fontSize: 10,
+                        text : v3
+                        
+                    },
+                    {
+                        fontSize:10,
+                        alignment: 'right',
+                        text: v4
+                    }
+                ]
+                    
+            },
+            {
+                text:'\n\n\n\n'
+            },
+            
+            dd
+            
+          ] // end of content
+        }; // end of docDefinition2
+
+        var pdf_name = 'certificate origin.pdf';
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+}
+
+</script>
+

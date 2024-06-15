@@ -1,0 +1,558 @@
+<script>
+    function locale(input) {
+        input = Number(input);
+        return input.toLocaleString(undefined, {
+                minimumFractionDigits: 2
+            }) // 2,046,430.00
+
+    }
+
+    function order_sheet_sidebutton() {
+        var i1 = $('#OrderNo').val();
+        var i1_gubun = $('#OrderGubun').val();
+
+        var i2 = $('#buyer_order').val();
+        var i3 = $('#order_LC').val();
+        var i4_1 = $('#item_order').val();
+        var i4_2 = $('#order_DN').val();
+        var i4_3 = $('#order_LF').val();
+        var i4_4 = $('#LS_order').val();
+        var i5_1 = $('#order_quantity').val();
+        var i5_1_unit = $('#QTY_order').val();
+        var i5_2 = $('#order_prc').val();
+        var i5_2_unit = $('#PRC_order').val();
+        var i6 = $('#date_SD').val();
+        var i7 = $('#date_ED').val();
+        var i8_1 = $('#payment_order').val();
+        var i8_2 = $('#order_term').val();
+        var i8_3 = $('#document_order').val();
+        var i9 = $('#term_order').val();
+        var i10 = $('#arrive_order').val();
+
+        var length = document.getElementById("table_supply").rows.length;
+        var i11_1 = new Array;
+        var i11_2 = new Array;
+        var i11_3 = new Array;
+        var i11_4 = new Array;
+        for (var i = 0; i < length - 1; i++) {
+            var c1 = 'company_order_' + String(i);
+            i11_1.push(eval(c1).getValue());
+            var c2 = 'order_table_quantity_' + String(i);
+            i11_2.push(eval(c2).value);
+            var c3 = 'order_table_fob_' + String(i);
+            i11_3.push(eval(c3).value);
+            var c4 = 'order_table_amount_' + String(i);
+            i11_4.push(eval(c4).value);
+        }
+
+        var i12_1 = $('#order_com1').val();
+        var i12_1_agent = $('#order_com1_to').val();
+
+        var i12_2 = $('#order_com2').val();
+        var i12_2_agent = $('#order_com2_to').val();
+
+        var i12_3 = $('#order_com3').val();
+        var i12_3_agent = $('#order_com3_to').val();
+
+        var i12_4 = $('#order_com4').val();
+        var i12_4_agent = $('#order_com4_to').val();
+
+        var i13 = $('#order_expect_margin').val();
+        var i13_r = $('#order_dollor').val();
+        var i14 = $('#cma_test2').val();
+        var i15 = $('#cma_test1').val();
+
+        var str1 = String(i1) + '-' + String(i1_gubun);
+        var str2 = String(i2);
+        var str3 = String(i3);
+        var str4 = String(i4_1) + ' ' + String(i4_2) + 'D' + ' X ' + String(i4_3) + 'MM' + ' ' + String(i4_4);
+
+        var str5_1 = locale(setReadyCalculation(i5_1)) + ' ' + String(i5_1_unit);
+        var str5_2 = String(i5_2_unit) + ' ' + locale(setReadyCalculation(i5_2));
+        var str5_3 = String(i5_2_unit) + ' ' + locale(setReadyCalculation(i5_1) * setReadyCalculation(i5_2))
+
+        var str6 = String(i6);
+        var str7 = String(i7);
+
+        var str82 = '';
+        var str83 = '';
+
+
+        if (i8_2 != '') {
+            str82 = String(i8_2);
+        }
+        if (i8_3 != '')
+            str83 = String(i8_3) + ' Date.';
+        //var str8 = String(i8_1) + ' at ' + String(i8_2) + ' ' + String(i8_3) + ' Date.';
+        var str8 = String(i8_1) + str82 + str83;
+        var str9 = String(i9) + ' ' + String(i10);
+        var str10 = String(i10);
+
+        var str11_1 = '';
+        var str11_2 = '';
+        var str11_3 = '';
+        var str11_4 = '';
+        for (var i = 0; i < length - 1; i++) {
+            str11_1 += String(i11_1[i]) + '\n';
+            str11_2 += (locale(setReadyCalculation(i11_2[i]))) + String(i5_1_unit) + '\n';
+            str11_3 += String(i5_2_unit) + String(i11_3[i]) + '\n';
+            str11_4 += String(i5_2_unit) + (locale(setReadyCalculation(i11_4[i]))) + '\n';
+        }
+
+        if (!i12_3)
+            i12_3 = '0';
+        if (!i12_4)
+            i12_4 = '0';
+        var str12_1 = String(i12_1) + '%';
+        var str12_1_a = String(i12_1_agent);
+        var str12_2 = String(i12_2) + '%';
+        var str12_2_a = String(i12_2_agent);
+        var str12_3 = String(i12_3) + '/' + String(i5_1_unit);
+        var str12_3_a = String(i12_3_agent);
+        var str12_4 = String(i12_4) + '/' + String(i5_1_unit);
+        var str12_4_a = String(i12_4_agent);
+
+        var str13 = locale(setReadyCalculation(i13));
+        var str13_1 = locale(setReadyCalculation(i13) / setReadyCalculation(i13_r) * 100);
+
+        var str14 = String(i14);
+        var str15 = String(i15);
+
+        /////////////////////////////////////////////////
+
+        var docDefinition2 = {
+            pageMargins: [20, 60, 20, 60],
+            content: [{
+                        columns: [{
+                                width: 80,
+                                text: [{
+                                    text: '\nORDER NO ',
+                                    alignment: 'left',
+                                    width: 50,
+                                    fontSize: 9
+                                }, {
+                                    text: '\nBUYER ',
+                                    alignment: 'left',
+                                    width: 50,
+                                    fontSize: 9
+                                }, {
+                                    text: '\nL/C NO ',
+                                    alignment: 'left',
+                                    width: 50,
+                                    fontSize: 9
+                                }, {
+                                    text: '\nSPECIFICATION',
+                                    alignment: 'left',
+                                    width: 50,
+                                    fontSize: 9
+                                }],
+                            }, {
+                                width: 10,
+                                text: [{
+                                    text: '\n:',
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }, {
+                                    text: '\n:',
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }, {
+                                    text: '\n:',
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }, {
+                                    text: '\n:',
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }],
+
+                            }, { // col start 3
+                                width: 100,
+                                margin: [0, 7, 0, 0],
+                                text: [{
+                                    color: '#d85212',
+                                    text: str1,
+                                    alignment: 'left',
+
+                                    width: 9,
+                                }, {
+                                    text: '\n' + str2,
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }, {
+                                    text: '\n' + str3,
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }, {
+                                    text: '\n' + str4,
+                                    alignment: 'left',
+                                    fontSize: 9,
+                                    width: 9,
+                                }],
+
+                            } // end col 3
+                            , { // table
+                                color: '#19083a',
+                                table: {
+                                    heights: [9, 30],
+                                    widths: [40, 40, 40, 40, 40, 40, 40],
+
+                                    body: [
+                                        [{
+                                            alignment: 'center',
+                                            text: '담 당',
+                                            fontSize: 9
+
+                                        }, {
+                                            alignment: 'center',
+                                            text: '대 리',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '과 장',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '차 장',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '부 장',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '이 사',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '사 장',
+                                            fontSize: 9
+                                        }],
+                                        [{
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+
+                                        }, {
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+                                        }, {
+                                            alignment: 'center',
+                                            text: '',
+                                            fontSize: 9
+                                        }]
+                                    ]
+                                } // table layout
+                            }, // end table 
+                        ]
+                    },
+
+                    { // table
+
+                        margin: [0, 10, 0, 10],
+                        table: {
+                            heights: [10, 80],
+                            widths: [65, 45, 65, 40, 40, 60, 60, '*'],
+
+                            body: [
+                                [{
+                                    alignment: 'center',
+                                    text: 'QUANTITY',
+                                    fontSize: 10
+
+                                }, {
+                                    alignment: 'center',
+                                    text: 'U/PRICE',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'AMOUNT',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'S/D',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'E/D',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'TERM',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'PAYMENT',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'PORT/DISCHARGE',
+                                    fontSize: 10
+                                }],
+                                [{
+                                    alignment: 'center',
+                                    text: str5_1,
+                                    fontSize: 8
+
+                                }, {
+                                    alignment: 'center',
+                                    text: str5_2,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str5_3,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str6,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str7,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str8,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str9,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str10,
+                                    fontSize: 8
+                                }]
+                            ]
+                        } // table layout
+                    }, // end table 
+                    {
+                        text: 'SHIPMENT'
+                    }, { // table
+                        margin: [0, 10, 0, 10],
+                        table: {
+                            heights: [10, 15],
+                            widths: [150, 150, '*'],
+                            body: [
+                                [{
+                                    alignment: 'center',
+                                    text: 'LOT NO',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'ON BOARD (ACT/DOC)',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'CONTAINER NO',
+                                    fontSize: 10
+                                }],
+                                [{
+                                        alignment: 'center',
+                                        text: '',
+                                        fontSize: 8
+
+                                    }, {
+                                        alignment: 'center',
+                                        text: '',
+                                        fontSize: 8
+                                    }, {
+                                        alignment: 'center',
+                                        text: '',
+                                        fontSize: 8
+                                    }
+
+                                ]
+                            ]
+                        } // table layout
+                    }, // end table 
+
+                    {
+                        text: '\nSUPPLY'
+                    }, { // table
+                        margin: [0, 10, 0, 10],
+                        table: {
+                            heights: [10, 45],
+                            widths: [70, 80, 50, 80, 50, '*'],
+                            body: [
+                                [{
+                                    alignment: 'center',
+                                    text: '업체',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'Q\'TY',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'UNIT PRICE',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: 'AMOUNT',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: '출고',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: '비고',
+                                    fontSize: 10
+                                }],
+                                [{
+                                    alignment: 'center',
+                                    text: str11_1,
+                                    fontSize: 8
+
+                                }, {
+                                    alignment: 'center',
+                                    text: str11_2,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str11_3,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: str11_4,
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: '',
+                                    fontSize: 8
+                                }, {
+                                    alignment: 'center',
+                                    text: '',
+                                    fontSize: 8
+                                }]
+                            ]
+                        } // table layout
+                    }, // end table 
+
+
+                    { // table
+                        margin: [0, 10, 0, 10],
+                        table: {
+                            heights: [12, 12],
+                            widths: [80, 80, 80, 80, 80, '*'],
+                            body: [
+                                [{
+                                    alignment: 'center',
+                                    text: 'COMMISION 1',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_1,
+                                    fontSize: 9
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_1_a,
+                                    fontSize: 9
+                                }, {
+                                    alignment: 'center',
+                                    text: 'COMMISION 2',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_2,
+                                    fontSize: 9
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_2_a,
+                                    fontSize: 9
+                                }],
+                                [{
+                                    alignment: 'center',
+                                    text: 'COMMISION 3',
+                                    fontSize: 10
+
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_3,
+                                    fontSize: 9
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_3_a,
+                                    fontSize: 9
+                                }, {
+                                    alignment: 'center',
+                                    text: 'COMMISION 4',
+                                    fontSize: 10
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_4,
+                                    fontSize: 9
+                                }, {
+                                    alignment: 'center',
+                                    text: str12_4_a,
+                                    fontSize: 9
+                                }]
+                            ]
+                        } // table layout
+                    }, // end table 
+
+                    { // table
+                        margin: [0, 10, 0, 10],
+                        table: {
+                            heights: [12, 100],
+                            widths: [280, '*'],
+                            body: [
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        text: 'NEGO시 특별사항 [예상마진:' + str13 + '(' + str13_1 + '%)' + ']',
+                                    }]
+                                }, ''],
+                                [
+
+                                    {
+
+                                        text: str14,
+                                        fontSize: 9
+
+                                    }, {
+
+                                        text: str15,
+                                        fontSize: 9
+                                    }
+                                ]
+                            ]
+                        } // table layout
+                    }, // end table 
+                ] // end of content
+        }; // end of docDefinition2
+
+        var pdf_name = 'PaymentInstructionforNego.pdf';
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+
+
+    }
+</script>

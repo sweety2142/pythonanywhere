@@ -1,0 +1,655 @@
+<!-- LOCAL -------------------------------->
+<a id="localBtn" onclick="myFunc('divLocal')" href="javascript:void(0)" class="local_grad w3-bar-item w3-button w3-text-white w3-text-dark-gray" style="width:100%;max-width:1500px">
+    <i class="fa fa-inbox w3-margin-right"></i>LOCAL<i class="w3-margin-left fa fa-caret-down"></i>
+</a>
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="divLocal" style="max-width:1500px;overflow:auto">
+    <h3 class="w3-text-grey w3-padding-16">
+        <i class="fa fa-server fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Local
+    </h3>
+    <div class="w3-container">
+        <!-- start -->
+
+        <!--table  1 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+
+        <button class="w3-button w3-padding-small local_color w3-text-white" id="addTable_local">Add</button>
+        <button class="w3-button w3-padding-small shipment_color w3-text-white" id="removeTable_local">Remove</button>
+        <table class="w3-table-all w3-card-4 w3-small w3-centered" id="table_local">
+            <tr>
+                <th class="min_width_100">업체</th>
+                <th class="min_width_100">L/C No</th>
+                <th class="min_width_100">QTY</th>
+                <th class="min_width_100">PRC</th>
+                <th class="min_width_100">AMOUNT(US$)</th>
+                <th class="min_width_100">AMOUNT(w)</th>
+                <th class="min_width_100">결제일자</th>
+                <th class="min_width_100">지급일환율</th>
+                <th class="min_width_100">지급일원화</th>
+            </tr>
+            <tr>
+                <td>
+                    <select class="w3-small bootstrap3 ht_25" name="option" id="company_table_local_0">
+                        <option value="">Select item</option>
+                        {% for item in company_data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_LC_0" type="text" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_QTY_0" type="text" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_PRC_0" type="text" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_amount_dollor_0" type="text" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_amount_won_0" type="text" placeholder="Enter text"></td>
+                <td><input type="text" id="Datepay_local_0" class="w3-input ht_25" placeholder="Select date"></td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_rate_0" type="text" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" id="local_table_rate_amount_0" type="text" placeholder="Enter text"></td>
+            </tr>
+            <tbody></tbody>
+        </table>
+        </div><!-- end of 1 row -->
+
+<hr>
+
+        <!-- 2  row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    계산서 Date1
+                </div>
+                <input type="text" id="paydate1_local" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-quarter">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    계산서 Date2
+                </div>
+                <input type="text" id="paydate2_local" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-quarter">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    계산서 Date3
+                </div>
+                <input type="text" id="paydate3_local" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [4] -->
+            <div class="w3-quarter">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    계산서 Date4
+                </div>
+                <input type="text" id="paydate4_local" class="w3-input ht_25">
+            </div>
+        </div><!-- end of 2 row -->
+
+        <!-- 3 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    QTY1
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillInvoice1" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-quarter">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    QTY2
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillInvoice2" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-quarter">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    QTY3
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillInvoice3" name="Days">
+            </div>
+            <!-- w3-third [4] -->
+            <div class="w3-quarter">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    QTY4
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillInvoice4" name="Days">
+            </div>
+        </div><!-- end of 3 row -->
+
+        <!-- 4 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount1 (원)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillMoneyInvoice1" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount2 (원)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillMoneyInvoice2" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount3 (원)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillMoneyInvoice3" name="Days">
+
+            </div>
+            <!-- w3-third [4] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount4 (원)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillMoneyInvoice4" name="Days">
+
+            </div>
+
+        </div><!-- end of 4 row -->
+
+
+        <!-- 5 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount1 ($)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillDollorInvoice1" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount2 ($)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillDollorInvoice2" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount3 ($)
+                </div>
+                <input class="w3-input ht_25" type="text"  id="BillDollorInvoice3" name="Days">
+
+            </div>
+            <!-- w3-third [4] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    Amount4 ($)
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillDollorInvoice4" name="Days">
+
+            </div>
+
+        </div><!-- end of 5 row -->
+
+        <!-- 6 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    계산서환율1
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillRate1" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    계산서환율2
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillRate2" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    계산서환율3
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillRate3" name="Days">
+
+            </div>
+            <!-- w3-third [4] -->
+            <div class="w3-quarter">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i>
+                    계산서환율4
+                </div>
+                <input class="w3-input ht_25" type="text" id="BillRate4" name="Days">
+
+            </div>
+
+        </div><!-- end of 6 row -->
+    <hr>
+        <!-- 7 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    선임 (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_sunim" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_sunim2" name="Days">
+                </div>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Demurrage (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_demur" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_demur2" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    수출보험료 (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_su" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_su2" name="Days">
+                </div>
+
+            </div>
+
+        </div><!-- end of 7 row -->
+
+        <!-- 7-1 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-text-red">
+                    <i class="fa fa-pencil"></i>
+                    적화보험료 (US$ / 원)
+                </div>
+                
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text"  id="local_jukwha"  name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text"  id="local_jukwha2" name="Days">
+                </div>
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-text-green">
+                    <i class="fa fa-pencil"></i>
+                    내륙운송료 (US$ / 원)
+                </div>
+
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text"  id="local_transport"  name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text"  id="local_transport2" name="Days">
+                </div>
+            </div>
+        </div><!-- end of 7-1 row -->
+
+        <!-- 8 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-text-yellow">
+                    <i class="fa fa-pencil"></i>
+                    Comm Amount (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_comm" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_comm2" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    결제일자
+                </div>
+                <input type="text" id="paycomm_local" class="w3-input ht_25">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    정리일자
+                </div>
+                <input type="text" id="clean_local" class="w3-input ht_25">
+
+            </div>
+
+        </div><!-- end of 8 row -->
+
+        <!-- 9 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    L/C Open charge (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_lc_open" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_lc_open2" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    L/C 수령액 (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" id="local_receive_LC" type="text" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" id="local_receive_LC_won" type="text" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    우편료 및 환가료 (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_u" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_u2" name="Days">
+                </div>
+
+            </div>
+
+        </div><!-- end of 9 row -->
+
+        <!-- 10 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    환가료환출 (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_hwanhwan" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_hwanhwan2" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Delaycharge (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_delay" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_delay2" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Less (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_less" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_less2" name="Days">
+                </div>
+
+
+            </div>
+
+        </div><!-- end of 10 row -->
+
+
+        <!-- 11 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    인수지연 (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_insudelay" name="Days">
+                </div>
+                <div class="w3-col s2">
+                    /
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25" type="text" id="local_insudelay2" name="Days">
+                </div>
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color" style="font-weight:bold;color:#0081d1">
+                    <i class="fa fa-pencil"></i>
+                    Actual Margin (US$ / 원)
+                </div>
+                <div class="w3-col s5">
+                    <input class="w3-input ht_25 w3-light-gray" type="text" id="local_actual" name="Days" readonly>
+                </div>
+                <div class="w3-col s1">
+                    /
+                </div>
+                <div class="w3-col s6">
+                    <input class="w3-input ht_25 w3-light-gray" type="text" id="local_actual2" name="Days" readonly>
+                </div>
+
+            </div>
+
+
+        </div><!-- end of 11 row -->
+
+         <!-- 12 row -->
+        <div class="w3-container w3-row-padding">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter w3-center w3-small w3-cell-middle w3-padding" >
+                <i class="fa fa-question"></i>
+                특이사항
+            </div>
+            <div class="w3-threequarter">
+                <input class="w3-input w3-border" id="local_special" type="text" name="Days" style="background-color:#feeee6;max-width:300px">
+            </div>
+        </div><!-- end of 12 row -->
+
+        <br>
+
+        </div>
+    </div><!-- end of w3-container -->
+
+
+
+<script>
+   var addTable_local_i =0;
+  $('#addTable_local').click(function() {
+    addTable_local_i++;
+    c = '';
+    c+= '<tr>';
+    c+= '<td>';
+    c+= '<select class="w3-small bootstrap3 ht_25" id="company_table_local_'+addTable_local_i+'">';
+    c+= '<option value="">Select item</option>';
+    c+= '{% for item in company_data %}';
+    c+= '<option value="{{ item }}">{{ item }}</option>';
+    c+= '{% endfor %}';         
+    c+= '</select>';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_LC_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_QTY_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_PRC_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_amount_dollor_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_amount_won_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input type="text" class="w3-input ht_25" id="Datepay_local_'+addTable_local_i+'" placeholder="Select date">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_rate_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="local_table_rate_amount_'+addTable_local_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '</tr>';
+    //2020-03-26
+    c+= '<script>company_table_local_'+addTable_local_i+'=$("#company_table_local_'+addTable_local_i+'").selectize({plugins: [\'enter_key_submit\'],allowEmptyOption:true,create:true})[0].selectize;<\/script>';
+    c+= '<script>Datepay_local_'+addTable_local_i+'=$("#Datepay_local_'+addTable_local_i+'").datepicker({changeMonth:true,changeYear:true,dateFormat:"yy-mm-dd"});<\/script>';
+    
+
+    $('#table_local > tbody:last').append(c);
+  });
+
+  $('#removeTable_local').click(function() {
+    $('#table_local > tbody:last > tr:last').remove();
+  });
+
+
+
+
+
+
+</script>
+
+<!-------------------------------------------->
+
+    <script>
+				//2020-03-26
+        company_table_local_0 = $('#company_table_local_0').selectize({plugins: ['enter_key_submit'],allowEmptyOption:true,create:true})[0].selectize;
+    </script>
+
+            <!-- Script of date -->
+    <script>
+        $( function() {
+            $( "#Datepay_local_0" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#paydate1_local" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#paydate2_local" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#paydate3_local" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#paydate4_local" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+
+            $( "#paycomm_local" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#clean_local" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+
+        });
+    </script>

@@ -1,0 +1,442 @@
+
+<div class="w3-container w3-hide" id="standing_payment_inst_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Payment Instruction for Nego</b>
+        </h5>
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>PDF</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+            <button type="button" class="w3-button w3-blue w3-round w3-padding-small w3-bar-item " onclick="exportPDF_standing();" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-hide" id="standing_payment_inst_db_header" style="width:100%;max-width:1000px">
+    <label class="w3-small row2_text_color">Search DataBase</label>
+    <select id="standing_payment_inst_DB" class="w3-small w3-pale-yellow w3-card bootstrap3">
+        <option value=""></option>
+        
+        {% for item in all_data %}
+        <option style='background-color:rgb(28, 12, 48)'; z-index:10000; value="{{ item }}"> {{ item }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right " id="standing_payment_inst" style="max-width:1000px;">
+    <div class="w3-container">        
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="standing_payment_inst_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="standing_payment_inst_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color" style="color:#4e4464;">
+                    <i class="fa fa-pencil"></i>
+                    Buyer
+                </div>
+                <select id="standing_payment_inst_buyer" class="bootstrap3 w3-small">
+                    <option  value=""></option>
+                    {% for item in buyer_data %}
+                    <option  value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                <div class="row1_text_color" style="color:#4e4464;">
+                    <i class="fa fa-pencil"></i>
+                    Buyer Detail
+                </div>
+                <input type="text" id="standing_payment_inst_buyer2" class="w3-input ht_25 w3-light-gray">
+                <div class="row1_text_color" style="color:#550821;">
+                    <i class="fa fa-calendar-check-o"></i>
+                    Date
+                </div>
+                <input type="text" id="standing_payment_inst_date" class="w3-input ht_25">                
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i>
+                    Bank
+                </div>
+                <select id="standing_payment_inst_bank" class="bootstrap3 w3-small">
+                    <option  value=""></option>
+                    {% for item in inst_nego_bank %}
+                    <option  value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Bank Detail
+                </div>
+                <input type="text" id="standing_payment_inst_bank2" class="w3-input ht_25 w3-light-gray">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Bank Address
+                </div>
+                <input type="text" id="standing_payment_inst_bank3" class="w3-input ht_25 w3-light-gray">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Bank Swift
+                </div>
+                <input type="text" id="standing_payment_inst_bank4" class="w3-input ht_25 w3-light-gray">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Bank Account No
+                </div>
+                <input type="text" id="standing_payment_inst_bank5" class="w3-input ht_25 w3-light-gray">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Bank BENEFICIARY
+                </div>
+                <input type="text" id="standing_payment_inst_bank6" class="w3-input ht_25 w3-light-gray">
+                
+                <div class="row1_text_color" style="color:#3400ee;">
+                    <i class="fa fa-list-ul"></i>
+                    Sign
+                </div>
+                <select id="standing_payment_inst_sign" class="bootstrap3 w3-small">
+                
+                    <option value="AI EMAN">AI EMAN</option>
+                    <option value="ALFIBRASTOCK">ALFIBRASTOCK</option>
+                    <option value="ANALAR">ANALAR</option>
+                    <option value="ANDRZEJ">ANDRZEJ</option>            
+                    <option value="ARTOPLAST">ARTOPLAST</option>
+                    <option value="ATLASFLEX">ATLASFLEX</option>
+                    <option value="AUSMALT">AUSMALT</option>
+                    <option value="AWITEX">AWITEX</option>
+                    <option value="BAYDEMIRLER">BAYDEMIRLER</option>
+                    <option value="BEDDING">BEDDING</option>
+                    <option value="BELDA">BELDA</option>
+                    <option value="BETUL">BETUL</option>
+                    <option value="BIRLIK">BIRLIK</option>
+                    <option value="BOLLORE ORIGINAL STAMP">BOLLORE ORIGINAL STAMP</option>
+                    <option value="BOLLORE SIGN">BOLLORE SIGN</option>
+                    <option value="BOLLORE SIGN2">BOLLORE SIGN2</option>
+                    <option value="BRIT N">BRIT N</option>
+                    <option value="BUTIK DOKUMA">BUTIK DOKUMA</option>
+                    <option value="CIMA">CIMA</option>
+                    <option value="CLASSIQUE">CLASSIQUE</option>
+                    <option value="COMERCIAL">COMERCIAL</option>
+                    <option value="COMFORT">COMFORT</option>
+                    <option value="CONEDMAR">CONEDMAR</option>
+                    <option value="COTON KABBAJ">COTON KABBAJ</option>
+                    <option value="D&A">D&A</option>
+                    <option value="DIER">DIER</option>
+                    <option value="DILA">DILA</option>
+                    <option value="DILOTEX">DILOTEX</option>
+                    <option value="DILTEX">DILTEX</option>
+                    <option value="DISTRI(OH)">DISTRI(OH)</option>
+                    <option value="DONYAYE-1">DONYAYE-1</option>
+                    <option value="DOTEX">DOTEX</option>
+                    <option value="ESCHLER">ESCHLER</option>
+                    <option value="EUROFIL">EUROFIL</option>
+                    <option value="EYMES">EYMES</option>
+                    <option value="FAREAST">FAREAST</option>
+                    <option value="FARHOUD">FARHOUD</option>
+                    <option value="FIBRE AND FABRIC">FIBRE AND FABRIC</option>
+                    <option value="FIRICOR">FIRICOR</option>
+                    <option value="FRANCISCO">FRANCISCO</option>
+                    <option value="HAKCAN">HAKCAN</option>
+                    <option value="ILCAT">ILCAT</option>
+                    <option value="ILK-ON">ILK-ON</option>
+                    <option value="IMP ROMANIA">IMP ROMANIA</option>
+                    <option value="INTERPRO">INTERPRO</option>
+                    <option value="KAPTIONE">KAPTIONE</option>
+                    <option value="MANATEX">MANATEX</option>
+                    <option value="MATERIAS">MATERIAS</option>
+                    <option value="MERTUL">MERTUL</option>
+                    <option value="METEMTEKS">METEMTEKS</option>
+                    <option value="MILADOM 가짜싸인">MILADOM 가짜싸인</option>
+                    <option value="MINET">MINET</option>
+                    <option value="MODELO">MODELO</option>
+                    <option value="MOFIN">MOFIN</option>
+                    <option value="MONTSIA">MONTSIA</option>
+                    <option value="NASIM">NASIM</option>
+                    <option value="NETIO 싸인방">NETIO 싸인방</option>
+                    <option value="NOVALFA">NOVALFA</option>
+                    <option value="NYLONTEX 가짜싸인">NYLONTEX 가짜싸인</option>
+                    <option value="OMEGATEX">OMEGATEX</option>
+                    <option value="OPPSA">OPPSA</option>
+                    <option value="OPPSA1">OPPSA1</option>
+                    <option value="OPPSA2">OPPSA2</option>
+                    <option value="PARTOV">PARTOV</option>
+                    <option value="PASTOFO">PASTOFO</option>
+                    <option value="PIEL">PIEL</option>
+                    <option value="PLANAFIL">PLANAFIL</option>
+                    <option value="PLUMAS">PLUMAS</option>
+                    <option value="POLY SOLUT">POLY SOLUT</option>
+                    <option value="PROPET">PROPET</option>
+                    <option value="RACATEX">RACATEX</option>
+                    <option value="RETEXSA - SERGIO">RETEXSA - SERGIO</option>
+                    <option value="RETEXSA">RETEXSA</option>
+                    <option value="RICHBOND">RICHBOND</option>
+                    <option value="RUMELAX">RUMELAX</option>
+                    <option value="RUMELAX2">RUMELAX2</option>
+                    <option value="SALIDOR">SALIDOR</option>
+                    <option value="SALTEKIN">SALTEKIN</option>
+                    <option value="SAPLING">SAPLING</option>
+                    <option value="SEBASTIA">SEBASTIA</option>
+                    <option value="SIMAFLEX">SIMAFLEX</option>
+                    <option value="SPLITFIL">SPLITFIL</option>
+                    <option value="SPUNMADRID">SPUNMADRID</option>
+                    <option value="TARARISS">TARARISS</option>
+                    <option value="TESPOL">TESPOL</option>
+                    <option value="TEXTIVISION">TEXTIVISION</option>
+                    <option value="TRENDSETTER">TRENDSETTER</option>
+                    <option value="TURKUAZ">TURKUAZ</option>
+                    <option value="UP WAY">UP WAY</option>
+                    <option value="UTS">UTS</option>
+                    <option value="VICA">VICA</option>
+                    <option value="VILARRASA">VILARRASA</option>
+                    <option value="WALTER">WALTER</option>
+                    <option value="WINDSOR">WINDSOR</option>
+                    <option value="WINTER">WINTER</option>
+                    <option value="WISEN">WISEN</option>
+                    <option value="WOLAKT">WOLAKT</option>
+                    <option value="XENIT">XENIT</option>
+                    <option value="YAMELADOU">YAMELADOU</option>
+                    <option value="yanteks">yanteks</option>
+                    <option value="동산테크">동산테크</option>
+                    <option value="두베스트">두베스트</option>
+                    <option value="아인합성">아인합성</option>
+                    <option value="윈더텍스">윈더텍스</option>
+                </select>
+            </div>               
+          
+        </div>
+
+        {% if check_comp == 'DB' %}
+        <img src="../static/images/sign/두베스트" id='doimage_sign' class="w3-show" sizes="(max-width: 500px) 444px,(max-width: 800px) 777px,1222px">
+        {% elif check_comp == 'EI' %}
+        <img src="../static/images/sign/아인합성" id='doimage_sign' class="w3-show" sizes="(max-width: 500px) 444px,(max-width: 800px) 777px,1222px">
+        {% endif %}
+
+        {% if check_comp == 'DB' %}
+        <img src="../static/images/sign/두베스트" id='doimage_sign2' class="w3-hide" >
+        {% elif check_comp == 'EI' %}
+        <img src="../static/images/sign/아인합성" id='doimage_sign2' class="w3-hide" >
+        {% endif %}
+
+
+
+    </div><!-- end of second row -->   
+
+</div>
+
+<script>
+   
+   standing_payment_inst_DB = $('#standing_payment_inst_DB').selectize({
+    placeholder:"Select item",
+        //valueField:'name',
+        searchField:['name'],
+        score: function(search) {
+        var score = this.getScoreFunction(search);
+          return function(item) {
+            if( item.text.toLowerCase().indexOf(search.toLowerCase()) > -1){ return 1; }else{ return 0; }
+          };
+        },
+        sortField:[{ field: 'name', direction:'asc'}],
+        onDropdownOpen: function($dropdown){
+            this.$input.get(0).selectize.clear(true);
+            }
+    })[0].selectize;
+
+    standing_payment_inst_buyer = $('#standing_payment_inst_buyer').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;
+    standing_payment_inst_bank = $('#standing_payment_inst_bank').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;    
+    standing_payment_inst_sign = $('#standing_payment_inst_sign').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;
+    standing_payment_inst_sign.addItem('두베스트');
+    standing_payment_inst_bank.addItem('keb');
+
+    $( function() {
+            $( "#standing_payment_inst_date" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+    });
+
+    function exportPDF_standing()
+    {
+        var i1 = $('#standing_payment_inst_OrderNo').val();
+        var i2 = $('#standing_payment_inst_OrderGubun').val();
+
+        var i3 = $('#standing_payment_inst_buyer').val();
+        var i4 = $('#standing_payment_inst_buyer2').val();
+
+        var i5 = $('#standing_payment_inst_date').val();
+
+        var i6 = $('#standing_payment_inst_bank').val();
+        var i7 = $('#standing_payment_inst_bank2').val();
+        var i8 = $('#standing_payment_inst_bank3').val();
+        var i9 = $('#standing_payment_inst_bank4').val();
+        var i10 = $('#standing_payment_inst_bank5').val();
+        var i11 = $('#standing_payment_inst_bank6').val();
+
+        var i12 = $('#standing_payment_inst_sign').val();       
+        /////////////////////////////////////////////////
+        
+        // image 
+        var canvas = document.createElement('canvas');
+        var img = document.getElementById('doimage_sign');
+        canvas.height = img.naturalHeight;
+        canvas.width = img.naturalWidth;
+        var ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var base64String2 = canvas.toDataURL();
+
+        var ee = {
+            image : base64String2,
+                width: 150,
+                height: 90,
+                absolutePosition: { x: 400, y: 650 }
+        }
+
+        var canvas2 = document.createElement('canvas');
+        var img2 = document.getElementById('doimage_sign2');
+        canvas2.height = img2.naturalHeight;
+        canvas2.width = img2.naturalWidth;
+        var ctx2 = canvas2.getContext('2d');
+
+        ctx2.drawImage(img2, 0, 0, canvas2.width, canvas2.height);
+        var base64String3 = canvas2.toDataURL();
+        
+        var ee2 =
+        {
+            image : base64String3,
+                width: 150,
+                height: 90,
+                absolutePosition: { x: 400, y: 400 }
+        } 
+
+        var docDefinition2 = {
+            content: [
+                        ee,
+                        ee2,
+                        {
+                            alignment: 'center',
+                            text: '\nSTANDING  PAYMENT  INSTRUCTION\n',
+                            decoration: 'underline',
+                            bold: true,
+                            fontSize: 20
+                        }, 
+                        {
+
+                            text: '\nTO :' + i4
+                        },
+                        {
+                            columns: [
+                                {
+
+                                text: [{
+                                        text: '\nRE :SALES CONTRACT NO. ' + i1,
+                                        alignment: 'left'
+                                        }
+                                    ],
+                                    
+                                },
+                                {
+                                
+                                text: [
+                                        {
+                                            text: '\nDATED ' + i5,
+                                            alignment: 'right'
+                                        }
+                                    ],
+                                    
+                                }
+                                ]
+                            
+                        },   
+                        {
+                            
+                            text: '\n\nDear Sirs,'
+                        },
+                        {
+                            
+                            text: '\n\n We refer to the captioned sales contract (the “Contract”) pursuant to which we are obligated to sell the goods specified therein against your payment of the price therefore'
+                        },
+                        {
+                            
+                            text: '\n\n Please be advised that we have irrevocably designated ' +i4 + ' (the “bank”) as the payee and assignee for our account in respect of the payment of the price for all goods that we will sell to you on or after '  + i5 + ' ,pursuant to the Contract.'
+                        },
+                        {
+                            
+                            text: '\n Therefore, we hereby instruct you to pay any portion or all of the price of such goods to the Bank through its account no '+i10 + ' with '+ i7+' '+i8+'(SWIFT:'+i9+')'
+                        },
+                        {
+                            text:'\nwhen it becomes due and payable in accordance with the terms and conditions of the Contract.'
+                        },
+                        {
+                            text:'\n\nPlease confirm your consent to the foregoing by countersigning the enclosed duplicate of this letter and sending it to us.'
+                        },
+                        {
+                            text:'\n\nVery truly yours.'
+                        },
+                        {
+                            alignment:'right',
+                            text:'\n\nBY___________________'
+                        },                        
+                        {
+                            alignment:'right',
+                            text:'\nName : J.G.PARK'                            
+                        },                        
+                        {
+                            alignment:'right',
+                            text:'\nTitle : Executive Manager'                            
+                        },                                                
+                        {
+                            text: '\n_______________________________________________________________________'
+                        },
+                        {
+                            alignment: 'center',
+                            text: '\nACKNOWLEDGEMENT  AND  CONSENT\n',
+                            decoration: 'underline',
+                            bold: true,
+                            fontSize: 20
+                        },
+                        {
+                            text:'\nWe consent to the arrangement for payment of the price for the goods that we will purchase from EIN TEXTILE Co., Ltd. (the “Seller”) under the Contract as proposed by the Seller in connection with the sales contract(No. '+i1 +') dated '+i5+', entered into by and between the Seller and us.'
+                        },
+                        {
+                            text:'\n\n[Buyer]'
+                        },
+                        {
+                            text:'\n\nBy________________________',
+                            alignment:'right'
+                        },
+                        {
+                            text:'\nName:_______________________',
+                            alignment:'right'
+                        }
+                        ,
+                        {
+                            text:'\nTitle:______________________',
+                            alignment:'right'
+                        }
+                        
+
+
+                ] // end of content
+            }; // end of docDefinition2
+
+            var pdf_name = 'PaymentInstructionforNego.pdf';
+            var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+        
+    
+    }
+
+</script>

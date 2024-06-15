@@ -1,0 +1,30 @@
+{% extends "admin.html" %}
+{% block main %}
+<h3>Administrator Control Panel</h3><br>
+<div class="w3-container w3-cell w3-card-4 w3-center w3-middle local_grad" style="margin-left:30px;width:200px;height:100px">
+    <div class="">
+        <br>
+        <i class='fa fa-user fa-2x' area-hidden='true'></i>
+        <span style="font-size:15pt;font-weight:bold;color:#0081d1">
+        &emsp;{{ total.users }}
+        </span>
+    </div>
+    <div class=admin_box_r>
+        <div class=box_text>Total users</div>
+    </div>
+</div>
+<br>
+<div class="w3-container w3-cell w3-card-4 w3-center fta_grad" style="width:200px;height:100px;">
+    <div class="">
+        <br>
+        <i class='fa fa-area-chart fa-2x' area-hidden='true'></i>
+        <span style="font-size:15pt;font-weight:bold;color:#0081d1">
+        &emsp;{{ total.views }}
+        </span>
+    </div>
+    <div class=admin_box_r>
+        <div class=box_text>Total views</div>
+    </div>
+</div>
+<br>
+{% endblock %}

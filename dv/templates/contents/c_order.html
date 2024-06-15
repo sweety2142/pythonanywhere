@@ -1,0 +1,1769 @@
+<style>
+    #myBtn {
+        display: display;
+        position: fixed;
+        bottom: 70px;
+        right: 30px;
+        z-index: 100000;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        background-color: rgb(40, 64, 145);
+        color: white;
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 4px;
+    }
+    
+    #myBtn_order_sheet {
+        display: display;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 100000;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        background-color: rgb(92, 42, 61);
+        color: white;
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 4px;
+    }
+    
+    #myBtn:hover {
+        background-color: #555;
+    }
+    
+    #myBtn_shipping_advice,
+    #myBtn_packing_list,
+    #myBtn_commercial_invoice,
+    #myBtn_shipping_docs,
+    #myBtn_contract_invoice,
+    #myBtn_contract_contract,
+    #myBtn_delivery_order {
+        display: display;
+        position: fixed;
+        bottom: 70px;
+        right: 30px;
+        z-index: 100000;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        background-color: rgb(115, 122, 105);
+        color: rgb(7, 22, 243);
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 4px;
+    }
+    
+    #myBtn_home {
+        display: display;
+        position: fixed;
+        bottom: 120px;
+        right: 30px;
+        z-index: 100000;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        background-color: rgb(94, 110, 72);
+        color: rgb(17, 14, 15);
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 4px;
+    }
+</style>
+
+
+<style>
+        .se-pre-con {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(/static/images/waiting_page_ico[1].gif) center no-repeat #fff;
+</style>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+<script>
+    $(window).on('load', function() {
+        $(".se-pre-con").fadeOut("slow");
+    });
+</script>
+<div class="se-pre-con"></div>
+
+<button id="myBtn" title="modify" onclick="realmodify_sidebutton();"> Quick Save</button>
+<button class="w3-hide" id="myBtn_home" title="modify" onclick="gohome();">Home</button>
+<button class="w3-hide" id="myBtn_shipping_advice" title="modify" onclick=""> Save shipping advice</button>
+<button class="w3-hide" id="myBtn_packing_list" title="modify" onclick=""> Save packing list</button>
+<button class="w3-hide" id="myBtn_commercial_invoice" title="modify" onclick=""> Save commercial invoice</button>
+<button class="w3-hide" id="myBtn_shipping_docs" title="modify" onclick="save_shippingdata()"> Save shipping docs </button>
+<button class="w3-hide" id="myBtn_contract_invoice" title="modify" onclick="save_contract_invoice();"> Save contract invoice</button>
+<button class="w3-hide" id="myBtn_contract_contract" title="modify" onclick="save_contract2();"> Save contract</button>
+<button class="w3-hide" id="myBtn_delivery_order" title="modify" onclick="save_deliveryorder()"> Save delivery order</button>
+<button id="myBtn_order_sheet" title="modify" onclick="order_sheet_sidebutton();"> Order Sheet </button>
+
+
+
+<!-- The Modal -->
+<div id="id02" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+        <header class="w3-container w3-blue">
+            <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-blue w3-tiny w3-display-topright">&times;</span>
+            <h6> Confirm </h6>
+        </header>
+
+        <div class="w3-container">
+            <br>
+            <p> Are you sure to save DB? </p>
+            <input class="w3-input w3-border w3-margin-bottom w3-third" type="text" placeholder="Enter DB name" name="idnumber" id="saveDB_ID" required>
+            <input class="w3-input w3-border w3-margin-bottom w3-third" type="text" placeholder="Enter DB name" name="idnumber" id="saveDB_GB" required>
+            <div class="w3-half">
+                <button type="button" class="w3-button w3-blue w3-round w3-padding-small w3-bar-item w3-margin-bottom" onclick="realsave();document.getElementById('id02').style.display='none'"> yes </button>
+                <button type="button" class="w3-button w3-green w3-round w3-padding-small w3-bar-item w3-margin-bottom" onclick="document.getElementById('id02').style.display='none'"> no </button>
+            </div>
+            <br>
+        </div>
+        <footer class="w3-container w3-teal">
+            <br>
+            <p> Copy Right(C) 2020. Kim Il Ho. All rights reserved.</p>
+        </footer>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="id03_delete" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+        <header class="w3-container w3-red">
+            <span onclick="document.getElementById('id03_delete').style.display='none'" class="w3-button w3-red w3-tiny w3-display-topright">&times;</span>
+            <h6> Confirm </h6>
+        </header>
+
+        <div class="w3-container">
+            <br>
+            <p> Are you sure to delete? </p>
+            <input class="w3-input w3-border w3-margin-bottom w3-third" type="text" placeholder="Enter DB name" name="idnumber" id="deleteDB_ID" required>
+            <input class="w3-input w3-border w3-margin-bottom w3-third" type="text" placeholder="Enter DB name" name="idnumber" id="deleteDB_GB" required>
+            <div class="w3-half">
+                <button type="button" class="w3-button w3-red w3-round w3-padding-small w3-bar-item w3-margin-bottom" onclick="realdelete();document.getElementById('id03_delete').style.display='none'"> yes </button>
+                <button type="button" class="w3-button w3-yellow w3-round w3-padding-small w3-bar-item w3-margin-bottom" onclick="document.getElementById('id03_delete').style.display='none'"> no </button>
+            </div>
+            <br>
+        </div>
+        <footer class="w3-container w3-teal">
+            <br>
+            <p> Copy Right(C) 2020. Kim Il Ho. All rights reserved.</p>
+        </footer>
+    </div>
+
+</div>
+
+<!-- The Modal -->
+<div id="id04_modify" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-bottom">
+        <header class="w3-container w3-dark-gray">
+            <span onclick="document.getElementById('id04_modify').style.display='none'" class="w3-button w3-dark-gray w3-tiny w3-display-topright">&times;</span>
+            <h6> Confirm </h6>
+        </header>
+        <div class="w3-container">
+            <br>
+            <p> Are you sure to modify? </p>
+            <input class="w3-input w3-border w3-margin-bottom w3-third" type="text" placeholder="Enter DB name" name="idnumber" id="modifyDB_ID" required>
+            <input class="w3-input w3-border w3-margin-bottom w3-third" type="text" placeholder="Enter DB name" name="idnumber" id="modifyDB_GB" required>
+            <div class="w3-half">
+                <button type="button" class="w3-button w3-dark-gray w3-round w3-padding-small w3-bar-item w3-margin-bottom" onclick="realmodify();document.getElementById('id04_modify').style.display='none'"> yes </button>
+                <button type="button" class="w3-button w3-yellow w3-round w3-padding-small w3-bar-item w3-margin-bottom" onclick="document.getElementById('id04_modify').style.display='none'"> no </button>
+            </div>
+            <br>
+        </div>
+        <footer class="w3-container w3-teal">
+            <br>
+            <p> Copy Right(C) 2020. Kim Il Ho. All rights reserved.</p>
+        </footer>
+    </div>
+
+</div>
+
+<div class="w3-small " id="history_id">
+    Keyword
+</div>
+
+<div class="w3-container" style="width:100%;max-width:1000px" id="HeaderData">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>NEGO</b>
+        </h5>
+        <div class="control-group" style="max-width:550px;">
+            <select id="SelectNego" class="bootstrap3 w3-small ht_65 ">                
+                {% for item in all_data %}
+                <option style='background-color:yellow' value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Save DB</b>
+        </h5>
+
+        <!--
+            숨기기 
+        <div class="w3-third">
+                <div class="w3-threequarter">
+                    <input class="w3-input w3-light-blue ht_25" type="text" id="saveDB_1" placeholder="DBB0000">
+                </div>
+                <div class="w3-quarter">
+                    <input class="w3-input w3-light-green ht_25" type="text" id="saveDB_2" placeholder="A">
+                </div>
+        </div>        
+        -->
+        <div class="w3-col ">
+            <button type="button" class="w3-quarter w3-button w3-dark-grey w3-round w3-padding-small w3-bar-item " style="font-size:10pt;" onclick="testClear()"> New </button>
+            <button type="button" class="w3-quarter w3-button w3-khaki w3-round w3-padding-small w3-bar-item " style="font-size:10pt;" onclick="testSave()"> Copy </button>
+            <!--<button type="button" class="w3-quarter w3-button w3-light-blue w3-round w3-padding-small w3-bar-item " style="font-size:10pt;" onclick="testModify()" > Save </button> --!>
+              <button type="button" class="w3-quarter w3-button w3-light-blue w3-round w3-padding-small w3-bar-item " style="font-size:10pt;" onclick="realsave2()" > Save </button>
+              <button type="button" class="w3-quarter w3-button w3-red w3-round w3-padding-small w3-bar-item" style="font-size:10pt;" onclick="testDelete()"> delete </button>  <!--realdelete => testDelete() -->
+        </div>
+    </div>
+
+    <div class="w3-half">
+        <div class="control-group" style="max-width:550px">
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ORDER ----------------------------------->
+
+
+<a id="orderBtn" onclick="myFunc('divOrder')" href="javascript:void(0)" class="w3-bar-item w3-button order_grad w3-text-dark-gray" style="width:100%;max-width:1000px">
+    <i class="fa fa-inbox w3-margin-right"></i>ORDER<i class="w3-margin-left fa fa-caret-down"></i>
+</a>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="divOrder" style="max-width:1000px;overflow:auto">
+    <h3 class="w3-text-grey">
+        <i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> Order
+    </h3>
+    <div class="w3-container">
+
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-col s9 m9 l9">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="OrderNo" readonly>
+                </div>
+                <div class="w3-col s3 m3 l3">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="OrderGubun" readonly>
+                </div>
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i> Date
+                </div>
+                <input type="text" id="datepicker" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-list-ul"></i> Buyer
+                </div>
+                <select id="buyer_order" class="bootstrap3 w3-small">
+                    <option  value=""></option>
+                    {% for item in buyer_data %}
+                    <option  value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-list-ul"></i> Agent
+                </div>
+                <select id="agent_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in agent_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i> 기준키
+                </div>
+                <div class="">
+                    <input type="text" id="date_stand" class="w3-input ht_25">
+                </div>
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i> Delivery Time
+                    <!--i class="fa fa-calendar-check-o"></i-->
+                </div>
+                <div class="">
+                    <input type="text" id="date_delivery" class="w3-input ht_25">
+                </div>
+            </div>
+        </div>
+        <!-- end of second row -->
+
+        <hr>
+
+        <!--
+<a id="testsh" onclick="myFunc('sh')" href="javascript:void(0)" class="w3-center" style="width:100%">
+    <i class="fa fa-angle-down fa-2x"></i>
+</a>
+
+<div class="w3-hide" id="sh">
+         -->
+        <!-- 2 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i> Term
+                </div>
+                <select id="term_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in term_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i> 도착지
+                </div>
+                <select id="arrive_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in destination_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i> Payment
+                </div>
+                <select id="payment_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in payment_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i> 선적방법
+                </div>
+                <select id="method_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in sea_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Days
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_term" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i> Doc/Type
+                </div>
+                <select id="document_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in contract_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <!-- end of 4 row -->
+
+        <hr>
+
+
+        <!--  table  5 row >
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small" style="max-width:800px">
+
+            <div class="w3-text-teal">
+                    <i class="fa fa-check"></i>
+                    COM
+            </div>
+        <button class="w3-button w3-padding-small local_color w3-text-white" id="addTable">Add</button>
+        <button class="w3-button w3-padding-small shipment_color w3-text-white" id="removeTable">Remove</button>
+        <table class="w3-table-all w3-card-4 w3-small w3-centered" id="tableSPL">
+            <tr>
+                <th class="min_width_100">Weight</th>
+                <th class="min_width_100">U$</th>
+                <th class="min_width_100">To</th>
+            </tr>
+            <tr>
+                <td><input class="w3-input w3-border ht_25" type="text" id="order_table_com1" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" type="text" id="order_table_com1_amount" placeholder="Enter text"></td>
+                <td>
+                    <select class="w3-small bootstrap3 ht25 min_width_100" name="option" id="com_to_0">
+                        <option value="">Select item</option>
+                        {% for item in agent_data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tbody></tbody>
+        </table>
+        </div><!-- end of 5 row -->
+        <!-- 테이블 없애고 input으로 대체>
+
+        <!-- new 5 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red">
+                    <i class="fa fa-pencil"></i> Com 1 (%)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com1" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red " id="order_title_com1">
+                    <i class="fa fa-pencil"></i> Amount (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com1_amount" name="Days">
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l3">
+                <div class="w3-text-red">
+                    <i class="fa fa-list-ul"></i> Agent
+                </div>
+                <select id="order_com1_to" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in agent_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- <a id="com1_hide" onclick="myFunc('com1_hide_func');" href="javascript:void(0)" class="w3-center" style="width:100%">
+					    <i class="fa fa-angle-down fa-2x" id="com1_hide_icon"></i>
+						</a> -->
+            <!--						<button class="btn" onclick="showhide_com1();" id="com1_hide"> <i class="fa fa-angle-down fa-2x" id="com1_hide_icon"></i> </button> -->
+            <div class="btn w3-button" id="com1_hide"> <i class="fa fa-angle-down fa-2x" id="com1_hide_icon"></i> </div>
+        </div>
+        <script>
+            $(document).on('click', '#com1_hide', function() {
+                showhide_com2();
+            });
+
+            var ck = true;
+
+            function showhide_com2() {
+
+                if (ck) {
+                    $("#com1_hide").replaceWith('<div class = "btn w3-button" id="com1_hide"> <i class="fa fa-angle-left fa-2x" id="com1_hide_icon"></i> </div>');
+                    ck = false;
+                } else {
+                    $("#com1_hide").replaceWith('<div class = "btn w3-button" id="com1_hide"> <i class="fa fa-angle-down fa-2x" id="com1_hide_icon"></i> </div>');
+                    ck = true;
+                }
+                myFunc('com1_hide_func');
+            }
+        </script>
+
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800 w3-hide" id="com1_hide_func">
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red">
+                    <i class="fa fa-pencil"></i> Com 2 (%)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com2" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red " id="order_title_com2">
+                    <i class="fa fa-pencil"></i> Amount (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com2_amount" name="Days">
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l3">
+                <div class="w3-text-red">
+                    <i class="fa fa-list-ul"></i> Agent
+                </div>
+                <select id="order_com2_to" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in agent_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red">
+                    <i class="fa fa-pencil"></i> Com 3 (kg)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com3" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red " id="order_title_com3">
+                    <i class="fa fa-pencil"></i> Amount (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com3_amount" name="Days" onchange="change_amount_com">
+
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l3">
+                <div class="w3-text-red">
+                    <i class="fa fa-list-ul"></i> Agent
+                </div>
+                <select id="order_com3_to" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in agent_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="btn w3-button" id="com3_hide"> <i class="fa fa-angle-down fa-2x" id="com3_hide_icon"></i> </div>
+        </div>
+        <script>
+            $(document).on('click', '#com3_hide', function() {
+                showhide_com4();
+            });
+
+            var ck2 = true;
+
+            function showhide_com4() {
+
+                if (ck2) {
+                    $("#com3_hide").replaceWith('<div class = "btn w3-button" id="com3_hide"> <i class="fa fa-angle-left fa-2x" id="com3_hide_icon"></i> </div>');
+                    ck2 = false;
+                } else {
+                    $("#com3_hide").replaceWith('<div class = "btn w3-button" id="com3_hide"> <i class="fa fa-angle-down fa-2x" id="com3_hide_icon"></i> </div>');
+                    ck2 = true;
+                }
+                myFunc('com3_hide_func');
+            }
+        </script>
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800 w3-hide" id="com3_hide_func">
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red">
+                    <i class="fa fa-pencil"></i> Com 4 (kg)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com4" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-red " id="order_title_com4">
+                    <i class="fa fa-pencil"></i> Amount (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_com4_amount" name="Days">
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l3">
+                <div class="w3-text-red">
+                    <i class="fa fa-list-ul"></i> Agent
+                </div>
+                <select id="order_com4_to" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in agent_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <!-- end of 5 row -->
+
+
+        <!-- 6 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter w3-center w3-small w3-cell-middle w3-padding">
+                <div class="w3-text-purple" id="order_title_total">COM TOTAL (US$)</div>
+            </div>
+            <div class="w3-threequarter">
+                <input class="w3-input w3-border" type="text" id="order_com_total" name="Days" style="background-color:#fff9e6;max-width:300px;">
+            </div>
+        </div>
+        <!-- end of 6 row -->
+
+
+        <hr>
+
+        <!-- 7 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-teal">
+                    <i class="fa fa-list-ul"></i> ITEM
+                </div>
+                <select id="item_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in item_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i> Den
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_DN" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i> mm/F
+                </div>
+
+                <input class="w3-input ht_25" type="text" id="order_LF" name="Days">
+
+            </div>
+
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-teal">
+                    <i class="fa fa-list-ul"></i> L/S
+                </div>
+                <select id="LS_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in luster_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l4">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i> REMARK
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_remark" name="Days">
+            </div>
+
+        </div>
+        <!-- end of 8 row -->
+        <hr>
+
+
+
+
+        <!-- 10 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color w3-tag w3-dark-gray">
+                    <i class="fa fa-pencil"></i> QTY
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_quantity" name="Days">
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color">
+                    <i class="fa fa-gear"></i> QTY 단위
+                </div>
+                <select id="QTY_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in quantity_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color">
+                    <i class="fa fa-gear"></i> Currency
+                </div>
+                <select id="PRC_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in currency_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> U/price
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_prc" name="Days">
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> Cross Rate
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_cross_rate" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-deep-purple" style="background-color:#fff0e6">
+                    <i class="fa fa-pencil"></i> Amount (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_dollor" name="Days">
+            </div>
+        </div>
+        <!-- end of 11 row -->
+
+        <!-- 12 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> L/C No
+                </div>
+                <input class="w3-input ht_25" id="order_LC" type="text" name="Days">
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> LC 수령액(won)
+                </div>
+                <input class="w3-input ht_25" id="order_receive_LC" type="text" name="Days">
+            </div>
+
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-tag w3-blue" style="font-weight:bold">
+                    <i class="fa fa-calendar-o"></i> S/D
+                </div>
+                <input type="text" id="date_SD" class="w3-input w3-border w3-mobile ht_25">
+            </div>
+
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-tag w3-blue" style="font-weight:bold">
+                    <i class="fa fa-calendar-o"></i> E/D
+                </div>
+                <input type="text" id="date_ED" class="w3-input w3-border w3-mobile ht_25">
+            </div>
+        </div>
+        <!-- end of 13 row -->
+
+        <hr>
+
+        <!--table  14 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small" style="max-width:1000px;">
+
+            <div class="w3-text-teal">
+                <i class="fa fa-check"></i> Supply 현황
+            </div>
+            <button class="w3-button w3-padding-small local_color w3-text-white" id="addTable_supply">Add</button>
+            <button class="w3-button w3-padding-small shipment_color w3-text-white" id="removeTable_supply">Remove</button>
+            <table class="w3-table-all w3-card-4 w3-centered" id="table_supply">
+                <tr>
+                    <th class="min_width_100">Supplier</th>
+                    <th class="min_width_100" id="qty_intable">QTY (KG)</th>
+                    <th class="min_width_100" id="uprice_intable">U/Price</th>
+                    <th class="min_width_100">Amount</th>
+                    <th class="min_width_100">Method Option</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="w3-small bootstrap3 ht_25" name="option" id="company_order_0">
+                        <option value=""></option>
+                        {% for item in company_data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                    </td>
+                    <td><input class="w3-input w3-border ht_25" id="order_table_quantity_0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="order_table_fob_0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="order_table_amount_0" type="text" placeholder="Enter text"></td>
+                    <td>
+                        <select class="w3-small bootstrap3 ht_25" name="option" id="method_opt_0">
+                        <option value=""></option>
+                        {% for item in term_data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                    </td>
+                </tr>
+                <tbody></tbody>
+            </table>
+        </div>
+        <!-- end of 14 row -->
+
+        <!-- 15 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> 예상선임 (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_expect_price" name="Days">
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> 기타 (% / amount)
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="order_etc_per">
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="order_etc_amount">
+                </div>
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="w3-dark-grey">
+                    <i class="fa fa-pencil"></i> 예상 Margin
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_expect_margin" name="Days">
+            </div>
+        </div>
+        <!-- end of 15 row -->
+
+        <!-- 16 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row2_text_color">
+                    <i class="fa fa-star"></i> Supply Remark
+                </div>
+                <textarea class="w3-input w3-border" id="cma_test1" style="resize:none;line-height:1.6;overflow-y:hidden;"></textarea>
+            </div>
+            <div class="w3-half">
+                <div class="row2_text_color">
+                    <i class="fa fa-question"></i> 특별 사항
+                </div>
+                <textarea class="w3-input w3-border" id="cma_test2" style="resize:none;line-height:1.6;overflow-y:hidden;"></textarea>
+            </div>
+
+        </div>
+        <!-- end of 16 row -->
+        <hr>
+        <!-- 18 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-list-ul"></i> Buyer Bank
+                </div>
+                <select id="buyerbank_order" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in buyerbank_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i> 이전오더번호
+                </div>
+                <input class="w3-input ht_25" type="text" id="order_before_order" name="Days">
+            </div>
+        </div>
+        <!-- end of 18 row -->
+
+
+        <!-- 9 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="w3-text-teal">
+                    <i class="fa fa-pencil"></i> 수입번호
+                </div>
+
+                <input class="w3-input ht_25" type="text" id="order_suip" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-half">
+                <div class="w3-deep-purple w3-tag">
+                    <i class="fa fa-shopping-bag"></i> P/O Number
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" name="Days" id="order_ponum">
+
+            </div>
+        </div>
+        <!-- end of 9 row -->
+
+        <br><br><br><br>
+
+
+
+
+
+
+        <!-- SelectBox -------------------------->
+        <!--
+        <div class="control-group w3-mobile" style="max-width:300px">
+            <select id="sel_1" class="bootstrap3 w3-small">
+                <option value="">SelectJS Sample ILHO nim...</option>
+                {% for item in init_data %}
+                <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+-->
+
+    </div>
+</div>
+<!-- end of w3-container -->
+
+<script>
+    var mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if ((document.body.scrollTop > 20) || (document.documentElement.scrollTop > 20)) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#cma_test1').on('keyup', function(e) {
+            $(this).css('height', 'auto');
+            $(this).height(this.scrollHeight);
+        });
+        $('#cma_test2').on('keyup', function(e) {
+            $(this).css('height', 'auto');
+            $(this).height(this.scrollHeight);
+        });
+    });
+
+    $("input").on("keydown", function(e) {
+
+        if (e.keyCode == 13) {
+            $(this).next('input').focus();
+        }
+    });
+    // modal
+
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].classList.remove("w3-light-grey");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.classList.add("w3-light-grey");
+    }
+    // end modal
+
+
+    //var addTable_i = 0;
+    //$('#addTable').click(function() {
+    //  addTable_i++;
+    // c = '';
+    //  c+= '<tr>';
+    //  c+= '<td><input class="w3-input w3-border ht_25" type="text" placeholder="Enter text">';
+    //  c+= '</td>';
+    //  c+= '<td><input class="w3-input w3-border ht_25" type="text" placeholder="Enter text">';
+    //  c+= '</td>';
+    //  c+= '<td>';
+    //  c+= '<select class="w3-small bootstrap3 ht_25" id="com_to_'+addTable_i+'">';
+    //  c+= '<option value="">Select item</option>';
+    //  c+= '{% for item in agent_data %}';
+    //  c+= '<option value="{{ item }}">{{ item }}</option>';
+    //  c+= '{% endfor %}';
+    //  c+= '</select>';
+    //  c+= '</td>';
+    //  c+= '</tr>';
+    //  c+= '<script>$("#com_to_'+addTable_i+'").selectize({})[0].selectize;<\/script>';
+    //  $('#tableSPL > tbody:last').append(c);
+    //});
+
+    //$('#removeTable').click(function() {
+    //  $('#tableSPL > tbody:last > tr:last').remove();
+    //});
+
+    var addTable_supply_i = 0;
+    $('#addTable_supply').click(function() {
+        addTable_supply_i++;
+        c = '';
+        c += '<tr>';
+        c += '<td>';
+        c += '<select class="w3-small bootstrap3 ht_25" id="company_order_' + addTable_supply_i + '">';
+        c += '<option value=""></option>';
+        c += '{% for item in company_data %}';
+        c += '<option value="{{ item }}">{{ item }}</option>';
+        c += '{% endfor %}';
+        c += '</select>';
+        c += '</td>';
+        c += '<td><input class="w3-input w3-border ht_25" id="order_table_quantity_' + addTable_supply_i + '" type="text" placeholder="Enter text">';
+        c += '</td>';
+        c += '<td><input class="w3-input w3-border ht_25" id="order_table_fob_' + (addTable_supply_i) + '" type="text" placeholder="Enter text">';
+        c += '</td>';
+        c += '<td><input class="w3-input w3-border ht_25" id="order_table_amount_' + addTable_supply_i + '" type="text" placeholder="Enter text">';
+        c += '</td>';
+        c += '<td>';
+        c += '<select class="w3-small bootstrap3 ht_25" id="method_opt_' + addTable_supply_i + '">';
+        c += '<option value=""></option>';
+        c += '{% for item in term_data %}';
+        c += '<option value="{{ item }}">{{ item }}</option>';
+        c += '{% endfor %}';
+        c += '</select>';
+        c += '</td>';
+        c += '</tr>';
+        //2020-03-25
+        c += '<script> company_order_' + addTable_supply_i + ' =$("#company_order_' + addTable_supply_i + '").selectize({plugins:[\'enter_key_submit\'],allowEmptyOption:true,create:true})[0].selectize;<\/script>';
+        c += '<script>method_opt_' + addTable_supply_i + ' =$("#method_opt_' + addTable_supply_i + '").selectize({plugins:[\'enter_key_submit\'],allowEmptyOption:true,create:true})[0].selectize;<\/script>';
+
+        $('#table_supply > tbody:last').append(c);
+    });
+
+    $('#removeTable_supply').click(function() {
+        $('#table_supply > tbody:last > tr:last').remove();
+    });
+
+
+    // initialize save button
+    //document.getElementById("saveDB_1").value=total;
+</script>
+
+<!-------------------------------------------->
+
+
+<script>
+    //2020.02.18
+    $(document).on('keypress', 'input,select', function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            //2020-03-26
+
+            if (e.target.id == 'date_ED') {
+                company_order_0.focus();
+            } else if (e.target.id == 'date_SD') {
+                date_ED.focus();
+            } else if (e.target.id == 'ETA_ship') {
+                ship_container0.focus();
+            } else if (e.target.id == 'ship_forward0') {
+                //2020-03-26
+                if (addTable_ship_i == 0) {
+                    bank_nego.focus();
+                } else {
+                    ship_container1.focus();
+                }
+            } else if (e.target.id == 'day_nego') {
+                nego_ref.focus();
+            } else if (e.target.id == 'nego_etc_dollor') {
+                neto_etc_exchange.focus();
+            } else if (e.target.id == 'get_nego') {
+                nego_deposit_date0.focus();
+            } else if (e.target.id == 'nego_deposit_date0') {
+                nego_deposit_amount0.focus();
+            } else if (e.target.id == 'nego_comment') {
+                company_table_local_0.focus();
+            } else if (e.target.id == 'local_special') {
+                out_fta.focus();
+            }
+            //2020-03-25
+            else if (e.target.id == 'order_receive_LC') {
+                date_SD.focus();
+            } else if (e.target.id == 'order_expect_price') {
+                order_etc_per.focus();
+            }
+
+            //2020-03-26
+            else if (e.target.id == 'ship_BL') {
+                ETA_ship.focus();
+            } else if (e.target.id == 'ETA_ship') {
+                ship_container0.focus();
+            } else {
+                if (index >= $canfocus.length) index = 0;
+                $canfocus.eq(index).focus();
+            }
+
+            //2020-03-26
+            if ((String(e.target.id).search('ship_forward') != -1) && (e.target.id != 'ship_forward0')) {
+                var searchdata = String(e.target.id);
+                searchdata = searchdata.replace("ship_forward", "");
+                var fig = (parseFloat(searchdata) + 1);
+                if (addTable_ship_i >= fig) {
+                    var sumstring = 'ship_container' + String(fig);
+                } else {
+                    bank_nego.focus();
+                }
+            }
+        }
+    });
+
+    Selectize.define('enter_key_submit', function(options) {
+        var self = this;
+        this.onKeyDown = (function(e) {
+            var original = self.onKeyDown;
+            return function(e) {
+                // this.items.length MIGHT change after event propagation.
+                // We need the initial value as well. See next comment.
+                var initialSelection = this.items.length;
+                original.apply(this, arguments);
+
+                if (e.keyCode === 13) {
+                    if (e.target.id == 'buyer_order-selectized') {
+                        agent_order.focus();
+                    }
+                    if (e.target.id == 'agent_order-selectized') {
+                        date_stand.focus();
+                    }
+                    if (e.target.id == 'term_order-selectized') {
+                        arrive_order.focus();
+                    }
+                    //if(e.target.id == '_order-selectized'){ _order.focus(); }
+                    //if(e.target.id == '_order-selectized'){ $(':focusable').eq().focus(); }
+
+                    if (e.target.id == 'arrive_order-selectized') {
+                        payment_order.focus();
+                    }
+                    if (e.target.id == 'payment_order-selectized') {
+                        method_order.focus();
+                    }
+                    if (e.target.id == 'method_order-selectized') {
+                        order_term.focus();
+                    }
+                    if (e.target.id == 'document_order-selectized') {
+                        order_com1.focus();
+                    }
+                    if (e.target.id == 'order_com1_to-selectized') {
+                        var innerval = document.getElementById("com1_hide").innerHTML;
+                        if (String(innerval).search("down") != -1) {
+                            order_com3.focus();
+                        }
+                        if (String(innerval).search("left") != -1) {
+                            order_com2.focus();
+                        }
+
+                    }
+                    if (e.target.id == 'order_com2_to-selectized') {
+                        order_com3.focus();
+                    }
+                    if (e.target.id == 'order_com3_to-selectized') {
+                        var innerval = document.getElementById("com3_hide").innerHTML;
+                        if (String(innerval).search("down") != -1) {
+                            item_order.focus();
+                        }
+                        if (String(innerval).search("left") != -1) {
+                            order_com4.focus();
+                        }
+                    }
+                    if (e.target.id == 'order_com4_to-selectized') {
+                        item_order.focus();
+                    }
+                    if (e.target.id == 'item_order-selectized') {
+                        order_DN.focus();
+                    }
+                    if (e.target.id == 'LS_order-selectized') {
+                        order_remark.focus();
+                    }
+                    if (e.target.id == 'QTY_order-selectized') {
+                        PRC_order.focus();
+                    }
+                    if (e.target.id == 'PRC_order-selectized') {
+                        order_prc.focus();
+                    }
+
+                    if (e.target.id == 'company_order_0-selectized') {
+                        order_table_quantity_0.focus();
+                    }
+                    //2020-03-25
+                    if (e.target.id == 'method_opt_0-selectized') {
+                        if (addTable_supply_i == 0) {
+                            order_expect_price.focus();
+                        } else {
+                            company_order_1.focus();
+                        }
+                    }
+
+                    // 2020-03-26
+                    if (e.target.id == 'buyerbank_order-selectized') {
+                        order_before_order.focus();
+                    }
+                    if (e.target.id == 'bank_nego-selectized') {
+                        day_nego.focus();
+                    }
+                    if (e.target.id == 'unit_nego-selectized') {
+                        nego_TT.focus();
+                    }
+                    //2020-03-26
+                    if (e.target.id == 'buymethod_nego-selectized') {
+                        nego_m4.focus();
+                    }
+                    if (e.target.id == 'unit_nego_table-selectized') {
+                        nego_etc.focus();
+                    }
+                    if (e.target.id == 'company_table_local_0-selectized') {
+                        local_table_LC_0.focus();
+                    }
+
+                    //2020-03-25
+                    if ((String(e.target.id).search('company_order_') != -1) && (e.target.id != 'company_order_0-selectized')) {
+                        var searchdata = String(e.target.id);
+                        searchdata = searchdata.replace("company_order_", "");
+                        searchdata = searchdata.replace("-selectized", "");
+                        var sumstring = 'order_table_quantity_' + searchdata;
+                        eval(sumstring).focus();
+                    }
+                    if ((String(e.target.id).search('method_opt_') != -1) && (e.target.id != 'method_opt_0-selectized')) {
+                        //2020-03-26
+                        var searchdata = String(e.target.id);
+                        searchdata = searchdata.replace("method_opt_", "");
+                        var fig = (parseFloat(searchdata) + 1);
+                        if (addTable_supply_i >= fig) {
+                            var sumstring = 'company_order_' + String(fig);
+                            eval(sumstring).focus();
+                        } else {
+                            order_expect_price.focus();
+                        }
+                    }
+                    //2020-03-26
+                    if ((String(e.target.id).search('company_table_local_') != -1)) {
+                        var searchdata = String(e.target.id);
+                        searchdata = searchdata.replace("company_table_local_", "");
+                        searchdata = searchdata.replace("-selectized", "");
+                        var sumstring = 'local_table_LC_' + searchdata;
+                        eval(sumstring).focus();
+                    }
+                }
+            };
+        })();
+    });
+
+    SelectNego = $('#SelectNego').selectize({
+        placeholder: "Select item",
+
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+    //2020-07-08
+    /* SelectNego = $('#SelectNego').selectize({
+        placeholder:"Select item",
+        onDropdownOpen: function($dropdown){
+            this.$input.get(0).selectize.clear(true);
+            }
+    })[0].selectize; */
+
+    //2020-03-26
+    buyer_order = $('#buyer_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    agent_order = $('#agent_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+    order_com1_to = $('#order_com1_to').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    order_com2_to = $('#order_com2_to').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    order_com3_to = $('#order_com3_to').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    order_com4_to = $('#order_com4_to').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+    term_order = $('#term_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    arrive_order = $('#arrive_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    payment_order = $('#payment_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    method_order = $('#method_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    document_order = $('#document_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    item_order = $('#item_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    LS_order = $('#LS_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    QTY_order = $('#QTY_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    QTY_order.addItem('KG');
+    PRC_order = $('#PRC_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    // table
+    company_order_0 = $('#company_order_0').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+    method_opt_0 = $('#method_opt_0').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+    //method_table_order = $('#method_table_order').selectize({})[0].selectize;
+    buyerbank_order = $('#buyerbank_order').selectize({
+        plugins: ['enter_key_submit'],
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+
+    // 2020.02.18 Enter key should next focus about selectizejs
+    /*
+    buyer_order.on("change", function(){
+        agent_order.focus();
+    });
+    agent_order.on("change", function(){
+        $(':focusable').eq(17).focus();
+    })
+    
+    term_order.on("change", function(){
+        arrive_order.focus();
+    })
+     arrive_order.on("change", function(){
+        payment_order.focus();
+    })
+   
+     payment_order.on("change", function(){
+        $(':focusable').eq(23).focus();
+    })
+    
+    method_order.on("change", function(){
+        document_order.focus();
+    })
+    document_order.on("change", function(){
+        $(':focusable').eq(26).focus();
+    })
+    order_com1_to.on("change", function(){
+        $(':focusable').eq(29).focus();
+    })
+    order_com2_to.on("change", function(){
+        $(':focusable').eq(32).focus();
+    })
+    order_com3_to.on("change", function(){
+        $(':focusable').eq(35).focus();
+    })
+    order_com4_to.on("change", function(){
+        item_order.focus();
+    })
+    item_order.on("change", function(){
+        $(':focusable').eq(40).focus();
+    })
+    LS_order.on("change", function(){
+        $(':focusable').eq(43).focus();
+    })
+    QTY_order.on("change", function(){
+        PRC_order.focus();
+    })
+    PRC_order.on("change", function(){
+        $(':focusable').eq(49).focus();
+    })
+    buyerbank_order.on("change", function(){
+        $(':focusable').eq(70).focus();
+    })
+*/
+    //
+</script>
+
+<!-- Script of date -->
+<script>
+    $(function() {
+        $("#datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#date_stand").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#date_delivery").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#date_SD").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#date_ED").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+
+</script>

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Page content -->
+<div class="w3-main w3-light-grey" style="margin-left:320px">
+    <i class="fa fa-bars w3-button w3-light-grey w3-hide-large w3-xlarge w3-margin-top" onclick="w3_open()"></i>
+    <div class="w3-content w3-margin-top" style="max-width:2000px;margin-left:20px;width:100%">
+        <div class="w3-twothird" style="width:90%">
+
+
+
+    {% include 'contents/c_order.html' %}
+    {% include 'contents/d_shipment.html' %}    
+    {% include 'contents/e_nego.html' %}
+    {% include 'contents/f_local.html' %}    
+    {% include 'contents/g_fta.html' %}        
+
+    
+            
+        </div><!-- end of w3-twothird from a_header.html-->
+    </div><!-- end of w3-content from a_header.html-->
+</div><!-- end of w3-main from a_header.html-->
+    {% include 'contents/h_footer.html' %}
+
+{% endblock body %}
+

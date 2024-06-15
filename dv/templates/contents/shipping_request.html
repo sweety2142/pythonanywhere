@@ -1,0 +1,594 @@
+<div class="w3-container w3-hide" id="shipping_request_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Shipping request</b>
+        </h5>
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>PDF</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+            <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_shippingrequest()" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right " id="shipping_request" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_request_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_request_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Shipper / Exporter
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_request_shipper" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Consingnee
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_request_consingnee" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Notify Party
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_request_Notify" name="Days" style=" resize : none;"> </textarea>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Vessel/Flight
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="shipping_request_Vessel" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Loading
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_request_Loading" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Discharge
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_request_discharge" name="Days" style=" resize : none;"> </textarea>
+                </div>
+
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Final destination
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_request_destination" name="Days" style=" resize : none;"> </textarea>
+                </div>
+
+                <div class="w3-half">
+
+                </div>
+
+            </div>
+            <div class="w3-half">
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-calendar-check-o" style="font-family:Courier 'Courier New', Courier, monospace"></i> 날짜
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="date_shipping_request_date" class="w3-input ht_25 max_width_400">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil" style="font-family:Courier 'Courier New', Courier, monospace"></i> 선박회사
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_shipcompany" class="w3-input w3-border ht_25" style="font-family:Courier 'Courier New', Courier, monospace">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-calendar-check-o"></i> Sailing on or about
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="date_shipping_request_sailing" class="w3-input ht_25 max_width_400">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-calendar-check-o"></i> 작업일
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="date_shipping_request_job" class="w3-input ht_25 max_width_400">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> 공장
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_factory" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> Type of Movement
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_movement" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-calendar-check-o"></i> 출항예정일
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="date_shipping_request_sailday" class="w3-input ht_25 max_width_400">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-calendar-check-o"></i> B/L수령예정일
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="date_shipping_request_BLsailday" class="w3-input ht_25 max_width_400">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> 선임
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_sunim" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> 담당
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_damdang" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> THC
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_THC" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> REMARK
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_remark" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> TEL
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_tel" class="w3-input w3-border ht_25">
+                </div>
+
+                <div class="w3-col s5 m5 l5 row1_text_color">
+                    <i class="fa fa-pencil"></i> FAX
+                </div>
+                <div class="w3-col s7 m7 l7">
+                    <input type="text" id="shipping_request_fax" class="w3-input w3-border ht_25">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of second row -->
+    <hr>
+    <br>
+    <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+        <div class="w3-full">
+            <pre><u>Marks and numbers</u>          <u>Description of goods</u>                <u>Net weight</u>                 <u>Gross weight</u>        <u>Measurement</u></pre>
+            <textarea class="w3-input w3-border" id="shipping_request_goods" style="resize:none;height:200px;width:900px; overflow-x:auto;overflow-y:auto;font-family:Courier 'Courier New', Courier, monospace"></textarea>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    $(function() {
+        $("#date_shipping_request_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_request_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_request_job").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_request_sailday").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_request_BLsailday").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+
+
+    function pdfPrint_shippingrequest() {
+
+        pdfMake.fonts = {
+            Cour: {
+                normal: 'cour.ttf',
+                bold: 'courbd.ttf',
+                italics: 'couri.ttf',
+                bolditalics: 'courbi.ttf'
+            },
+            Roboto: {
+                normal: 'Roboto-Regular.ttf',
+                bold: 'Roboto-Medium.ttf',
+                italics: 'Roboto-Italic.ttf',
+                bolditalics: 'Roboto-MediumItalic.ttf'
+            },
+            D2C: {
+                normal: 'D2Coding.ttf',
+                bold: 'D2CodingBold.ttf'
+            }
+
+        }
+
+
+        // set variable    
+
+        var v1 = $("#shipping_request_shipper").val();
+        var v2 = $("#shipping_request_consingnee").val();
+        var v3 = $("#shipping_request_Notify").val();
+        var v4 = $("#shipping_request_Vessel").val();
+        var v5 = $("#shipping_request_Loading").val();
+        var v6 = $("#shipping_request_discharge").val();
+        var v7 = $("#shipping_request_destination").val();
+
+        var v8 = $("#date_shipping_request_date").val();
+        var v9 = $("#shipping_request_shipcompany").val();
+        var v10 = $("#date_shipping_request_sailing").val();
+        var v11 = $("#date_shipping_request_job").val();
+        var v12 = $("#shipping_request_factory").val();
+        var v13 = $("#shipping_request_movement").val();
+        var v14 = $("#date_shipping_request_sailday").val();
+        var v15 = $("#date_shipping_request_BLsailday").val();
+        var v16 = $("#shipping_request_sunim").val();
+        var v17 = $("#shipping_request_damdang").val();
+        var v18 = $("#shipping_request_THC").val();
+        var v19 = $("#shipping_request_remark").val();
+        var v20 = $("#shipping_request_tel").val();
+        var v21 = $("#shipping_request_fax").val();
+
+        var v22 = $("#shipping_request_goods").val();
+
+
+        var arr = v22.split('\n');
+
+        var isize = arr.length;
+        var arr1 = [];
+        for (var i = 0; i < isize; i++) {
+            arrt = [];
+            console.log(arr[i]);
+            if (arr[i].substr(0, 28).search('--') != -1) {
+                arr_ = String('-').padEnd(21, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(0, 28));
+            }
+
+            if (arr[i].substr(28, 55).search('--') != -1) {
+                arr_ = String('-').padEnd(32, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(28, 55));
+            }
+
+            if (arr[i].substr(60, 100).search('--') != -1) {
+                arr_ = String('-').padEnd(11, '-');
+                arrt.push(arr_);
+            } else {
+                arrt.push(arr[i].substr(85, 100));
+            }
+
+            arrt.push("");
+
+            arrt.push("");
+
+            arr1.push(arrt);
+        }
+
+
+        var rows = [];
+
+        for (var i = 0; i < isize; i++) {
+
+            rows.push([arr1[i][0], arr1[i][1], arr1[i][2], arr1[i][3], arr1[i][4]]);
+        }
+
+        var dd = {
+
+            table: {
+                widths: [100, 150, 60, 60, '*'],
+                fontSize: 8,
+                alignment: 'left',
+                margin: [0, 0, 0, 0],
+                preserveLeadingSpaces: true,
+                body: rows
+            },
+            fontSize: 8,
+            preserveLeadingSpaces: true,
+            alignment: 'left',
+            layout: 'noBorders',
+            margin: [0, 0, 0, 0]
+        }
+
+
+        var companystr = '';
+        if (check_company == 'DB')
+            companystr = 'DO BEST';
+        else if (check_company == 'EI')
+            companystr = 'EIN Textile';
+        //28, 37, 26,20, 1
+
+        var docDefinition2 = {
+            pageMargins: [20, 60, 20, 60],
+            content: [{
+                        alignment: 'center',
+                        text: '\nSHIPPING REQUEST\n',
+                        bold: true,
+                        fontSize: 30
+                    }, {
+                        color: '#444',
+                        table: {
+                            widths: [150, 150, '*'],
+                            heights: [80, 80, 50, 50, 50, 50],
+                            body: [
+                                [{
+                                    border: [true, true, true, false],
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Shipper/Exporter\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v1
+                                    }]
+                                }, '', {
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: '날    짜 : ',
+                                        font: 'D2C'
+                                    }, {
+                                        fontSize: 10,
+                                        text: v8
+                                    }, {
+                                        bold: true,
+                                        text: '\n선박회사 : ',
+                                        font: 'D2C'
+                                    }, {
+                                        fontSize: 10,
+                                        text: v9,
+                                        font: 'D2C'
+                                    }]
+                                }],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Consingnee\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v2
+                                    }]
+                                }, '', ''],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Notify Party\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v3
+                                    }]
+                                }, '', {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Sailing on or about\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v10
+                                    }]
+                                }],
+                                ['', '', {
+                                    text: [{
+                                        bold: true,
+                                        text: '작 업 일 : ',
+                                        font: 'D2C'
+                                    }, {
+                                        fontSize: 10,
+                                        text: v11
+                                    }]
+                                }],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Vessel / Flight\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v4
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Port of Loading\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v5
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: '공 장 : ',
+                                        font: 'D2C'
+                                    }, {
+                                        fontSize: 10,
+                                        text: v12
+                                    }]
+                                }],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Port of Discharge\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v6
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Final Destination\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v7
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Type of Movement\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: v13
+                                    }]
+                                }],
+                            ]
+                        } // table layout
+                    }, {
+                        color: '#123',
+                        layout: 'noBorders',
+                        table: {
+                            widths: [100, 150, 60, 60, '*'],
+                            heights: [15, 100, 40],
+                            body: [
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Marks and numbers\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: 'No. and Kind\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Description of goods\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Gross weight\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Measurement\n',
+                                        }]
+
+
+                                    }
+
+                                ]
+                            ]
+                        } // table layout
+                    }, {
+                        preserveLeadingSpaces: true,
+                        preserveTrailingSpaces: true,
+                        // characterSpacing: 1.3,
+                        // fontSize: 10
+                        text: v22,
+                        font: 'D2C',
+                        fontSize: 9,
+
+                        margin: [0, 5, 0, 0] // left top right bottom
+                    }, {
+                        text: '\n\n\n\n\n\n\n                          '
+                    }, {
+
+                        text: [{
+                            text: companystr + ' Co., LTD.\n  Tel) ',
+                        }, {
+                            text: v20
+                        }, {
+                            text: '\nFax) ',
+                        }, {
+                            text: v21
+                        }, {
+                            text: '\n담당:',
+                            font: 'D2C'
+                        }, {
+                            text: v17,
+                            font: 'D2C'
+                        }]
+
+                    }
+
+                ] // end of content
+
+        }; // end of docDefinition2
+
+        var pdf_name = 'request in ship.pdf';
+
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+
+
+
+    } // end of pdfPrint()
+</script>

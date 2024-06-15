@@ -1,0 +1,24 @@
+<div class="col-lg-4 col-md-6 mb-0  ">
+    <select class="mdb-select colorful-select dropdown-primary" id="prod" searchable="OrderNo">
+
+
+        {% for key in db_cont %}
+        {% if key == 'orderno' %}
+        {% for k,v in db_cont[key].items() %}
+        {% if k== 'OrderNo' %}
+        {% for va in v %}
+        {% if va != 'nan' %}
+        <option value='1'>{{ va }}</option>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+
+        <!--option value="AA_t_10_ty_90">A</option-->
+        <!--option value="B">B</option-->
+    </select>
+    <label class="mdb-main-label">OrderNo</label>
+
+</div>

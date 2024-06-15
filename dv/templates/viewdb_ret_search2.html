@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% if check_comp == 'DB' %}
+    <title>Do Best Ledger Manager Site</title>
+    {% elif check_comp == 'EI' %}
+    <title>EIN Textile Ledger Manager Site</title>
+    {% endif %}
+
+    <link rel="icon" href="{{ url_for('static', filename='images/ledger.png') }}">
+    <link href="{{ url_for('static', filename='css/_bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_bootstrap_select_min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/w3.css') }}" rel="stylesheet">
+    <!--link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"-->
+    <link href="{{ url_for('static', filename='css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_STYLE.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/selectizejs/normalize.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/stylesheet.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/selectize.bootstrap3.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectizejs/selectize.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+
+    <!-- tablesorter -->
+    <link href="{{ url_for('static', filename='tablesorter/theme.bootstrap_3.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tablesorter/prettify.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tablesorter/jquery-ui.min.css') }}" rel="stylesheet">
+    <!--link href="{{ url_for('static', filename='tablesorter/css/month_bootstrap3/theme.bootstrap.css') }}" rel="stylesheet"-->
+    <link href="{{ url_for('static', filename='tablesorter/jquery.tablesorter.pager.min.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tablesorter.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tablesorter.widgets.min.js') }}"></script>
+    <!-- Widget output -->
+    <link href="{{ url_for('static', filename='tablesorter/jq.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tablesorter/tipsy.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/prettify.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tipsy.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-output.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/docs.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tablesorter.pager.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-cssStickyHeaders.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-columnSelector.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-pager.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-chart.min.js') }}"></script>
+    <!--script type="text/javascript" src="{{ url_for('static', filename='tablesorter/css/month_bootstrap3/bootstrap.min.js') }}"></script-->
+
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/parser-input-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.mark.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-mark.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-editable.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-math.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='exceljs/exceljs.bare.min.js') }}"></script>
+
+
+    <style>
+        .tn {
+            background-color: transpatent;
+            border: none;
+        }
+    </style>
+    <style>
+        .red {
+            color: red;
+        }
+        
+        .accordion a {
+            color: #2A6496;
+        }
+        
+        .dropdown-menu {
+            min-width: 320px;
+            font-size: 12px;
+            padding: 10px;
+        }
+        
+        .dropdown-menu h5 {
+            text-align: right;
+            margin-right: 4px;
+        }
+        
+        .dropdown-menu li div {
+            margin-bottom: 5px;
+        }
+        
+        .output-separator,
+        .output-replacequotes,
+        .output-quotes {
+            font-family: Tahoma, Geneva, sans-serif;
+            min-width: 18px;
+            height: 22px;
+        }
+        
+        .output-separator-input,
+        .output-replacequotes {
+            width: 26px;
+        }
+        
+        pre {
+            /* override bootstrap setting */
+            overflow-y: hidden !important;
+        }
+    </style>
+    <style id="css">
+        table.tablesorter tbody tr.odd.checked td {
+            background: #8080c0;
+            color: #fff;
+        }
+        
+        table.tablesorter tbody tr.even.checked td {
+            background: #a0a0e0;
+            color: #fff;
+        }
+    </style>
+
+    <style id="css">
+        table.tablesorter {
+            font-family: arial;
+            background-color: #CDCDCD;
+            margin: 10px 0pt 15px;
+            font-size: 8pt;
+            width: 100%;
+            text-align: left;
+        }
+        
+        table.tablesorter thead tr th,
+        table.tablesorter tfoot tr th {
+            background-color: #e6EEEE;
+            border: 1px solid #FFF;
+            font-size: 8pt;
+            padding: 4px;
+        }
+        
+        table.tablesorter2 {
+            font-family: arial;
+            background-color: rgb(206, 200, 200);
+            margin: 10px 0pt 15px;
+            font-size: 8pt;
+            width: 100%;
+            text-align: left;
+        }
+        
+        table.tablesorter2 thead tr th,
+        table.tablesorter2 tfoot tr th {
+            background-color: rgb(247, 239, 247);
+            border: 1px solid rgb(87, 84, 233);
+            font-size: 8pt;
+            padding: 4px;
+        }
+        
+        .columnSelectorWrapper {
+            position: relative;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        
+        .columnSelector,
+        .hidden {
+            display: none;
+        }
+        
+        .columnSelectorButton {
+            background: #99bfe6;
+            border: #888 1px solid;
+            color: #111;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        #colSelect1:checked+label {
+            background: #5797d7;
+            border-color: #555;
+        }
+        
+        #colSelect1:checked~#columnSelector {
+            display: block;
+        }
+        
+        .columnSelector {
+            width: 220px;
+            position: absolute;
+            top: 30px;
+            padding: 10px;
+            background: #fff;
+            border: #99bfe6 1px solid;
+            border-radius: 5px;
+        }
+        
+        .columnSelector label {
+            display: block;
+        }
+        
+        .columnSelector label:nth-child(1) {
+            border-bottom: #99bfe6 solid 1px;
+            margin-bottom: 5px;
+        }
+        
+        .columnSelector input {
+            margin-right: 5px;
+        }
+        
+        .columnSelector .disabled {
+            color: #ddd;
+        }
+        
+        .#popover-target label {
+            margin: 0 5px;
+            display: block;
+        }
+        
+        #popover-target input {
+            margin-right: 5px;
+        }
+        
+        #popover-target .disabled {
+            color: #ddd;
+        }
+    </style>
+
+</head>
+
+<body class="w3-light-grey">
+
+    <div class="w3-container">
+        <h3> Nego Status </h3>
+        <div class="w3-bar w3-light-blue">
+            <button class="w3-bar-item w3-button tablink w3-blue" onclick="openTabs(event, 's_alldata')">Order Data</button>
+        </div>
+        <br>
+
+        <div class="w3-container w3-card-4 w3-border tabs" id="s_alldata" style="max-width:1900;border:1px solid #a6a6a6;overflow:auto;">
+            <div class="group1">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default reset">Reset</button>
+                    <!-- targeted by the "filter_reset" option -->
+
+                    <button type="button" class="btn btn-success" onclick="exportTableToExcel('table1')">Export Table Data To Excel File</button>
+                    <!-- Split button -->
+                    <button type="button" class="btn btn-default download">Output</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <h5><strong>Output options</strong></h5>
+                        </li>
+                        <li>
+                            <label>Separator: <input class="output-separator-input" type="text" size="2" value="," /></label>
+                            <button type="button" class="output-separator btn btn-default btn-xs active" title="comma">,</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="semi-colon">;</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="tab">&#x21e5;</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="space">&#x2423;</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="output JSON">json</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="output Array (see note)">array</button>
+                        </li>
+                        <li>
+                            <label>Send to:</label>
+                            <div class="btn-group output-download-popup" data-toggle="buttons" title="Download file or open in Popup window">
+
+                                <label class="btn btn-default btn-sm active">
+                            <input type="radio" name="delivery1" class="output-download" checked> Download
+                        </label>
+                            </div>
+                        </li>
+                        <li>
+                            <label>Include:</label>
+                            <div class="btn-group output-filter-all" data-toggle="buttons" title="Output only filtered, visible, selected, selected+visible or all rows">
+                                <label class="btn btn-default btn-sm active">
+                            <input type="radio" name="getrows1" class="output-filter" checked="checked"> Filtered
+                        </label>
+                                <!--
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-visible"> Visible
+                        </label>
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-selected"> Selected
+                        </label>
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-sel-vis"> Sel+Vis
+                        </label>
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-all"> All
+                        </label>
+                        -->
+                            </div>
+                        </li>
+                        <li>
+                            <button class="output-header btn btn-default btn-sm active" title="Include table header">Header</button>
+                            <button class="output-footer btn btn-default btn-sm" title="Include table footer">Footer</button>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <label>Replace quotes: <input class="output-replacequotes" type="text" size="2" value="'" /></label>
+                            <button type="button" class="output-quotes btn btn-default btn-xs active" title="single quote">'</button>
+                            <button type="button" class="output-quotes btn btn-default btn-xs" title="left double quote">&#x201c;</button>
+                            <button type="button" class="output-quotes btn btn-default btn-xs" title="escaped quote">\"</button>
+                        </li>
+                        <li><label title="Remove extra white space from each cell">Trim spaces: <input class="output-trim" type="checkbox" checked /></label></li>
+                        <li><label title="Include HTML from cells in output">Include HTML: <input class="output-html" type="checkbox" /></label></li>
+                        <li><label title="Wrap all values in quotes">Wrap in Quotes: <input class="output-wrap" type="checkbox" /></label></li>
+                        <li><label title="Choose a download filename">Filename: <input class="output-filename" type="text" size="15" value="mytable.csv"/></label></li>
+                    </ul>
+
+                    <div class="w3-container w3-cell w3-right" style="width:300px">
+                        <input type="text" name="keyword" class="w3-input w3-border w3-animate-input w3-border-cyan" style="width:75%" data-column="all" placeholder="search all columns">
+                    </div>
+                </div>
+
+                <div class="custom-popup" style="z-index:9999">
+                    <div class="columnSelectorWrapper">
+                        <input id="colSelect1" type="checkbox" class="hidden">
+                        <label class="w3-button w3-white w3-border w3-border-blue w3-round-large w3-text-blue w3-tiny" for="colSelect1">Select Column</label>
+                        <div id="columnSelector" class="columnSelector w3-small" style="z-index:9999"></div>
+                    </div>
+                </div>
+
+
+                <table class="tablesorter cpp" id="table1">
+                    <thead>
+                        <tr>
+                            <th colspan="109" class="ts-pager form-inline">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-defalut first" style="color:black">
+                                        <span class="glyphicon glyphicon-step-backward"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-defalut prev">
+                                        <span class="glyphicon glyphicon-backward"></span>
+                                    </button>
+                                </div>
+                                <span class="pagedisplay"></span>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-defalut next">
+                                        <span class="glyphicon glyphicon-step-forward"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-defalut last">
+                                        <span class="glyphicon glyphicon-step-forward"></span>
+                                    </button>
+                                </div>
+                                <select class="form-control input-sm pagesize" title="Select page size">
+                                    <option selected="selected" value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="all">All rows</option>
+                                </select>
+                                <select class="gotoPage form-control input-sm pagenum" title="Select page number"></select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="sorter-checkbox filter-false" data-priority="critical">&nbsp;</th>
+                            {% for item in db_data %}
+                            <th style="min-width:70px" data-priority="3" class="columnSelector-true">{{ item }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th class="sorter-checkbox filter-false" data-priority="critical">&nbsp;</th>
+                            {% for item in db_data %}
+                            <th>{{ item }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th colspan="109" class="ts-pager form-inline">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-default first" style="color:black">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                        </button>
+                                    <button type="button" class="btn btn-defalut prev">
+                            <span class="glyphicon glyphicon-backward"></span>
+                        </button>
+                                </div>
+                                <span class="pagedisplay"></span>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-defalut next">
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </button>
+                                    <button type="button" class="btn btn-defalut last">
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </button>
+                                </div>
+                                <select class="form-control input-sm pagesize" title="Select page size">
+                        <option selected="selected" value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="all">All rows</option>
+                    </select>
+                                <select class="gotoPage form-control input-sm pagenum" title="Select page number"></select>
+                            </th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody class="w3-small">
+                        {% for item in total_db %}
+                        <tr>
+                            {% for i in range(109) %}
+                            <td>{{ item[i] if item[i]!=None }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- btn-group-->
+
+        </div>
+        <br><br><br>
+        <div class="w3-container w3-card-4 w3-border" style="max-width:1900;border:1px solid #a6a6a6;overflow:auto;">
+            <div class="group2">
+                <div class="btn-group">
+                    Summation
+                    <table class="tablesorter2 cpp2" id="table2">
+                        <thead>
+                            <tr>
+                                <th class="filter-true">Nego Inv No</th>
+                                <!-- 0-->
+                                <th class="filter-false">Nego 외화</th>
+                                <!-- 1-->
+                                <th class="filter-false">Nego 원화</th>
+                                <!-- 2-->
+                                <th class="filter-false">Nego 달러</th>
+                                <!-- 3-->
+                                <th class="filter-false">Nego Cross</th>
+                                <!-- 4-->
+                                <th class="filter-false">FOBAmout 원화</th>
+                                <!-- 5-->
+                                <th class="filter-false">FOBAmout 달러</th>
+                                <!-- 6-->
+                                <th class="filter-false">선임원화</th>
+                                <!-- 7-->
+                                <th class="filter-false">선임달러</th>
+                                <!-- 8-->
+                                <th class="filter-false">적화보험료원화</th>
+                                <!-- 9-->
+                                <th class="filter-false">적화보험료달러</th>
+                                <!-- 10-->
+                                <th class="filter-false">수출보험료원화</th>
+                                <!-- 11-->
+                                <th class="filter-false">수출보험료달러</th>
+                                <!-- 12-->
+                                <th class="filter-false">우편료원화</th>
+                                <!-- 13-->
+                                <th class="filter-false">우편료달러</th>
+                                <!-- 14-->
+                                <th class="filter-false">우편료기타원화</th>
+                                <!-- 15-->
+                                <th class="filter-false">우편료기타달러</th>
+                                <!-- 16-->
+                                <th class="filter-false">Margin원화</th>
+                                <!-- 17-->
+                                <th class="filter-false">Margin달러</th>
+                                <!-- 18-->
+                                <th class="filter-false">면장FOB원화</th>
+                                <!-- 19-->
+                                <th class="filter-false">면장FOB달러</th>
+                                <!-- 20-->
+                                <th class="filter-false">잔액외화</th>
+                                <!-- 21-->
+                                <th class="filter-false">잔액달러</th>
+                                <!-- 22-->
+                                <th class="filter-false">Order예상선임</th>
+                                <!-- 23-->
+                            </tr>
+                        </thead>
+
+                        <tbody class="w3-small">
+                            {% for item in total_db %}
+                            <tr>
+                                <td>{{ item[1] }}</td>
+                                <!-- 0-->
+                                <td>{{ item[13] }}</td>
+                                <!-- 1-->
+                                <td>{{ item[14]}} </td>
+                                <!-- 2-->
+                                <td>{{ item[13]}} </td>
+                                <td>{{ item[56]}} </td>
+                                <td>{{ item[16]}} </td>
+                                <td>{{ item[15]}} </td>
+                                <td>{{ item[21]}} </td>
+                                <td>{{ item[20]}} </td>
+                                <!-- 8-->
+                                <td>{{ item[23]}} </td>
+                                <!-- 9-->
+                                <td>{{ item[22]}} </td>
+                                <!-- 10-->
+                                <td>{{ item[25]}} </td>
+                                <!-- 11-->
+                                <td>{{ item[24]}} </td>
+                                <!-- 12-->
+                                <td>{{ item[27]}} </td>
+                                <!-- 13-->
+                                <td>{{ item[26]}} </td>
+                                <!-- 14-->
+                                <td>{{ item[29]}} </td>
+                                <!-- 15-->
+                                <td>{{ item[28]}} </td>
+                                <!-- 16-->
+                                <td>{{ item[31]}} </td>
+                                <!-- 17-->
+                                <td>{{ item[30]}} </td>
+                                <!-- 18-->
+                                <td>{{ item[35]}} </td>
+                                <!-- 19-->
+                                <td>{{ item[34]}} </td>
+                                <!-- 20-->
+                                <td>{{ item[56]}} </td>
+                                <!-- 21-->
+                                <td>{{ item[55]}} </td>
+                                <!-- 22-->
+                                <td>{{ item[105]}} </td>
+                                <!-- 23-->
+
+                            </tr>
+                            {% endfor %}
+
+                            <tr>
+                                <td> 합계 </td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                                <td data-math="above-sum">above-sum</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br><br>
+                </div>
+                <!-- btn-group-->
+            </div>
+        </div>
+    </div>
+
+    <script id="js">
+        $(function() {
+            $('.group1 table, .cpp').tablesorter({
+                theme: 'bootstrap',
+                checkboxClass: 'checked',
+                widthFixed: true,
+                fixedHeight: false,
+                ignoreCase: false,
+                delayInt: true,
+                sortList: [
+                    [0, 0]
+                ],
+                headerTemplate: '{content} {icon}',
+                sortLocaleCompare: true,
+
+                widgets: ["zebra", "filter", "uitheme", "output", "mark", "editable", "columns", "columnSelector", "math"],
+                widgetOptions: {
+                    stickyHeaders_offst: 50,
+                    filter_filteredRow: 'filtered',
+                    filter_reset: '.group1 .reset',
+                    filter_searchDelay: 500,
+                    filter_external: 'input[name="keyword"]',
+
+                    mark_tsUpdate: 'markUpdate',
+                    mark_tslgnore: {
+                        l: true
+                    },
+                    mark_accuracy: 'partially',
+                    mark_caseSensitive: false,
+                    mark_diacritics: true,
+                    mark_separateWordSearch: true,
+                    mark_synonyms: {},
+                    mark_acrossElements: false,
+                    mark_className: '',
+                    mark_debug: false,
+                    mark_element: 'mark',
+                    mark_exclude: [],
+                    mark_iframes: false,
+                    mark_log: console,
+                    mark_done: function(totalMatches) {},
+                    mark_each: function(element) {},
+                    mark_filter: function(node, term, totalMatches, matches) {
+                        return true;
+                    },
+                    mark_noMatch: function(termNotFound) {},
+
+                    output_separator: ',',
+                    output_ignoreColumns: [0],
+                    output_hiddenColumns: false,
+                    output_includeFooter: true,
+                    output_includeHeader: false,
+                    output_headerRows: false,
+                    output_dataAttrib: 'data-name',
+                    output_delivery: 'p',
+                    output_saveRows: 'f',
+                    output_duplicateSpans: true,
+                    output_replaceQuote: '\u201c;',
+                    output_includeHTML: true,
+                    output_trimSpaces: false,
+                    output_wrapQuotes: false,
+                    output_popupStyle: 'width=700,height=700',
+                    output_saveFileName: 'OrderSearch.csv',
+                    output_formatContent: function(config, widgetOptions, data) {
+                        // data.isHeader (boolean) = true if processing a header cell
+                        // data.$cell = jQuery object of the cell currently being processed
+                        // data.content = processed cell content (spaces trimmed, quotes added/replaced, etc)
+                        // data.columnIndex = column in which the cell is contained
+                        // data.parsed = cell content parsed by the associated column parser
+                        return data.content;
+                    },
+                    // callback executed when processing completes
+                    output_callback: function(config, data, url) {
+                        // return false to stop delivery & do something else with the data
+                        // return true OR modified data (v2.25.1) to continue download/output
+                        return true;
+                    },
+                    // callbackJSON used when outputting JSON & any header cells has a colspan - unique names required
+                    output_callbackJSON: function($cell, txt, cellIndex) {
+                        return txt + '(' + cellIndex + ')';
+                    },
+                    // the need to modify this for Excel no longer exists
+                    output_encoding: 'data:application/octet-stream;charset=utf8,',
+                    // override internal save file code and use an external plugin such as
+                    // https://github.com/eligrey/FileSaver.js
+                    output_savePlugin: null
+                        /* function(config, widgetOptions, data) {
+                                           var blob = new Blob([data], {type: widgetOptions.output_encoding});
+                                           saveAs(blob, widgetOptions.output_saveFileName);
+                                       } */
+                        ,
+
+                    editable_columns: [2],
+                    editable_enterToAccept: true,
+                    editable_autoAccept: true,
+                    editable_autoResort: false,
+                    editable_validate: null,
+                    editable_focused: function(txt, columnIndex, $element) {
+                        $element.addClass('focused');
+                    },
+                    editable_selectAll: function(txt, columnIndex, $element) {
+                        return /^b/i.test(txt) && columnIndex === 0;
+                    },
+                    editable_wrapContent: '<div>',
+                    editable_trimConten: true,
+                    editable_noEdit: 'no-edit',
+                    editable_editComplete: 'editComplete',
+                    columnSelector_container: $('#columnSelector'),
+                    columnSelector_columns: {
+                        0: 'disable'
+                    },
+                    columnSelector_saveColumns: true,
+                    columnSelector_layout: '<label><input type="checkbox">{name}</label>',
+                    columnSelector_layoutCustomizer: null,
+                    columnSelector_name: 'data-selector-name',
+                    columnSelector_mediaquery: true,
+                    columnSelector_mediaqueryName: 'Auto:',
+                    columnSelector_mediaqueryState: true,
+                    columnSelector_mediaqueryHidden: true,
+                    columnSelector_maxVisible: null,
+                    columnSelector_minVisible: null,
+                    columnSelector_priority: 'data-priority',
+                    columnSelector_cssChecked: 'checked',
+                    columnSelector_classHasSpan: 'hasSpan',
+                    columnSelector_updated: 'columnUpdate',
+
+                    math_data: 'math',
+                    math_ignore: [0, 1],
+                    math_none: 'N/A',
+                    math_complete: function($cell, wo, result, value, arry) {
+                        var txt = '<span class="align-decimal">' + (value === wo.math_none ? '' : '') + result + '</span>';
+                        if ($cell.attr('data-math') === 'all-sum') {
+                            return txt + '(Sum of' + arry.length + ' cells)';
+                        }
+                        return txt;
+                    },
+                    math_completed: function(c) {},
+                    math_textAttr: '',
+                    math_mask: '',
+                    math_prefix: '',
+                    math_suffix: '',
+                    math_event: 'recalculate',
+                    math_priority: ['row', 'above', 'below', 'col'],
+                    math_rowFilter: ''
+
+                } //WidgetOptions
+            }).tablesorterPager({
+                container: $('.ts-pager'),
+                output: '{startRow}-{endRow} / {filteredRows} ({totalRows})',
+                page: 0,
+                size: 20
+            });
+
+            $('.group2 table, .cpp2').tablesorter({
+                theme: 'bootstrap',
+                checkboxClass: 'checked',
+                widthFixed: true,
+                fixedHeight: false,
+                ignoreCase: false,
+                delayInt: true,
+                sortList: [
+                    [0, 0]
+                ],
+                headerTemplate: '{content} {icon}',
+                sortLocaleCompare: true,
+
+                widgets: ["zebra", "filter", "uitheme", "mark", "editable", "columns", "math"],
+                widgetOptions: {
+                    stickyHeaders_offst: 50,
+                    filter_filteredRow: 'filtered',
+                    filter_reset: '.group2 .reset',
+                    filter_searchDelay: 500,
+                    filter_external: 'input[name="keyword"]',
+
+                    mark_tsUpdate: 'markUpdate',
+                    mark_tslgnore: {
+                        l: true
+                    },
+                    mark_accuracy: 'partially',
+                    mark_caseSensitive: false,
+                    mark_diacritics: true,
+                    mark_separateWordSearch: true,
+                    mark_synonyms: {},
+                    mark_acrossElements: false,
+                    mark_className: '',
+                    mark_debug: false,
+                    mark_element: 'mark',
+                    mark_exclude: [],
+                    mark_iframes: false,
+                    mark_log: console,
+                    mark_done: function(totalMatches) {},
+                    mark_each: function(element) {},
+                    mark_filter: function(node, term, totalMatches, matches) {
+                        return true;
+                    },
+                    mark_noMatch: function(termNotFound) {},
+                    /*
+                    output_separator:',',
+                    output_ignoreColumns:[0,1],
+                    output_hiddenColumns:false,
+                    output_includeFooter:true,
+                    output_includeHeader:false,
+                    output_headerRows:false,
+                    output_dataAttrib:'data-name',
+                    output_delivery:'p',
+                    output_saveRows:'f',
+                    output_duplicateSpans:true,
+                    output_replaceQuote:'\u201c;',
+                    output_includeHTML:true,
+                    output_trimSpaces:false,
+                    output_wrapQuotes:false,
+                    output_popupStyle:'width=700,height=700',
+                    output_saveFileName:'mytable.txt',
+                    */
+                    editable_columns: [2],
+                    editable_enterToAccept: true,
+                    editable_autoAccept: true,
+                    editable_autoResort: false,
+                    editable_validate: null,
+                    editable_focused: function(txt, columnIndex, $element) {
+                        $element.addClass('focused');
+                    },
+                    editable_selectAll: function(txt, columnIndex, $element) {
+                        return /^b/i.test(txt) && columnIndex === 0;
+                    },
+                    editable_wrapContent: '<div>',
+                    editable_trimConten: true,
+                    editable_noEdit: 'no-edit',
+                    editable_editComplete: 'editComplete',
+
+                    math_data: 'math',
+                    math_ignore: [0, 1],
+                    math_none: 'N/A',
+                    math_complete: function($cell, wo, result, value, arry) {
+                        var txt = '<span class="align-decimal">' + (value === wo.math_none ? '' : '') + result + '</span>';
+                        if ($cell.attr('data-math') === 'all-sum') {
+                            return txt + '(Sum of' + arry.length + ' cells)';
+                        }
+                        return txt;
+                    },
+                    math_completed: function(c) {
+
+                    },
+                    math_textAttr: '',
+                    math_mask: '',
+                    math_prefix: '',
+                    math_suffix: '',
+                    math_event: 'recalculate',
+                    math_priority: ['row', 'above', 'below', 'col'],
+                    math_rowFilter: ''
+
+                }
+            }).tablesorterPager({
+                container: $('.ts-pager'),
+                output: '{startRow}-{endRow} / {filteredRows} ({totalRows})',
+                page: 0,
+                size: 20
+            });
+
+            var demos = ['.group1'];
+
+            $.each(demos, function(groupIndex) {
+                var $this = $(demos[groupIndex]);
+
+                $this.find('.dropdown-toggle').click(function(e) {
+                    // this is needed because clicking inside the dropdown will close
+                    // the menu with only bootstrap controlling it.
+                    $this.find('.dropdown-menu').toggle();
+                    return false;
+                });
+                // make separator & replace quotes buttons update the value
+                $this.find('.output-separator').click(function() {
+                    $this.find('.output-separator').removeClass('active');
+                    var txt = $(this).addClass('active').html();
+                    $this.find('.output-separator-input').val(txt);
+                    $this.find('.output-filename').val(function(i, v) {
+                        // change filename extension based on separator
+                        var filetype = (txt === 'json' || txt === 'array') ? 'js' :
+                            txt === ',' ? 'csv' : 'txt';
+                        return v.replace(/\.\w+$/, '.' + filetype);
+                    });
+                    return false;
+                });
+                $this.find('.output-quotes').click(function() {
+                    $this.find('.output-quotes').removeClass('active');
+                    $this.find('.output-replacequotes').val($(this).addClass('active').text());
+                    return false;
+                });
+                // header/footer toggle buttons
+                $this.find('.output-header, .output-footer').click(function() {
+                    $(this).toggleClass('active');
+                });
+                // clicking the download button; all you really need is to
+                // trigger an "output" event on the table
+                $this.find('.download').click(function() {
+                    var typ,
+                        $table = $this.find('table'),
+                        wo = $table[0].config.widgetOptions,
+                        val = $this.find('.output-filter-all :checked').attr('class');
+                    wo.output_saveRows = val === 'output-filter' ? 'f' :
+                        val === 'output-visible' ? 'v' :
+                        // checked class name, see table.config.checkboxClass
+                        val === 'output-selected' ? '.checked' :
+                        val === 'output-sel-vis' ? '.checked:visible' :
+                        'a';
+                    val = $this.find('.output-download-popup :checked').attr('class');
+                    wo.output_delivery = val === 'output-download' ? 'd' : 'p';
+                    wo.output_separator = $this.find('.output-separator-input').val();
+                    wo.output_replaceQuote = $this.find('.output-replacequotes').val();
+                    wo.output_trimSpaces = $this.find('.output-trim').is(':checked');
+                    wo.output_includeHTML = $this.find('.output-html').is(':checked');
+                    wo.output_wrapQuotes = $this.find('.output-wrap').is(':checked');
+                    wo.output_saveFileName = $this.find('.output-filename').val();
+
+                    // first example buttons, second has radio buttons
+                    if (groupIndex === 0) {
+                        wo.output_includeHeader = $this.find('button.output-header').is(".active");
+                    } else {
+                        wo.output_includeHeader = !$this.find('.output-no-header').is(':checked');
+                        wo.output_headerRows = $this.find('.output-headers').is(':checked');
+                    }
+                    // footer not included in second example
+                    wo.output_includeFooter = $this.find('.output-footer').is(".active");
+
+                    $table.trigger('outputTable');
+                    return false;
+                });
+
+                // add tooltip
+                $this.find('.dropdown-menu [title]').tipsy({
+                    gravity: 's'
+                });
+            });
+        });
+
+        $.tablesorter.equations['custom'] = function(arry) {
+            // (a+b+c)*d - (e/f)*100
+            return (arry[0] + arry[1]);
+        };
+    </script>
+
+    <!--/div> end of w3-container -->
+
+    <script>
+        function setReadyCalculation(input) {
+            input = String(input);
+            if (input == '')
+                input = '0';
+
+            input = input.replace(/[^0-9.]/g, "");
+
+            return input;
+        }
+
+        var decodeHtmlEntity = function(str) {
+            return str.replace(/&#(\d+);/g, function(match, dec) {
+                return String.fromCharCode(dec);
+            });
+        };
+
+        $(document).on("click", "#table1 thead th", function() {
+            var v1 = String(this.innerHtml);
+            var v2 = v1.split('= ');
+            //this.match(/^aria-label/gi);
+            //console.log(this);
+            //console.log(this.innerText);
+            //console.log(this.column);
+
+            var v4 = "{{db_data}}";
+            var v5 = decodeHtmlEntity(v4);
+
+            v5 = v5.split("[").join("");
+            v5 = v5.split("]").join("");
+            v5 = v5.split("'").join("");
+            v5 = v5.split(" ").join("");
+
+            var v6 = v5.split(',');
+            //console.log(v6[this.column-1]);
+
+            //var vtable = $("#table2").val();
+            //console.log(vtable.row);
+
+            var ths = document.getElementById('table2');
+            //console.log(String(ths.rows[2].cells[1].text()));
+            //console.log(ths[1].text());
+
+            //var tr = $(this);
+            //var td = tr.children();
+            //console.log(td);
+            $('#table2')
+                .unbind('appendCache applyWidgetId applyWidgets sorton update updateCell')
+                .removeClass('tablesorter')
+                .find('thead th')
+                .unbind('click mousedown')
+                .removeClass('header headerSortDown headerSortUp');
+
+            var parent = $("#table2")[0];
+            //console.log(parent.rows[0].cells[0].innerText);
+            parent.rows[0].cells[0].innerText = v6[this.column - 1];
+            //console.log(parent.rows[0].cells[0].innerText);
+
+            var select_col = this.column - 1;
+
+            ////////////////////////////////////////////////////
+
+            //table row count
+            var parent1 = $("#table1")[0];
+            //console.log(parent1.rows.length-5);
+            //console.log(parent1.rows[1].cells.length);
+            var len_row = parent1.rows.length - 5;
+
+            var vtotal = "{{total_db}}";
+            vtotal = decodeHtmlEntity(vtotal);
+            //console.log(vtotal);
+            //"B,"G'TEX""
+
+            //var regex =  /((?<=\').*?(?=\'))|((?<=\").*?(?=\"))/gi;        
+            //var matched = regex.exec(vtotal);
+            //console.log(matched);
+
+            vtotal = vtotal.split("[").join("");
+            vtotal = vtotal.split("]").join("");
+            //vtotal=vtotal.split(",").join("");
+            //vtotal=vtotal.split(',"');
+            vtotal = vtotal.split("\"").join("'");
+            vtotal = vtotal.split(" ").join("");
+            //vtotal=vtotal.replace(",'", ",\"" );        
+
+            console.log(vtotal);
+
+            vtotal = vtotal.split("',");
+
+            var vtotal2 = [];
+            for (var i = 0; i < vtotal.length; i++) {
+                if (vtotal[i][0] == "'")
+                    vtotal[i] = vtotal[i].slice(1);
+                vtotal2.push(vtotal[i]);
+            }
+
+
+            console.log(vtotal2);
+            console.log(len_row);
+            var vtotal3 = [];
+
+            for (var i = 0; i < len_row; i++) {
+                //console.log(vtotal2[(select_col+1)+i*vtotal2.length/len_row]);
+                //console.log(vtotal2[10 + +i*vtotal2.length/len_row]);
+                //console.log(vtotal2[13 + +i*vtotal2.length/len_row]);
+                var temp1 = vtotal2[(select_col + 1) + i * vtotal2.length / len_row];
+                var temp2 = vtotal2[14 + +i * vtotal2.length / len_row]; // qty
+                var temp3 = vtotal2[13 + +i * vtotal2.length / len_row]; // amount
+                var temp4 = vtotal2[56 + +i * vtotal2.length / len_row]; // margin
+                var temp5 = vtotal2[16 + +i * vtotal2.length / len_row]; // margin
+                var temp6 = vtotal2[15 + +i * vtotal2.length / len_row]; // margin
+                var temp7 = vtotal2[21 + +i * vtotal2.length / len_row]; // margin
+                var temp8 = vtotal2[20 + +i * vtotal2.length / len_row]; // margin
+                var temp9 = vtotal2[23 + +i * vtotal2.length / len_row]; // margin
+                var temp10 = vtotal2[22 + +i * vtotal2.length / len_row]; // margin
+                var temp11 = vtotal2[25 + +i * vtotal2.length / len_row]; // margin
+                var temp12 = vtotal2[24 + +i * vtotal2.length / len_row]; // margin
+                var temp13 = vtotal2[27 + +i * vtotal2.length / len_row]; // margin
+                var temp14 = vtotal2[26 + +i * vtotal2.length / len_row]; // margin
+                var temp15 = vtotal2[29 + +i * vtotal2.length / len_row]; // margin
+                var temp16 = vtotal2[28 + +i * vtotal2.length / len_row]; // margin
+                var temp17 = vtotal2[31 + +i * vtotal2.length / len_row]; // margin
+                var temp18 = vtotal2[30 + +i * vtotal2.length / len_row]; // margin
+                var temp19 = vtotal2[35 + +i * vtotal2.length / len_row]; // margin
+                var temp20 = vtotal2[34 + +i * vtotal2.length / len_row]; // margin
+                var temp21 = vtotal2[56 + +i * vtotal2.length / len_row]; // margin
+                var temp22 = vtotal2[55 + +i * vtotal2.length / len_row]; // margin
+                var temp23 = vtotal2[105 + +i * vtotal2.length / len_row]; // margin
+
+
+
+                //console.log(temp1);
+                //console.log(temp2);
+                //console.log(temp3);
+
+                var found = false;
+                for (var k = 0; k < vtotal3.length; k++) {
+                    if (vtotal3[k][0] == temp1) {
+
+                        //temp2 = parseFloat(temp2);
+                        //temp3 = parseFloat(temp3);
+                        //vtotal3[k][1] = parseFloat(vtotal3[k][1]);
+                        //vtotal3[k][2] = parseFloat(vtotal3[k][2]);
+
+                        var s2 = setReadyCalculation(temp2);
+                        var s3 = setReadyCalculation(temp3);
+                        var s4 = setReadyCalculation(temp4);
+                        var s5 = setReadyCalculation(temp5);
+                        var s6 = setReadyCalculation(temp6);
+                        var s7 = setReadyCalculation(temp7);
+                        var s8 = setReadyCalculation(temp8);
+                        var s9 = setReadyCalculation(temp9);
+                        var s10 = setReadyCalculation(temp10);
+                        var s11 = setReadyCalculation(temp11);
+                        var s12 = setReadyCalculation(temp12);
+                        var s13 = setReadyCalculation(temp13);
+                        var s14 = setReadyCalculation(temp14);
+                        var s15 = setReadyCalculation(temp15);
+                        var s16 = setReadyCalculation(temp16);
+                        var s17 = setReadyCalculation(temp17);
+                        var s18 = setReadyCalculation(temp18);
+                        var s19 = setReadyCalculation(temp19);
+                        var s20 = setReadyCalculation(temp20);
+                        var s21 = setReadyCalculation(temp21);
+                        var s22 = setReadyCalculation(temp22);
+                        var s23 = setReadyCalculation(temp23);
+                        var stemp2 = setReadyCalculation(vtotal3[k][1]);
+                        var stemp3 = setReadyCalculation(vtotal3[k][2]);
+                        var stemp4 = setReadyCalculation(vtotal3[k][3]);
+                        var stemp5 = setReadyCalculation(vtotal3[k][4]);
+                        var stemp6 = setReadyCalculation(vtotal3[k][5]);
+                        var stemp7 = setReadyCalculation(vtotal3[k][6]);
+                        var stemp8 = setReadyCalculation(vtotal3[k][7]);
+                        var stemp9 = setReadyCalculation(vtotal3[k][8]);
+                        var stemp10 = setReadyCalculation(vtotal3[k][9]);
+                        var stemp11 = setReadyCalculation(vtotal3[k][10]);
+                        var stemp12 = setReadyCalculation(vtotal3[k][11]);
+                        var stemp13 = setReadyCalculation(vtotal3[k][12]);
+                        var stemp14 = setReadyCalculation(vtotal3[k][13]);
+                        var stemp15 = setReadyCalculation(vtotal3[k][14]);
+                        var stemp16 = setReadyCalculation(vtotal3[k][15]);
+                        var stemp17 = setReadyCalculation(vtotal3[k][16]);
+                        var stemp18 = setReadyCalculation(vtotal3[k][17]);
+                        var stemp19 = setReadyCalculation(vtotal3[k][18]);
+                        var stemp20 = setReadyCalculation(vtotal3[k][19]);
+                        var stemp21 = setReadyCalculation(vtotal3[k][20]);
+                        var stemp22 = setReadyCalculation(vtotal3[k][21]);
+                        var stemp23 = setReadyCalculation(vtotal3[k][22]);
+
+
+                        stemp2 = parseFloat(stemp2);
+                        stemp3 = parseFloat(stemp3);
+                        stemp4 = parseFloat(stemp4);
+                        stemp5 = parseFloat(stemp5);
+                        stemp6 = parseFloat(stemp6);
+                        stemp7 = parseFloat(stemp7);
+                        stemp8 = parseFloat(stemp8);
+                        stemp9 = parseFloat(stemp9);
+                        stemp10 = parseFloat(stemp10);
+                        stemp11 = parseFloat(stemp11);
+                        stemp12 = parseFloat(stemp12);
+                        stemp13 = parseFloat(stemp13);
+                        stemp14 = parseFloat(stemp14);
+                        stemp15 = parseFloat(stemp15);
+                        stemp16 = parseFloat(stemp16);
+                        stemp17 = parseFloat(stemp17);
+                        stemp18 = parseFloat(stemp18);
+                        stemp19 = parseFloat(stemp19);
+                        stemp20 = parseFloat(stemp20);
+                        stemp21 = parseFloat(stemp21);
+                        stemp22 = parseFloat(stemp22);
+                        stemp23 = parseFloat(stemp23);
+
+                        s2 = parseFloat(s2);
+                        s3 = parseFloat(s3);
+                        s4 = parseFloat(s4);
+                        s5 = parseFloat(s5);
+                        s6 = parseFloat(s6);
+                        s7 = parseFloat(s7);
+                        s8 = parseFloat(s8);
+                        s9 = parseFloat(s9);
+                        s10 = parseFloat(s10);
+                        s11 = parseFloat(s11);
+                        s12 = parseFloat(s12);
+                        s13 = parseFloat(s13);
+                        s14 = parseFloat(s14);
+                        s15 = parseFloat(s15);
+                        s16 = parseFloat(s16);
+                        s17 = parseFloat(s17);
+                        s18 = parseFloat(s18);
+                        s19 = parseFloat(s19);
+                        s20 = parseFloat(s20);
+                        s21 = parseFloat(s21);
+                        s22 = parseFloat(s22);
+                        s23 = parseFloat(s23);
+
+                        vtotal3[k][1] = stemp2 + s2;
+                        vtotal3[k][2] = stemp3 + s3;
+                        vtotal3[k][3] = stemp4 + s4;
+                        vtotal3[k][4] = stemp5 + s5;
+                        vtotal3[k][5] = stemp6 + s6;
+                        vtotal3[k][6] = stemp7 + s7;
+                        vtotal3[k][7] = stemp8 + s8;
+                        vtotal3[k][8] = stemp9 + s9;
+                        vtotal3[k][9] = stemp10 + s10;
+                        vtotal3[k][10] = stemp11 + s11;
+                        vtotal3[k][11] = stemp12 + s12;
+                        vtotal3[k][12] = stemp13 + s13;
+                        vtotal3[k][13] = stemp14 + s14;
+                        vtotal3[k][14] = stemp15 + s15;
+                        vtotal3[k][15] = stemp16 + s16;
+                        vtotal3[k][16] = stemp17 + s17;
+                        vtotal3[k][17] = stemp18 + s18;
+                        vtotal3[k][18] = stemp19 + s19;
+                        vtotal3[k][19] = stemp20 + s20;
+                        vtotal3[k][20] = stemp21 + s21;
+                        vtotal3[k][21] = stemp22 + s22;
+                        vtotal3[k][22] = stemp23 + s23;
+
+                        found = true;
+                    }
+                }
+                if (!found) {
+
+                    vtotal3.push([temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14, temp15, temp16, temp17, temp18, temp19, temp20, temp21, temp22, temp23]);
+                }
+            }
+            console.log(vtotal3);
+            // var parent = $("#table2")[0];    
+            parent.rows[0].cells[0].innerText = v6[this.column - 1];
+            for (var i = len_row + 2; i > 0; i--) {
+                $('#table2 > tbody:last > tr:last').remove();
+            }
+
+            var vsum1 = 0;
+            var vsum2 = 0;
+            var vsum3 = 0;
+            var vsum4 = 0;
+            var vsum5 = 0;
+            var vsum6 = 0;
+            var vsum7 = 0;
+            var vsum8 = 0;
+            var vsum9 = 0;
+            var vsum10 = 0;
+            var vsum11 = 0;
+            var vsum12 = 0;
+            var vsum13 = 0;
+            var vsum14 = 0;
+            var vsum15 = 0;
+            var vsum16 = 0;
+            var vsum17 = 0;
+            var vsum18 = 0;
+            var vsum19 = 0;
+            var vsum20 = 0;
+            var vsum21 = 0;
+            var vsum22 = 0;
+            var vsum23 = 0;
+
+
+            for (var i = 0; i < vtotal3.length; i++) {
+                c = '';
+                c += '<tr>';
+                c += '<td>';
+                c += String(vtotal3[i][0]);
+                c += '</td>';
+                c += '<td>';
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][1]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][2]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][3]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][4]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][5]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][6]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][7]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][8]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][9]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][10]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][11]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][12]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][13]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][14]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][15]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][16]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][17]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][18]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][19]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][20]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][21]);
+                c += '</td>';
+                c += '<td>' + String(vtotal3[i][22]);
+                c += '</td>';
+                c += '</tr>';
+
+
+                vsum1 = vsum1 + parseFloat(setReadyCalculation(vtotal3[i][1]));
+                vsum2 = vsum2 + parseFloat(setReadyCalculation(vtotal3[i][2]));
+                vsum3 = vsum3 + parseFloat(setReadyCalculation(vtotal3[i][3]));
+                vsum4 = vsum4 + parseFloat(setReadyCalculation(vtotal3[i][4]));
+                vsum5 = vsum5 + parseFloat(setReadyCalculation(vtotal3[i][5]));
+                vsum6 = vsum6 + parseFloat(setReadyCalculation(vtotal3[i][6]));
+                vsum7 = vsum7 + parseFloat(setReadyCalculation(vtotal3[i][7]));
+                vsum8 = vsum8 + parseFloat(setReadyCalculation(vtotal3[i][8]));
+                vsum9 = vsum9 + parseFloat(setReadyCalculation(vtotal3[i][9]));
+                vsum10 = vsum10 + parseFloat(setReadyCalculation(vtotal3[i][10]));
+                vsum11 = vsum11 + parseFloat(setReadyCalculation(vtotal3[i][11]));
+                vsum12 = vsum12 + parseFloat(setReadyCalculation(vtotal3[i][12]));
+                vsum13 = vsum13 + parseFloat(setReadyCalculation(vtotal3[i][13]));
+                vsum14 = vsum14 + parseFloat(setReadyCalculation(vtotal3[i][14]));
+                vsum15 = vsum15 + parseFloat(setReadyCalculation(vtotal3[i][15]));
+                vsum16 = vsum16 + parseFloat(setReadyCalculation(vtotal3[i][16]));
+                vsum17 = vsum17 + parseFloat(setReadyCalculation(vtotal3[i][17]));
+                vsum18 = vsum18 + parseFloat(setReadyCalculation(vtotal3[i][18]));
+                vsum19 = vsum19 + parseFloat(setReadyCalculation(vtotal3[i][19]));
+                vsum20 = vsum20 + parseFloat(setReadyCalculation(vtotal3[i][20]));
+                vsum21 = vsum21 + parseFloat(setReadyCalculation(vtotal3[i][21]));
+                vsum22 = vsum22 + parseFloat(setReadyCalculation(vtotal3[i][22]));
+                vsum23 = vsum23 + parseFloat(setReadyCalculation(vtotal3[i][23]));
+
+
+
+                $('#table2 > tbody:last').append(c);
+            }
+            c = '';
+            c += '<tr>';
+            c += '<td>';
+            c += '합계';
+            c += '</td>';
+            c += '<td>';
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum1);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum2);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum3);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum4);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum5);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum6);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum7);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum8);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum9);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum10);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum11);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum12);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum13);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum14);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum15);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum16);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum17);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum18);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum19);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum20);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum21);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum22);
+            c += '</td>';
+            c += '<td data-math="above-sum">' + String(vsum23);
+            c += '</td>';
+
+            c += '</tr>';
+
+            $('#table2 > tbody:last').append(c);
+
+        });
+
+        function exportTableToExcel(tableID, filename = '') {
+
+            // 제목만 추출 (header)
+            let v4 = "{{db_data}}";
+            let v5 = decodeHtmlEntity(v4);
+            v5 = v5.split("[").join("");
+            v5 = v5.split("]").join("");
+            v5 = v5.split("'").join("");
+            v5 = v5.split(" ").join("");
+            let v6 = v5.split(',');
+            //console.log(v6);
+
+
+            // 엑셀 생성
+            const workbook = new ExcelJS.Workbook();
+
+            // 생성자
+            workbook.creator = '작성자';
+
+            // 최종 수정자
+            workbook.lastModifiedBy = '최종 수정자';
+
+            // 생성일(현재 일자로 처리)
+            workbook.created = new Date();
+
+            // 수정일(현재 일자로 처리)
+            workbook.modified = new Date();
+
+
+            // addWorksheet() 함수를 사용하여 엑셀 시트를 추가한다.
+            // 엑셀 시트는 순차적으로 생성된다.
+            workbook.addWorksheet('Sheet One');
+            workbook.addWorksheet('Sheet Two');
+            workbook.addWorksheet('Sheet Three');
+
+            // 엑셀 시트를 접근하는 방법은 세 가지 방법이 존재한다.
+            // 1. getWorksheet() 함수에서 시트 명칭 전달
+            const sheetOne = workbook.getWorksheet('Sheet One');
+
+            sheetOne.addRow(v6, 'i');
+            sheetOne.getRow(1).alignment = {
+                vertical: 'middle',
+                horizontal: 'center'
+            };
+            sheetOne.getRow(1).font = {
+                bold: true
+            };
+
+
+            let t1 = "{{total_db}}";
+            let t2 = decodeHtmlEntity(t1);
+            let t2arr = [];
+
+
+            //t2.split("]");
+            console.log(t2);
+
+
+            //t2 = t2.split("[").join("");
+            //t2 = t2.split("]").join("");
+            // t2 = t2.split("'").join("");
+            // t2 = t2.split(" ").join("");
+            //let t3 = t2.split(',');
+
+            //t2 = t2.split("[");
+            t2 = t2.split("[");
+
+            for (let i = 0; i < t2.length; i++) {
+                //t2[i] = t2[i].split("'").join("");
+                //t2[i] = t2[i].split("]").join("");
+                t2[i] = t2[i].split("',");
+                for (let j = 0; j < t2[i].length; j++) {
+                    t2[i][j] = t2[i][j].split("'").join("");
+                    t2[i][j] = t2[i][j].split("]]").join("");
+                    t2[i][j] = t2[i][j].split("],").join("");
+                }
+            }
+
+            //console.log(t2);
+
+            for (let i = 0; i < t2.length; i++) {
+
+                if (t2[i].length <= 1) continue;
+                t2[i].shift();
+                sheetOne.addRow(t2[i]); // shift 첫번째 빼고 
+
+                let lG = 'G' + String(i);
+                let lH = 'H' + String(i);
+                sheetOne.getCell(lG).value = Number(sheetOne.getCell(lG).value);
+                sheetOne.getCell(lG).numFmt = '#,##0;[Red]\-#,##0';
+                sheetOne.getCell(lH).value = Number(sheetOne.getCell(lH).value);
+                sheetOne.getCell(lH).numFmt = '#,##0;[Red]\-#,##0';
+
+
+                let l1 = 'L' + String(i);
+                let l2 = 'M' + String(i);
+                let l3 = 'N' + String(i);
+
+                sheetOne.getCell(l1).value = Number(sheetOne.getCell(l1).value);
+                sheetOne.getCell(l1).numFmt = '#,##0.00;[Red]\-#,##0.00';
+                sheetOne.getCell(l2).value = Number(sheetOne.getCell(l2).value);
+                sheetOne.getCell(l2).numFmt = '#,##0.00;[Red]\-#,##0.00';
+                sheetOne.getCell(l3).value = Number(sheetOne.getCell(l3).value);
+                sheetOne.getCell(l3).numFmt = '#,##0;[Red]\-#,##0';
+                //sheetOne.getCell(l1).numFmt = '"£"#,##0.00;[Red]\-"£"#,##0.00';
+
+                let lo = 'O' + String(i);
+                sheetOne.getCell(lo).value = Number(sheetOne.getCell(lo).value);
+                sheetOne.getCell(lo).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lp = 'P' + String(i);
+                sheetOne.getCell(lp).value = Number(sheetOne.getCell(lp).value);
+                sheetOne.getCell(lp).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lt = 'T' + String(i);
+                let templt = sheetOne.getCell(lt).value;
+
+                let regex = /[^0-9]/g;
+                templt = templt.replace(regex, "");
+
+                sheetOne.getCell(lt).value = Number(templt);
+                sheetOne.getCell(lt).numFmt = '"$"#,##0.00;[Red]\-"$"#,##0.00';
+
+
+                let lu = 'U' + String(i);
+                let templu = sheetOne.getCell(lu).value;
+                let regexu = /[^0-9]/g;
+                templu = templu.replace(regex, "");
+                sheetOne.getCell(lu).value = Number(templu);
+                sheetOne.getCell(lu).numFmt = '#,##0;[Red]\-#,##0';
+
+                let lw = 'W' + String(i);
+                let templw = sheetOne.getCell(lw).value;
+                let regexw = /[^0-9]/g;
+                templw = templw.replace(regex, "");
+                sheetOne.getCell(lw).value = Number(templw);
+                sheetOne.getCell(lw).numFmt = '#,##0;[Red]\-#,##0';
+
+                let ly = 'Y' + String(i);
+                let temply = sheetOne.getCell(ly).value;
+                let regexy = /[^0-9]/g;
+                temply = temply.replace(regex, "");
+                sheetOne.getCell(ly).value = Number(temply);
+                sheetOne.getCell(ly).numFmt = '#,##0;[Red]\-#,##0';
+
+                let laa = 'AA' + String(i);
+                let templaa = sheetOne.getCell(laa).value;
+                let regexaa = /[^0-9]/g;
+                templaa = templaa.replace(regex, "");
+                sheetOne.getCell(laa).value = Number(templaa);
+                sheetOne.getCell(laa).numFmt = '#,##0;[Red]\-#,##0';
+
+                let lac = 'AC' + String(i);
+                let templac = sheetOne.getCell(lac).value;
+                let regexac = /[^0-9]/g;
+                templac = templac.replace(regex, "");
+                sheetOne.getCell(lac).value = Number(templac);
+                sheetOne.getCell(lac).numFmt = '#,##0;[Red]\-#,##0';
+
+
+
+                let lv = 'V' + String(i);
+                let templv = sheetOne.getCell(lv).value;
+                templv = templv.replace(regex, "");
+                sheetOne.getCell(lv).value = Number(templv);
+                sheetOne.getCell(lv).numFmt = '"$"#,##0.00;[Red]\-"$"#,##0.00';
+
+                let lx = 'X' + String(i);
+                let templx = sheetOne.getCell(lx).value;
+                templx = templx.replace(regex, "");
+                sheetOne.getCell(lx).value = Number(templx);
+                sheetOne.getCell(lx).numFmt = '"$"#,##0.00;[Red]\-"$"#,##0.00';
+
+
+
+                let lz = 'Z' + String(i);
+                let templz = sheetOne.getCell(lz).value;
+                templz = templz.replace(regex, "");
+                sheetOne.getCell(lz).value = Number(templz);
+                sheetOne.getCell(lz).numFmt = '"$"#,##0.00;[Red]\-"$"#,##0.00';
+
+                let lad = 'AD' + String(i);
+                let templad = sheetOne.getCell(lad).value;
+                sheetOne.getCell(lad).value = Number(templad);
+                sheetOne.getCell(lad).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lae = 'AE' + String(i);
+                let templae = sheetOne.getCell(lae).value;
+                sheetOne.getCell(lae).value = Number(templae);
+                sheetOne.getCell(lae).numFmt = '#,##0;[Red]\-#,##0';
+
+                let lam = 'AM' + String(i);
+                let templam = sheetOne.getCell(lam).value;
+                sheetOne.getCell(lam).value = Number(templam);
+                sheetOne.getCell(lam).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+
+                let lAH = 'AH' + String(i);
+                let lAI = 'AI' + String(i);
+                sheetOne.getCell(lAH).value = Number(sheetOne.getCell(lAH).value);
+                sheetOne.getCell(lAH).numFmt = '#,##0;[Red]\-#,##0';
+                sheetOne.getCell(lAI).value = Number(sheetOne.getCell(lAI).value);
+                sheetOne.getCell(lAI).numFmt = '#,##0;[Red]\-#,##0';
+
+
+
+                let lbc = 'BC' + String(i);
+                let templbc = sheetOne.getCell(lbc).value;
+                sheetOne.getCell(lbc).value = Number(templbc);
+                sheetOne.getCell(lbc).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbd = 'BD' + String(i);
+                let templbd = sheetOne.getCell(lbd).value;
+                sheetOne.getCell(lbd).value = Number(templbd);
+                sheetOne.getCell(lbd).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbf = 'BF' + String(i);
+                let templbf = sheetOne.getCell(lbf).value;
+                sheetOne.getCell(lbf).value = Number(templbf);
+                sheetOne.getCell(lbf).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbl = 'BL' + String(i);
+                let templbl = sheetOne.getCell(lbl).value;
+                sheetOne.getCell(lbl).value = Number(templbl);
+                sheetOne.getCell(lbl).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbz = 'BZ' + String(i);
+                let templbz = sheetOne.getCell(lbz).value;
+                sheetOne.getCell(lbz).value = Number(templbz);
+                sheetOne.getCell(lbz).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lca = 'CA' + String(i);
+                let templca = sheetOne.getCell(lca).value;
+                sheetOne.getCell(lca).value = Number(templca);
+                sheetOne.getCell(lca).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lcb = 'CB' + String(i);
+                let templcb = sheetOne.getCell(lcb).value;
+                sheetOne.getCell(lcb).value = Number(templcb);
+                sheetOne.getCell(lcb).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lcq = 'CQ' + String(i);
+                let templcq = sheetOne.getCell(lcq).value;
+                sheetOne.getCell(lcq).value = Number(templcq);
+                sheetOne.getCell(lcq).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lda = 'DA' + String(i);
+                let templda = sheetOne.getCell(lda).value;
+                sheetOne.getCell(lda).value = Number(templda);
+                sheetOne.getCell(lda).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+
+
+
+
+                let lav = 'AV' + String(i);
+                let templav = sheetOne.getCell(lav).value;
+                sheetOne.getCell(lav).value = Number(templav);
+                sheetOne.getCell(lav).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let law = 'AW' + String(i);
+                let templaw = sheetOne.getCell(law).value;
+                sheetOne.getCell(law).value = Number(templaw);
+                sheetOne.getCell(law).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbe = 'BE' + String(i);
+                let templbe = sheetOne.getCell(lbe).value;
+                sheetOne.getCell(lbe).value = Number(templbe);
+                sheetOne.getCell(lbe).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbh = 'BH' + String(i);
+                let templbh = sheetOne.getCell(lbh).value;
+                sheetOne.getCell(lbh).value = Number(templbh);
+                sheetOne.getCell(lbh).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbk = 'BK' + String(i);
+                let templbk = sheetOne.getCell(lbk).value;
+                sheetOne.getCell(lbk).value = Number(templbk);
+                sheetOne.getCell(lbk).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbn = 'BN' + String(i);
+                let templbn = sheetOne.getCell(lbn).value;
+                sheetOne.getCell(lbn).value = Number(templbn);
+                sheetOne.getCell(lbn).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbq = 'BQ' + String(i);
+                let templbq = sheetOne.getCell(lbq).value;
+                sheetOne.getCell(lbq).value = Number(templbq);
+                sheetOne.getCell(lbq).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+
+                let lbs = 'BS' + String(i);
+                let templbs = sheetOne.getCell(lbs).value;
+                templbs = templbs.replace(regex, "");
+                sheetOne.getCell(lbs).value = Number(templbs);
+                sheetOne.getCell(lbs).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbt = 'BT' + String(i);
+                let templbt = sheetOne.getCell(lbt).value;
+                templbt = templbt.replace(regex, "");
+                sheetOne.getCell(lbt).value = Number(templbt);
+                sheetOne.getCell(lbt).numFmt = '#,##0;[Red]\-#,##0';
+
+                let lbu = 'BU' + String(i);
+                let templbu = sheetOne.getCell(lbu).value;
+                templbu = templbu.replace(regex, "");
+                sheetOne.getCell(lbu).value = Number(templbu);
+                sheetOne.getCell(lbu).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbv = 'BV' + String(i);
+                let templbv = sheetOne.getCell(lbv).value;
+                templbv = templbv.replace(regex, "");
+                sheetOne.getCell(lbv).value = Number(templbv);
+                sheetOne.getCell(lbv).numFmt = '#,##0;[Red]\-#,##0';
+
+                let lbw = 'BW' + String(i);
+                let templbw = sheetOne.getCell(lbw).value;
+                templbw = templbw.replace(regex, "");
+                sheetOne.getCell(lbw).value = Number(templbw);
+                sheetOne.getCell(lbw).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lbx = 'BX' + String(i);
+                let templbx = sheetOne.getCell(lbx).value;
+                templbx = templbw.replace(regex, "");
+                sheetOne.getCell(lbx).value = Number(templbx);
+                sheetOne.getCell(lbx).numFmt = '#,##0;[Red]\-#,##0';
+
+                let lcx = 'CX' + String(i);
+                let templcx = sheetOne.getCell(lcx).value;
+                templcx = templcx.replace(regex, "");
+                sheetOne.getCell(lcx).value = Number(templcx);
+                sheetOne.getCell(lcx).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let lcy = 'CY' + String(i);
+                let templcy = sheetOne.getCell(lcy).value;
+                templcy = templcy.replace(regex, "");
+                sheetOne.getCell(lcy).value = Number(templcy);
+                sheetOne.getCell(lcy).numFmt = '#,##0;[Red]\-#,##0';
+
+                let ldb = 'DB' + String(i);
+                let templdb = sheetOne.getCell(ldb).value;
+                templdb = templdb.replace(regex, "");
+                sheetOne.getCell(ldb).value = Number(templdb);
+                sheetOne.getCell(ldb).numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+                let ldc = 'DC' + String(i);
+                let templdc = sheetOne.getCell(ldc).value;
+                templdc = templdc.replace(regex, "");
+                sheetOne.getCell(ldc).value = Number(templdc);
+                sheetOne.getCell(ldc).numFmt = '#,##0;[Red]\-#,##0';
+            }
+
+
+
+            //     { %
+            //         for item in total_db %
+            //     } <
+            //     tr > { %
+            //             for i in range(109) %
+            //         } <
+            //         td > {
+            //             {
+            //                 item[i]
+            //                 if item[i] != None
+            //             }
+            //         } < /td> { % endfor %
+            // } <
+            // /tr> { % endfor %
+            // }
+
+
+
+            // 2. getWorksheet() 함수에서 시트 인덱스 전달
+            //const sheetTwo = workbook.getWorksheet(1);
+
+            // 3. 대괄호 표기법
+            //const sheetThree = workbook.worksheets[2];
+
+            // removeWorksheet() 함수를 사용하여 엑셀 시트를 제거한다.
+            //workbook.removeWorksheet(sheetThree.id);
+
+            // 컬럼 설정
+            // header: 엑셀에 표기되는 이름
+            // key: 컬럼을 접근하기 위한 key
+            // hidden: 숨김 여부
+            // width: 컬럼 넓이
+            // sheetOne.columns = [{
+            //     header: '이름',
+            //     key: 'name',
+            //     width: 40
+            // }, {
+            //     header: '성별',
+            //     key: 'gender',
+            //     hidden: false,
+            //     width: 30
+            // }, {
+            //     header: '부서코드',
+            //     key: 'deptCode',
+            //     width: 60
+            // }, {
+            //     header: '부서명',
+            //     key: 'deptName',
+            //     width: 100,
+            //     // 스타일 설정
+            //     style: {
+            //         // Font 설정
+            //         font: {
+            //             name: 'Arial Black',
+            //             size: 20
+            //         },
+            //         // Borders 설정
+            //         border: {
+            //             top: {
+            //                 style: 'thin',
+            //                 color: {
+            //                     argb: 'FF00FF00'
+            //                 }
+            //             },
+            //             left: {
+            //                 style: 'thin',
+            //                 color: {
+            //                     argb: 'FF00FF00'
+            //                 }
+            //             },
+            //             bottom: {
+            //                 style: 'thin',
+            //                 color: {
+            //                     argb: 'FF00FF00'
+            //                 }
+            //             },
+            //             right: {
+            //                 style: 'thin',
+            //                 color: {
+            //                     argb: 'FF00FF00'
+            //                 }
+            //             },
+            //         },
+            //         // Fills 설정
+            //         fill: {
+            //             type: 'pattern',
+            //             fgColor: {
+            //                 argb: 'FFFFFF00'
+            //             },
+            //             bgColor: {
+            //                 argb: 'FF0000FF'
+            //             }
+            //         }
+            //     }
+            // }]
+
+            // const sampleData = [{
+            //     name: '홍길동',
+            //     code: 'A100',
+            //     gender: 'F',
+            //     entryDate: '20200101',
+            //     deptCode: 'A1000',
+            //     deptName: '금융팀'
+            // }, {
+            //     name: '마이콜',
+            //     code: 'A200',
+            //     gender: 'F',
+            //     entryDate: '20200201',
+            //     deptCode: 'A2000',
+            //     deptName: '자산팀'
+            // }, {
+            //     name: '둘리',
+            //     code: '9999991234567',
+            //     gender: 'M',
+            //     entryDate: '20200301',
+            //     deptCode: 'A1000',
+            //     deptName: '금융팀'
+            // }, {
+            //     name: '또치',
+            //     code: '9999992234567',
+            //     gender: 'M',
+            //     entryDate: '20200401',
+            //     deptCode: 'A2000',
+            //     deptName: '자산팀'
+            // }];
+
+            // const borderStyle = {
+            //     top: {
+            //         style: 'thin'
+            //     },
+            //     left: {
+            //         style: 'thin'
+            //     },
+            //     bottom: {
+            //         style: 'thin'
+            //     },
+            //     right: {
+            //         style: 'thin'
+            //     }
+            // };
+
+            // sampleData.map((item, index) => {
+            //     sheetOne.addRow(item);
+
+            //     // 추가된 행의 컬럼 설정(헤더와 style이 다를 경우)
+            //     for (let loop = 1; loop <= 4; loop++) {
+            //         const col = sheetOne.getRow(index + 2).getCell(loop);
+            //         col.border = borderStyle;
+            //         col.font = {
+            //             name: 'Arial Black',
+            //             size: 40
+            //         };
+            //     }
+            // });
+
+            filename = filename ? filename + '.xls' : 'Nego_status_excel_data.xls';
+            workbook.xlsx.writeBuffer().then((data) => {
+                const blob = new Blob([data], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                });
+                const url = window.URL.createObjectURL(blob);
+                const anchor = document.createElement('a');
+                anchor.href = url;
+                //anchor.download = `테스트.xlsx`;
+                anchor.download = filename;
+                anchor.click();
+                window.URL.revokeObjectURL(url);
+            })
+
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            // 
+            // var downloadLink;
+            // var dataType = 'application/vnd.ms-excel';
+            // var tableSelect = document.getElementById(tableID);
+            // var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // // Specify file name
+            // filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+            // // Create download link element
+            // downloadLink = document.createElement("a");
+
+            // document.body.appendChild(downloadLink);
+
+            // if (navigator.msSaveOrOpenBlob) {
+            //     var blob = new Blob(['\ufeff', tableHTML], {
+            //         type: dataType
+            //     });
+            //     navigator.msSaveOrOpenBlob(blob, filename);
+            // } else {
+            //     // Create a link to the file
+            //     downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            //     // Setting the file name
+            //     downloadLink.download = filename;
+
+            //     //triggering the function
+            //     downloadLink.click();
+            // }
+        }
+
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        var vt = window.location.search;
+        var v1 = getUrlVars(vt);
+
+        console.log(v1['departdate']);
+        console.log(v1['returndate']);
+
+
+        function openTabs(evt, tabName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("tabs");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+    </script>
+
+    <script>
+        //items =['num','InvNo','DueDate','Buyer','Agent','LCNo','item','DN','LF','LS','a','b','c']
+
+        $(window).on('load', function() {
+            //init_table();
+            //init_table_buyer();
+        });
+        $(document).on('keypress', 'input', function(e) {
+            if (e.keyCode == 13) {
+                $(this).next('input').focus();
+            }
+        })
+
+        $(document).on('click', 'button[name="pagination"]', function() {
+            data = String($(this).val());
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('viewDB') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    inx: data
+                }),
+                success: function(out) {
+                    if (out["db_name"] == 'alldata') {
+                        $("#nt").empty();
+                        add_table(out, "OrderNo", "#nt", "InvNo");
+                    } else if (out["db_name"] == 'BUYER') {
+                        $("#nt_buy").empty();
+                        add_table(out, "Buyer", "#nt_buy", "Buyer");
+                    }
+                },
+                error: function() {
+                    alert("err");
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

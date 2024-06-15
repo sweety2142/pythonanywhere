@@ -1,0 +1,471 @@
+<a id="negoBtn" onclick="myFunc('divNego')" href="javascript:void(0)" class="nego_grad w3-bar-item w3-button w3-text-white w3-text-dark-gray" style="width:100%;max-width:1500px">
+    <i class="fa fa-inbox w3-margin-right"></i>NEGO<i class="w3-margin-left fa fa-caret-down"></i>
+</a>
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="divNego" style="width:100%;max-width:1500px;overflow:auto;">
+    <h3 class="w3-text-grey w3-padding-16">
+        <i class="fa fa-calculator fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Nego
+    </h3>
+   <div class="w3-container">
+
+       <!-- 1 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    Nego 은행
+                </div>
+                <select id="bank_nego" class="bootstrap3 w3-small">
+                    <option value=""></option>
+                    {% for item in bank_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    Nego 일자
+                </div>
+                <input type="text" id="day_nego" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Ref. No
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_ref" name="Days">
+            </div>
+        </div><!-- end of 1 row -->
+
+       <!-- 2 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-deep-purple w3-tag">
+                    <i class="fa fa-shopping-bag"></i>
+                    Inv.No.
+                </div>
+                <input class="w3-input w3-border ht_25" id="nego_InvNo" type="text" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    QTY
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_quantity" name="Days">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    <i class="fa fa-list-ul"></i>
+                    unit
+                </div>
+                <select id="unit_nego" class="bootstrap3 w3-small">
+                    <option value="">Select item</option>
+                    {% for item in quantity_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div><!-- end of 2 row -->
+
+        <!-- 3 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    T/T Amount
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_TT" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    Under Value
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_underV" name="Days">
+            </div>
+        </div><!-- end of 3 row -->
+
+<hr>
+
+
+        <!--table 4 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">    
+            <table class="w3-table-all w3-card-4 w3-small w3-centered" id="tableSPL_nego">
+                <tr>
+                    <th class="min_width_100">unit</th>
+                    <th class="min_width_100">Amount</th>
+                    <th class="min_width_100">Amount(US$)</th>
+                    <th class="min_width_100">환율</th>
+                    <th class="min_width_100">Amount(W)</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="w3-small bootstrap3 ht_25" name="option" id="unit_nego_table">
+                            <option value="">Select item</option>
+                            {% for item in currency_data %}
+                            <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td><input class="w3-input w3-border ht_25" type="text" id="nego_etc" name="nego_etc" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" type="text" id="nego_etc_dollor" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" type="text" id="neto_etc_exchange" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" type="text" id="nego_won" placeholder="Enter text"></td>
+                </tr>
+                <tbody></tbody>
+            </table>
+        </div><!-- end of 4 row -->
+
+
+<hr>
+
+        <!-- 5 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-text-blue">
+                    <i class="fa fa-pencil"></i>
+                    Nego 시 Cross rate (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_cross" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="w3-text-light-green">
+                    <i class="fa fa-pencil"></i>
+                    Amount (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_cross_amount" name="Days">
+
+            </div>
+        </div><!-- end of 5 row -->
+
+        <!-- 6 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-pencil"></i>
+                    COM1 (%)
+                </div>
+                <input class="w3-input ht_25" type="text"id="nego_com1_rate"  name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-pencil"></i>
+                    COM1 Amount(US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_com1_amount" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="w3-deep-purple w3-tag">
+                    <i class="fa fa-pencil"></i>
+                    환가요율(%)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_hwanga" name="Days">
+
+            </div>
+        </div><!-- end of 6 row -->
+
+        <!-- 7 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-pencil"></i>
+                    COM2 (kg)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_com2_rate" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-pencil"></i>
+                    COM2 Amount(US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_com2_amount" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="w3-text-aqua w3-tag">
+                    <i class="fa fa-pencil"></i>
+                    COM Total (US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_com_total" name="Days">
+
+            </div>
+        </div><!-- end of 7 row -->
+
+        <hr>
+        <!-- 8 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    우편료 및 환가료(W)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_uwon" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    Nego 예정일
+                </div>
+                <input type="text" id="nextnego_nego" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-shopping-bag"></i>
+                    면장번호
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_m1" name="Days">
+
+            </div>
+        </div><!-- end of 8 row -->
+
+        <!-- 9 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+
+                <div class="w3-third w3-border">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    선네고여부
+                </div>
+                <input type="radio" name="gender" id="id_radio_1" value="radio_1"> 선네고<br>
+                <input type="radio" name="gender" id="id_radio_2" value="radio_2"> 정상네고<br>
+
+                </div>
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    면장 FOB(US$)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_m3" name="Days">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-list-ul"></i>
+                    매입방식
+                    <!--i class="fa fa-list-ul"></i-->
+                </div>
+                <select id="buymethod_nego" class="bootstrap3 w3-small">
+                    <option value="">Select item</option>
+                    {% for item in purchasemethod_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div><!-- end of 9 row -->
+
+        <!-- 10 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-pencil"></i>
+                    면장FOB(W)
+                </div>
+                <input class="w3-input ht_25" type="text" id="nego_m4" name="Days">
+
+            </div>
+        </div><!-- end of 10 row -->
+
+        <!-- 11  row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    Due Date
+                </div>
+                <input type="text" id="DueDate_nego" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    신고일자
+                </div>
+                <input type="text" id="report_nego" class="w3-input ht_25">
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    인수확정일자
+                </div>
+                <input type="text" id="get_nego" class="w3-input ht_25">
+            </div>
+
+        </div><!-- end of 11 row -->
+
+<hr>
+
+
+       <!--table  12 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+
+            <div class="w3-text-teal">
+                    <i class="fa fa-check"></i>
+                    입금내역
+            </div>
+        <button class="w3-button w3-padding-small local_color w3-text-white" id="addTable_nego">Add</button>
+        <button class="w3-button w3-padding-small shipment_color w3-text-white" id="removeTable_nego">Remove</button>
+        <table class="w3-table-all w3-card-4 w3-small w3-centered" id="table_nego">
+            <tr>
+                <th class="min_width_100">입금일자</th>
+                <th class="min_width_100">Amount</th>
+                <th class="min_width_100">입금내역</th>
+            </tr>
+            <tr>
+                <td><input type="text" id="nego_deposit_date0" class="w3-input ht_25" placeholder="Select date"></td>
+                <td><input class="w3-input w3-border ht_25" id="nego_deposit_amount0" type="text" placeholder="Enter text"></td>
+                <td><input class="w3-input w3-border ht_25" id="nego_deposit_content0" type="text" placeholder="Enter text"></td>
+            </tr>
+            <tbody></tbody>
+        </table>
+        </div><!-- end of 12 row -->
+
+       <!-- 13 row -->
+        <div class="w3-container w3-row-padding">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter w3-center w3-small w3-cell-middle w3-padding" >
+                <i class="fa fa-question"></i>
+                미입금액
+            </div>
+            <div class="w3-threequarter">
+                <input class="w3-input w3-border" type="text" id="nego_incomplete_value" name="Days" style="background-color:#fff9e6;max-width:300px;">
+            </div>
+        </div><!-- end of 13 row -->
+
+        <!-- 14 row -->
+        <div class="w3-container w3-row-padding">
+            <!-- w3-third [1] -->
+            <div class="w3-quarter w3-center w3-small w3-cell-middle w3-padding" >
+                <i class="fa fa-question"></i>
+                Comment
+            </div>
+            <div class="w3-threequarter">
+                <input class="w3-input w3-border" type="text" id="nego_comment" name="Days" style="background-color:#feeee6;max-width:300px;">
+            </div>
+        </div><!-- end of 14 row -->
+
+        <br>
+        <br>
+        
+        
+    </div><!-- end of w3-container -->
+</div>
+
+
+<script>
+  var addTable_nego_i = 0;  
+  $('#addTable_nego').click(function() {
+    addTable_nego_i++;
+    c = '';
+    c+= '<tr>';
+    c+= '<td><input type="text" id="nego_deposit_date'+addTable_nego_i+'" class="w3-input ht_25" placeholder="Select date">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="nego_deposit_amount'+addTable_nego_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" id="nego_deposit_content'+addTable_nego_i+'" type="text" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '</tr>';
+    c+= '<script>$( "#nego_deposit_date'+addTable_nego_i+'" ).datepicker({changeMonth: true,changeYear: true,dateFormat: "yy-mm-dd"});<\/script>';
+
+
+
+    $('#table_nego > tbody:last').append(c);
+  });
+
+  $('#removeTable_nego').click(function() {
+    $('#table_nego > tbody:last > tr:last').remove();
+  });
+
+</script>
+
+<!-------------------------------------------->
+
+    <script>
+    		//2020-03-26
+        bank_nego = $('#bank_nego').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;
+        unit_nego = $('#unit_nego').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;
+        unit_nego.addItem('KG');
+        unit_nego_table = $('#unit_nego_table').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;
+        buymethod_nego = $('#buymethod_nego').selectize({ plugins: ['enter_key_submit'],allowEmptyOption:true,create:true })[0].selectize;
+       
+    </script>
+
+            <!-- Script of date -->
+    <script>
+        $( function() {
+            $( "#day_nego" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#actual_ship" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#ETA_ship" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#nextnego_nego" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#DueDate_nego" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#report_nego" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#get_nego" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+            $( "#nego_deposit_date0" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+
+
+        });
+    </script>

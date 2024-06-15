@@ -1,0 +1,229 @@
+<a id="shipmentBtn" onclick="myFunc('divShipment')" href="javascript:void(0)" class="shipment_grad w3-bar-item w3-button w3-text-dark-gray" style="width:100%;max-width:1500px;">
+    <i class="fa fa-inbox w3-margin-right"></i>SHIPMENT<i class="w3-margin-left fa fa-caret-down"></i>
+</a>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="divShipment" style="width:100%;max-width:1500px;overflow-x:auto;">
+    <h3 class="w3-text-grey w3-padding-16">
+        <i class="fa fa-ship fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Shipment
+    </h3>
+   <div class="w3-container">
+
+        <!-- start -->
+
+       <!-- 1 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small max_width_800">
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l4 w3-hide">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    INV, 0 Board (ETD)
+                </div>
+                <input type="text" id="inv_ship" class="w3-input ht_25">
+
+            </div>
+            <!-- w3-third [2] 이메일 제거 -->
+
+            <!-- w3-third [3] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    Shipment
+                </div>
+                <input type="text" id="actual_ship" class="w3-input ht_25">
+            </div>
+
+            <!-- w3-third [1] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-pencil"></i>
+                    BLNO
+                </div>
+
+                <input class="w3-input ht_25" type="text" id="ship_BL" name="Days">
+
+            </div>
+            <!-- w3-third [2] -->
+            <div class="w3-col s6 m4 l2">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-calendar-check-o"></i>
+                    ETA
+                </div>
+                <input type="text" id="ETA_ship" class="w3-input ht_25">
+
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third w3-hide">
+                <div class="w3-text-blue-gray">
+                    <i class="fa fa-pencil"></i>
+                    Size
+                </div>
+
+                <input class="w3-input ht_25" type="text" name="Days" id="ship_size">
+
+            </div>
+        </div><!-- end of 2 row -->
+
+<hr>
+
+        <!--table  3 row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <button class="w3-button w3-padding-small local_color w3-text-white" id="addTable_ship">Add</button>
+            <button class="w3-button w3-padding-small shipment_color w3-text-white" id="removeTable_ship">Remove</button>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered" id="tableSPL_ship">
+                <tr>
+                    <th class="min_width_100">ContainerNo</th>
+                    <th class="min_width_100">Seal No</th>
+                    <th class="min_width_100">LotNo</th>
+                    <th class="min_width_100">출고일</th>
+                    <th class="min_width_100">출고수량</th>
+                    <th class="min_width_100">선사</th>
+                    <th class="min_width_100">선명</th>
+                    <th class="min_width_100">KG/Cheese</th>
+                    <th class="min_width_100">KG/Carton</th>
+                    <th class="min_width_100">C/Size</th>
+                    <th class="min_width_100">KG/FT40</th>
+                    <th class="min_width_100">포워더</th>
+                </tr>
+                <tr>
+                    <td><input class="w3-input w3-border ht_25" id="ship_container0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_SealNo0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_lotNo0" type="text" placeholder="Enter text"></td>
+                    <td><input type="text" id="ship_date_chul0" class="w3-input ht_25" placeholder="Select date"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_amount0" type="text" placeholder="Enter text"></td>
+                    <!-- <td><input class="w3-input w3-border ht_25" id="ship_company0" type="text" placeholder="Enter text"></td> -->
+                    <td>
+                    <select class="w3-small bootstrap3 w3-border ht_25" name="option" id="ship_company0">
+                        <option value=""></option>
+                        {% for item in shippingcompany_data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                    </td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_name0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_che0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_car0" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_FT20" type="text" placeholder="Enter text"></td>
+                    <td><input class="w3-input w3-border ht_25" id="ship_FT40" type="text" placeholder="Enter text"></td>
+                    <!--<td><input class="w3-input w3-border ht_25" id="ship_forward0" type="text" placeholder="Enter text"></td> -->
+                    <td>
+                        <select class="w3-small bootstrap3 w3-border ht_25" name="option" id="ship_forward0">
+                            <option value=""></option>
+                            {% for item in forwarding_data %}
+                            <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                    </td>
+                </tr>
+                <tbody></tbody>
+            </table>
+        </div><!-- end of 3 row -->
+
+
+<br>
+
+
+        </div>
+    </div><!-- end of w3-container -->
+
+
+
+<script>
+  var addTable_ship_i=0; 
+  $('#addTable_ship').click(function() {
+    addTable_ship_i++;
+    c = '';
+    c+= '<tr>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_container'+addTable_ship_i+ '" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_SealNo'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_lotNo'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_date_chul'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_amount'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    //c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_company'+addTable_ship_i+'" placeholder="Enter text">';
+    //c+= '</td>';
+    c+= '<td>';
+    c+= '<select class="w3-small bootstrap3 w3-border ht_25" id="ship_company'+addTable_ship_i+'">';  
+    c+= '<option value=""></option>';
+    c+= '{% for item in shippingcompany_data %}';
+    c+= '<option value="{{ item }}">{{ item }}</option>';
+    c+= '{% endfor %}';
+    c+= '</select>';
+    c+= '</td>';
+
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_name'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_che'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_car'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_FT2'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    //2020-03-26
+    c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_FT4'+addTable_ship_i+'" placeholder="Enter text">';
+    c+= '</td>';
+    //c+= '<td><input class="w3-input w3-border ht_25" type="text" id="ship_forward'+addTable_ship_i+'" placeholder="Enter text">';
+    //c+= '</td>';
+    c+= '<td>';
+    c+= '<select class="w3-small bootstrap3 w3-border ht_25" id="ship_forward'+addTable_ship_i+'">';  
+    c+= '<option value=""></option>';
+    c+= '{% for item in forwarding_data %}';
+    c+= '<option value="{{ item }}">{{ item }}</option>';
+    c+= '{% endfor %}';
+    c+= '</select>';
+    c+= '</td>';
+
+    c+= '</tr>';
+    
+    c+= '<script> $( function() { $( "#ship_date_chul'+addTable_ship_i+'" ).datepicker({changeMonth: true,changeYear: true,dateFormat: "yy-mm-dd"}); }); <\/script>';
+    
+    //2020-03-26
+    c+= '<script> $("#tableSPL_ship tr > *:nth-child(8)").hide(); <\/script>';
+		c+= '<script> $("#tableSPL_ship tr > *:nth-child(9)").hide(); <\/script>';
+    c+= '<script> $("#tableSPL_ship tr > *:nth-child(11)").hide(); <\/script>';
+    
+    $('#tableSPL_ship > tbody:last').append(c);
+  });
+  
+  $('#removeTable_ship').click(function() {
+    $('#tableSPL_ship > tbody:last > tr:last').remove();
+  });
+</script>
+
+<!-------------------------------------------->
+<script>
+$('#tableSPL_ship tr > *:nth-child(8)').hide();  // hide cheese
+$('#tableSPL_ship tr > *:nth-child(9)').hide();   // hide carton
+$('#tableSPL_ship tr > *:nth-child(11)').hide();   // hide kg40
+</script>
+
+<script>
+    $( function() {
+        $( "#inv_ship" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "yy-mm-dd"
+        });
+        $( "#actual_ship" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "yy-mm-dd"
+        });
+        $( "#ETA_ship" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $( "#ship_date_chul0" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+
+            

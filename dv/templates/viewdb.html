@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% if check_comp == 'DB' %}
+    <title>Do Best Ledger Manager Site</title>
+    {% elif check_comp == 'EI' %}
+    <title>EIN Textile Ledger Manager Site</title>
+    {% endif %}
+    <link rel="icon" href="{{ url_for('static', filename='images/ledger.png') }}">
+    <link href="{{ url_for('static', filename='css/_bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_bootstrap_select_min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/w3.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_STYLE.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/selectizejs/normalize.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/stylesheet.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/selectize.bootstrap3.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectizejs/selectize.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+
+    <style>
+        .tn {
+            background-color: transpatent;
+            border: none;
+        }
+    </style>
+    <style>
+            .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url(/static/images/waiting_page_ico[1].gif) center no-repeat #fff;
+    </style>
+</head>
+
+<body class="w3-light-grey">
+    <script>
+        $(window).on('load', function() {
+            $(".se-pre-con").fadeOut("slow");
+        });
+    </script>
+    <div class="se-pre-con"></div>
+    <div class="w3-container">
+        <h3> Active DataBase </h3>
+
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button tablink w3-red" onclick="openTabs(event, 'BUYER')">BUYER</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'Alldata')">All data</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'BuyerBank')">Buyer Bank</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'AGENT')">AGENT</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'BANK')">BANK</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'COMPANY')">COMPANY</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'CONTAINERYARD')">CONTAINERYARD</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'CONTRACT_CONDITION')">CONTRACT_CONDITION</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'CURRENCY_UNIT')">CURRENCY_UNIT</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'DELIVERYPLACE')">DELIVERYPLACE</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'DEPARTMENT')">DEPARTMENT</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'DESTINATION')">DESTINATION</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'EXCHANGE_RATE')">EXCHANGE_RATE</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'FAIRWAY')">FAIRWAY</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'FORWARDING')">FORWARDING</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'FTA_CONVENTION')">FTA_CONVENTION</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'FTA_ITEM_NUMBER')">FTA_ITEM_NUMBER</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'FTA_ORIGIN')">FTA_ORIGIN</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'ITEM')">ITEM</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'LOCALTRUCKING')">LOCALTRUCKING</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'LUSTER')">LUSTER</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'PAYMENT')">PAYMENT</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'PURCHASE_METHOD')">PURCHASE_METHOD</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'QUANTITY')">QUANTITY</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'SEA')">SEA</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'SHIPPING_COMPANY')">SHIPPING_COMPANY</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'TERM')">TERM</button>
+            <!--button class="w3-bar-item w3-button tablink" onclick="openTabs(event, 'SPL2')">Sample 2</button-->
+        </div>
+
+
+        <div id="BUYER" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">DB Buyer</span>
+            <span class="w3-padding-small order_color w3-text-white">Add</span>
+            <form action="{{ url_for('add_item_db_buyer') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in db_data_buy %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                        <th style="background-color:#99e6ff">submit</th>
+                    </tr>
+                    <tr>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_code"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_buyer"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_prt_buyer"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_addr_1"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_addr_2"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_tel"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_fax"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_dam"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_jik"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_mail"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_mobile"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_level"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_bc"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="_grade_date"></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input" name="" value="" disabled></input>
+                        </td>
+                        <td class="w3-border" style="padding:0;height:25px;background-color:#99e6ff">
+                            <input type="submit" class="w3-tag w3-khaki w3-round w3-text-grey"></input>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small shipment_color w3-text-white">DB Buyer</span>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" id="nt_buy" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+            </table>
+            <br>
+            <div class="w3-container">
+                <div class="w3-center">
+                    <div class="w3-bar w3-border" style="width:100%">
+                        <!--button href="#" class="w3-bar-item w3-button">&laquo;</button-->
+                        {% for i in range(data_list_buy) %} {% set a = i * 100 %} {% if loop.last %} {% set b = total_count_buy %} {% else %} {% set b = a + 100 %} {% endif %}
+                        <button href="#" name="pagination" value="{{a}},{{b}}_BUYER" class="w3-button">{{i+1}}</button> {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="Alldata" class="w3-container w3-border tabs" style="display:none">
+            <br>
+            <span class="w3-padding-small shipment_color w3-text-white">DataBase</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" id="nt" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+            </table>
+            <br>
+            <div class="w3-container">
+                <div class="w3-center">
+                    <div class="w3-bar w3-border" style="width:100%">
+                        <!--button href="#" class="w3-bar-item w3-button">&laquo;</button-->
+                        {% for i in range(data_list) %} {% set a = i * 100 %} {% if loop.last %} {% set b = total_count %} {% else %} {% set b = a + 100 %} {% endif %}
+                        <button href="#" name="pagination" value="{{a}},{{b}}_alldata" class="w3-button">{{i+1}}</button> {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br>
+        </div>
+        <!-- end of Alldata -->
+
+
+        <!-- Add 2020-06-28 -->
+
+        <div id="AGENT" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">AGENT</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in db_agent %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in db_agent %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="AGENT">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in db_agent %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(f_agent["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="AGENT_{{ f_agent['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="AGENT_{{ f_agent['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in f_agent %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="AGENT_{{ f_agent['pk'][i][0] }}" value="{{ f_agent[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="BANK" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">BANK</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_BANK %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_BANK %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="BANK">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_BANK %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_BANK["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="BANK_{{ F_BANK['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="BANK_{{ F_BANK['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_BANK %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="BANK_{{ F_BANK['pk'][i][0] }}" value="{{ F_BANK[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="COMPANY" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">COMPANY</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_COMPANY %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_COMPANY %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="COMPANY">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_COMPANY %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_COMPANY["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="COMPANY_{{ F_COMPANY['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="COMPANY_{{ F_COMPANY['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_COMPANY %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="COMPANY_{{ F_COMPANY['pk'][i][0] }}" value="{{ F_COMPANY[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="CONTAINERYARD" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">CONTAINERYARD</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_CONTAINERYARD %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_CONTAINERYARD %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="CONTAINERYARD">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_CONTAINERYARD %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_CONTAINERYARD["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="CONTAINERYARD_{{ F_CONTAINERYARD['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="CONTAINERYARD_{{ F_CONTAINERYARD['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_CONTAINERYARD %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="CONTAINERYARD_{{ F_CONTAINERYARD['pk'][i][0] }}" value="{{ F_CONTAINERYARD[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="CONTRACT_CONDITION" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">CONTRACT_CONDITION</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_CONTRACT_CONDITION %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_CONTRACT_CONDITION %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="CONTRACT_CONDITION">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_CONTRACT_CONDITION %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_CONTRACT_CONDITION["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="CONTRACT_CONDITION_{{ F_CONTRACT_CONDITION['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="CONTRACT_CONDITION_{{ F_CONTRACT_CONDITION['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_CONTRACT_CONDITION %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="CONTRACT_CONDITION_{{ F_CONTRACT_CONDITION['pk'][i][0] }}" value="{{ F_CONTRACT_CONDITION[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="CURRENCY_UNIT" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">CURRENCY_UNIT</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_CURRENCY_UNIT %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_CURRENCY_UNIT %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="CURRENCY_UNIT">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_CURRENCY_UNIT %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_CURRENCY_UNIT["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="CURRENCY_UNIT_{{ F_CURRENCY_UNIT['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="CURRENCY_UNIT_{{ F_CURRENCY_UNIT['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_CURRENCY_UNIT %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="CURRENCY_UNIT_{{ F_CURRENCY_UNIT['pk'][i][0] }}" value="{{ F_CURRENCY_UNIT[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="DELIVERYPLACE" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">DELIVERYPLACE</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_DELIVERYPLACE %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_DELIVERYPLACE %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="DELIVERYPLACE">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_DELIVERYPLACE %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_DELIVERYPLACE["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="DELIVERYPLACE_{{ F_DELIVERYPLACE['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="DELIVERYPLACE_{{ F_DELIVERYPLACE['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_DELIVERYPLACE %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="DELIVERYPLACE_{{ F_DELIVERYPLACE['pk'][i][0] }}" value="{{ F_DELIVERYPLACE[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="DEPARTMENT" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">DEPARTMENT</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_DEPARTMENT %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_DEPARTMENT %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="DEPARTMENT">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_DEPARTMENT %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_DEPARTMENT["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="DEPARTMENT_{{ F_DEPARTMENT['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="DEPARTMENT_{{ F_DEPARTMENT['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_DEPARTMENT %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="DEPARTMENT_{{ F_DEPARTMENT['pk'][i][0] }}" value="{{ F_DEPARTMENT[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="DESTINATION" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">DESTINATION</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_DESTINATION %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_DESTINATION %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="DESTINATION">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_DESTINATION %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_DESTINATION["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="DESTINATION_{{ F_DESTINATION['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="DESTINATION_{{ F_DESTINATION['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_DESTINATION %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="DESTINATION_{{ F_DESTINATION['pk'][i][0] }}" value="{{ F_DESTINATION[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="EXCHANGE_RATE" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">EXCHANGE_RATE</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_EXCHANGE_RATE %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_EXCHANGE_RATE %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="EXCHANGE_RATE">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_EXCHANGE_RATE %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_EXCHANGE_RATE["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="EXCHANGE_RATE_{{ F_EXCHANGE_RATE['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="EXCHANGE_RATE_{{ F_EXCHANGE_RATE['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_EXCHANGE_RATE %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="EXCHANGE_RATE_{{ F_EXCHANGE_RATE['pk'][i][0] }}" value="{{ F_EXCHANGE_RATE[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="FAIRWAY" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">FAIRWAY</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_FAIRWAY %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_FAIRWAY %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="FAIRWAY">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_FAIRWAY %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_FAIRWAY["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="FAIRWAY_{{ F_FAIRWAY['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="FAIRWAY_{{ F_FAIRWAY['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_FAIRWAY %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="FAIRWAY_{{ F_FAIRWAY['pk'][i][0] }}" value="{{ F_FAIRWAY[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="FORWARDING" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">FORWARDING</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_FORWARDING %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_FORWARDING %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="FORWARDING">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_FORWARDING %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_FORWARDING["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="FORWARDING_{{ F_FORWARDING['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="FORWARDING_{{ F_FORWARDING['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_FORWARDING %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="FORWARDING_{{ F_FORWARDING['pk'][i][0] }}" value="{{ F_FORWARDING[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="FTA_CONVENTION" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">FTA_CONVENTION</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_FTA_CONVENTION %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_FTA_CONVENTION %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="FTA_CONVENTION">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_FTA_CONVENTION %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_FTA_CONVENTION["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="FTA_CONVENTION_{{ F_FTA_CONVENTION['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="FTA_CONVENTION_{{ F_FTA_CONVENTION['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_FTA_CONVENTION %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="FTA_CONVENTION_{{ F_FTA_CONVENTION['pk'][i][0] }}" value="{{ F_FTA_CONVENTION[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="FTA_ITEM_NUMBER" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">FTA_ITEM_NUMBER</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_FTA_ITEM_NUMBER %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_FTA_ITEM_NUMBER %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="FTA_ITEM_NUMBER">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_FTA_ITEM_NUMBER %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_FTA_ITEM_NUMBER["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="FTA_ITEM_NUMBER_{{ F_FTA_ITEM_NUMBER['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="FTA_ITEM_NUMBER_{{ F_FTA_ITEM_NUMBER['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_FTA_ITEM_NUMBER %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="FTA_ITEM_NUMBER_{{ F_FTA_ITEM_NUMBER['pk'][i][0] }}" value="{{ F_FTA_ITEM_NUMBER[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="FTA_ORIGIN" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">FTA_ORIGIN</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_FTA_ORIGIN %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_FTA_ORIGIN %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="FTA_ORIGIN">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_FTA_ORIGIN %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_FTA_ORIGIN["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="FTA_ORIGIN_{{ F_FTA_ORIGIN['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="FTA_ORIGIN_{{ F_FTA_ORIGIN['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_FTA_ORIGIN %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="FTA_ORIGIN_{{ F_FTA_ORIGIN['pk'][i][0] }}" value="{{ F_FTA_ORIGIN[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="ITEM" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">ITEM</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_ITEM %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_ITEM %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="ITEM">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_ITEM %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_ITEM["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="ITEM_{{ F_ITEM['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="ITEM_{{ F_ITEM['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_ITEM %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="ITEM_{{ F_ITEM['pk'][i][0] }}" value="{{ F_ITEM[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="LOCALTRUCKING" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">LOCALTRUCKING</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_LOCALTRUCKING %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_LOCALTRUCKING %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="LOCALTRUCKING">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_LOCALTRUCKING %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_LOCALTRUCKING["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="LOCALTRUCKING_{{ F_LOCALTRUCKING['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="LOCALTRUCKING_{{ F_LOCALTRUCKING['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_LOCALTRUCKING %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="LOCALTRUCKING_{{ F_LOCALTRUCKING['pk'][i][0] }}" value="{{ F_LOCALTRUCKING[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="LUSTER" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">LUSTER</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_LUSTER %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_LUSTER %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="LUSTER">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_LUSTER %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_LUSTER["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="LUSTER_{{ F_LUSTER['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="LUSTER_{{ F_LUSTER['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_LUSTER %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="LUSTER_{{ F_LUSTER['pk'][i][0] }}" value="{{ F_LUSTER[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+        <div id="PAYMENT" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">PAYMENT</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_PAYMENT %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_PAYMENT %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="PAYMENT">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_PAYMENT %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_PAYMENT["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="PAYMENT_{{ F_PAYMENT['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="PAYMENT_{{ F_PAYMENT['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_PAYMENT %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="PAYMENT_{{ F_PAYMENT['pk'][i][0] }}" value="{{ F_PAYMENT[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="PURCHASE_METHOD" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">PURCHASE_METHOD</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_PURCHASE_METHOD %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_PURCHASE_METHOD %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="PURCHASE_METHOD">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_PURCHASE_METHOD %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_PURCHASE_METHOD["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="PURCHASE_METHOD_{{ F_PURCHASE_METHOD['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="PURCHASE_METHOD_{{ F_PURCHASE_METHOD['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_PURCHASE_METHOD %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="PURCHASE_METHOD_{{ F_PURCHASE_METHOD['pk'][i][0] }}" value="{{ F_PURCHASE_METHOD[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="QUANTITY" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">QUANTITY</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_QUANTITY %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_QUANTITY %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="QUANTITY">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_QUANTITY %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_QUANTITY["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="QUANTITY_{{ F_QUANTITY['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="QUANTITY_{{ F_QUANTITY['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_QUANTITY %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="QUANTITY_{{ F_QUANTITY['pk'][i][0] }}" value="{{ F_QUANTITY[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="SEA" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">SEA</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_SEA %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_SEA %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="SEA">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_SEA %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_SEA["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="SEA_{{ F_SEA['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="SEA_{{ F_SEA['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_SEA %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="SEA_{{ F_SEA['pk'][i][0] }}" value="{{ F_SEA[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="SHIPPING_COMPANY" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">SHIPPING_COMPANY</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_SHIPPING_COMPANY %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_SHIPPING_COMPANY %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="SHIPPING_COMPANY">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_SHIPPING_COMPANY %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_SHIPPING_COMPANY["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="SHIPPING_COMPANY_{{ F_SHIPPING_COMPANY['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="SHIPPING_COMPANY_{{ F_SHIPPING_COMPANY['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_SHIPPING_COMPANY %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="SHIPPING_COMPANY_{{ F_SHIPPING_COMPANY['pk'][i][0] }}" value="{{ F_SHIPPING_COMPANY[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+        <div id="TERM" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">TERM</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in DB_TERM %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in DB_TERM %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="TERM">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in DB_TERM %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(F_TERM["pk"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="TERM_{{ F_TERM['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="TERM_{{ F_TERM['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in F_TERM %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="TERM_{{ F_TERM['pk'][i][0] }}" value="{{ F_TERM[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="BuyerBank" class="w3-container w3-border tabs">
+            <br>
+            <span class="w3-padding-small nego_color w3-text-white">Buyer bank</span>
+            <span class="w3-padding-small order_color w3-text-white">Add(Do not enter "pk" data.)</span>
+            <form action="{{ url_for('add_dt') }}" method="POST">
+                <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="overflow-x:auto;display:block">
+                    <tr>
+                        {% for item in db_data_buyer_bank %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for item in db_data_buyer_bank %}
+                        <td class="w3-border" style="padding:0;height:25px">
+                            <input type="text" class="w3-input min_width_150" name="{{ item }}"></input>
+                        </td>
+                        {% endfor %}
+                        <input type="hidden" name="db" value="BUYERBANK">
+                        <th style="background-color:#99e6ff"><button class="w3-button" type="submit">submit</button></th>
+                    </tr>
+                </table>
+            </form>
+            <br><br>
+            <p></p>
+            <span class="w3-padding-small order_color w3-text-white">Edit / Remove(Do not modify "pk" data)</span>
+            <table class="w3-table-all w3-card-4 w3-small w3-centered w3-border" style="max-height:700px;display:block;overflow-x:auto;white-space:nowarp;">
+                <tr>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for item in db_data_buyer_bank %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                {% for i in range(final_db_buyer_bank["Address"]|length) %}
+                <tr>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-blue w3-tiny ht_25" name="btn_edit" id="" value="BUYERBANK_{{ final_db_buyer_bank['pk'][i][0] }}">run</button>
+                    </td>
+                    <td style="padding:0;height:25px">
+                        <button class="w3-button w3-red w3-tiny ht_25" name="btn_delete" id="" value="BUYERBANK_{{ final_db_buyer_bank['pk'][i][0]  }}">del</button>
+                    </td>
+                    {% for item in final_db_buyer_bank %}
+                    <td class="w3-border" style="padding:0;height:25px">
+                        <input type="text" class="w3-input" name="BUYERBANK_{{ final_db_buyer_bank['pk'][i][0] }}" value="{{ final_db_buyer_bank[item][i][0] }}" style="min-width:150px"></input>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br><br><br><br>
+        </div>
+
+        <script>
+            $(document).on('click', 'button[name=btn_edit]', function() {
+                var rex = /(\S+)_(\S+)$/;
+                var _id = rex.exec($(this).val());
+                var data = $("input[name=" + $(this).val() + "]").serializeArray();
+                dt = [];
+                data.forEach(function(data) {
+                    dt.push(data['value']);
+                });
+                //dt.pop();
+                var datas = {
+                    _db: _id[1],
+                    _pk: data.pop()['value'],
+                    _data: dt
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url_for('edit_view') }}",
+                    contentType: "application/json;charset=utf-8;",
+                    data: JSON.stringify(datas),
+                    success: function(out) {
+                        alert("complete");
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            });
+
+            $(document).on('click', 'button[name=btn_delete]', function() {
+                var rex = /(\S+)_(\S+)$/;
+                var _id = rex.exec($(this).val());
+                //var data = $("input[name="+$(this).val()+"]").serializeArray();
+                //dt.pop();
+                var confirmed = confirm("Are you sure to delete?");
+                if (confirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url_for('delete_view') }}",
+                        contentType: "application/json;charset=utf-8;",
+                        data: JSON.stringify({
+                            '_db': _id[1],
+                            '_pk': _id[2]
+                        }),
+                        success: function(out) {
+                            location.reload();
+                        },
+                        error: function() {
+                            alert("error");
+                        }
+                    });
+                }
+            });
+        </script>
+
+
+
+
+
+
+
+    </div>
+    <!-- end of w3-container -->
+
+
+    <script>
+        function openTabs(evt, tabName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("tabs");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+    </script>
+
+
+
+    <script>
+        //items =['num','InvNo','DueDate','Buyer','Agent','LCNo','item','DN','LF','LS','a','b','c']
+
+        $(window).on('load', function() {
+            init_table();
+            init_table_buyer();
+        });
+        $(document).on('keypress', 'input', function(e) {
+            if (e.keyCode == 13) {
+                $(this).next('input').focus();
+            }
+        })
+
+        $(document).on('click', 'button[name="pagination"]', function() {
+            data = String($(this).val());
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('viewDB') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    inx: data
+                }),
+                success: function(out) {
+                    if (out["db_name"] == 'alldata') {
+                        $("#nt").empty();
+                        add_table(out, "OrderNo", "#nt", "InvNo");
+                    } else if (out["db_name"] == 'BUYER') {
+                        $("#nt_buy").empty();
+                        add_table(out, "Buyer", "#nt_buy", "Buyer");
+                    }
+                },
+                error: function() {
+                    alert("err");
+                }
+            });
+        });
+
+
+        function init_table() {
+            { % autoescape false %
+            }
+            items = {
+                {
+                    db_data
+                }
+            }; { % endautoescape %
+            }
+            c = '';
+            c += '<tr style="border-top:2px solid #66b3ff">';
+            c += '    <th>num</th>';
+            c += '    <th>Edit</th>';
+            c += '    <th>Delete</th>';
+            items.forEach(function(item) {
+                c += '    <th>' + item + '</th>';
+            });
+            c += '</tr>';
+            c += '{% set nu = namespace(value=0) %}';
+            c += '{% set cnt =namespace(value=0) %}';
+            c += '{% for ite in final_db["OrderNo"] %}';
+            c += '        {% set cnt.value = cnt.value + 1 %}';
+            c += '<tr class="tr_index">';
+            c += '    <td style="padding:0;height:25px">';
+            c += '        {{ cnt.value }}';
+            c += '    </td>';
+            c += '    <td style="padding:0;height:25px">';
+            c += '        <button class="w3-button w3-blue w3-tiny ht_25" id="editBtn_all_data" value="{{ nu.value }}">run</button>';
+            c += '    </td>';
+            c += '    <td style="padding:0;height:25px">';
+            c += '        <button class="w3-button w3-red w3-tiny ht_25" id="delBtn_all_data" value="{{ final_db["pk"][nu.value][0] }}">del</button>';
+            c += '    </td>';
+            c += '    {% for item in final_db %}';
+            c += '    <td class="w3-border" style="padding:0;height:25px">';
+            c += '        <input type="text" class="w3-input" name="db_all_items_{{ nu.value }}" value="{{ final_db[item][nu.value][0] }}" style="min-width:150px"></input>';
+            c += '    </td>';
+            c += '    {% endfor %}';
+            c += '</tr>';
+            c += '{% set nu.value = nu.value + 1 %}';
+            c += '{% endfor %}';
+            $("#nt").append(c);
+        }
+
+        function init_table_buyer() {
+            { % autoescape false %
+            }
+            items = {
+                {
+                    db_data_buy
+                }
+            }; { % endautoescape %
+            }
+            c = '';
+            c += '<tr style="border-top:2px solid #66b3ff">';
+            c += '    <th class="w3-border">num</th>';
+            c += '    <th class="w3-border">Edit</th>';
+            c += '    <th class="w3-border">Delete</th>';
+            items.forEach(function(item) {
+                c += '    <th class="w3-border">' + item + '</th>';
+            });
+            c += '</tr>';
+            c += '{% set nu =namespace(value=0) %}';
+            c += '{% set cnt =namespace(value=0) %}';
+            c += '{% for ite in final_db_buy["Buyer"] %}';
+            c += '        {% set cnt.value = cnt.value + 1 %}';
+            c += '<tr class="tr_index">';
+            c += '    <td style="padding:0;height:25px">';
+            c += '        {{ cnt.value }}';
+            c += '    </td>';
+            c += '    <td style="padding:0;height:25px">';
+            c += '        <button class="w3-button w3-blue w3-tiny ht_25" id="editBtn" value="{{ nu.value }}">run</button>';
+            c += '    </td>';
+            c += '    <td style="padding:0;height:25px">';
+            c += '        <button class="w3-button w3-red w3-tiny ht_25" id="delBtn" value="{{ final_db_buy["pk"][nu.value][0] }}">del</button>';
+            c += '    </td>';
+            c += '    {% for item in final_db_buy %}';
+            c += '    <td class="w3-border" style="padding:0;height:25px">';
+            c += '        <input type="text" class="w3-input" name="db_items_{{ nu.value }}" value="{{ final_db_buy[item][nu.value][0] }}" style="min-width:150px"></input>';
+            c += '    </td>';
+            c += '    {% endfor %}';
+            c += '</tr>';
+            c += '{% set nu.value = nu.value + 1 %}';
+            c += '{% endfor %}';
+            $("#nt_buy").append(c);
+        }
+
+
+        $(document).on('click', '#editBtn_all_data', function() {
+            var nb = $(this).val();
+            var data = $("input[name=db_all_items_" + nb + "]").serializeArray();
+            dt = [];
+            data.forEach(function(item) {
+                dt.push(item['value']);
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('modi_all') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    inx: dt
+                }),
+                success: function(out) {
+                    init_table();
+                    init_table_buyer();
+                    location.reload();
+
+                },
+                error: function() {
+                    alert("err");
+                }
+            });
+        });
+
+
+        $(document).on('click', '#delBtn_all_data', function() {
+            var nb = $(this).val();
+            var confirmed = confirm("Are you sure to delete?");
+            if (confirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url_for('del_all_data') }}",
+                    contentType: "application/json;charset=utf-8;",
+                    data: JSON.stringify({
+                        inx: nb
+                    }),
+                    success: function(out) {
+                        init_table();
+                        init_table_buyer();
+                        location.reload();
+                    },
+                    error: function() {
+                        alert("err");
+                    }
+                });
+            }
+        });
+
+
+        $(document).on('click', '#editBtn', function() {
+            var nb = $(this).val();
+            var data = $("input[name=db_items_" + nb + "]").serializeArray();
+            dt = [];
+            data.forEach(function(item) {
+                dt.push(item['value']);
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('modi_buyer') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    inx: dt
+                }),
+                success: function(out) {
+                    init_table();
+                    init_table_buyer();
+                    location.reload();
+
+                },
+                error: function() {
+                    alert("err");
+                }
+            });
+        });
+
+        $(document).on('click', '#delBtn', function() {
+            var nb = $(this).val();
+            var confirmed = confirm("Are you sure to delete?");
+            if (confirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url_for('del_buyer') }}",
+                    contentType: "application/json;charset=utf-8;",
+                    data: JSON.stringify({
+                        inx: nb
+                    }),
+                    success: function(out) {
+                        init_table();
+                        init_table_buyer();
+                        location.reload();
+                    },
+                    error: function() {
+                        alert("err");
+                    }
+                });
+            }
+        });
+
+
+        function add_table(data, it, nt, ref) {
+            items = data["view_db"];
+            c = '';
+            c += '<tr style="border-top:2px solid #66b3ff">';
+            c += '    <th>num</th>';
+            c += '    <th>Edit</th>';
+            c += '    <th>Delete</th>';
+            items.forEach(function(item) {
+                c += '    <th>' + item + '</th>';
+            });
+            c += '</tr>';
+            c += '{% set nu = namespace(value=0) %}';
+            nu = 0;
+            c += '{% set cnt =namespace(value=0) %}';
+            for (i = 0; i < data["data"][it].length; i++) {
+                c += '<tr>';
+                c += '  <td style="padding:0;height:25px">';
+                c += data["data"]["pk"][i];
+                c += '  </td>';
+                c += '    <td style="padding:0;height:25px">';
+                c += '        <button class="w3-button w3-blue w3-tiny ht_25" id="editBtn" value="' + data["data"]["pk"][i] + '">run</button>';
+                c += '    </td>';
+                c += '    <td style="padding:0;height:25px">';
+                c += '        <button class="w3-button w3-red w3-tiny ht_25" id="delBtn" value="' + data["data"]["pk"][i] + '">del</button>';
+                c += '    </td>';
+                items.forEach(function(item) {
+                    c += '  <td class="w3-border" style="padding:0;height:25px">';
+                    c += '    <input type="text" class="w3-input" name="db_items_' + data["data"]["pk"][i] + '" value="' + data["data"][item][nu][0] + '" style="min-width:150px"></input>';
+                    c += '  </td>';
+                });
+
+                c += '</tr>';
+                nu++;
+            }
+
+            $(nt).append(c);
+
+        }
+    </script>
+
+</body>
+
+</html>

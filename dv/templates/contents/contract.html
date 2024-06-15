@@ -1,0 +1,650 @@
+<div class="w3-container w3-hide" id="contractdb_header" style="width:100%;max-width:1000px">
+    <label class="w3-small row2_text_color">Search DataBase</label>
+    <select id="ContractDB" class="w3-small w3-light-green w3-card bootstrap3">
+    <option value=""></option>
+    
+    {% for item in all_data %}
+    <option style='background-color:yellow'; z-index:10000; value="{{ item }}"> {{ item }}</option>
+    {% endfor %}
+</select>
+</div>
+
+<div class="w3-container w3-hide" id="contract_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Proforma Invoice</b>
+        </h5>
+
+
+
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>PDF</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+            <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_contract_invoice()" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="contract" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="contract_invoice_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="contract_invoice_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Shipper / Exporter
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="contract_invoice_shipper" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> For Account Risk of Messrs
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="contract_invoice_account" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Notify Party
+                </div>
+                <div class="row2_text_color">
+                    SAME AS ABOVE
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Loading
+                    </div>
+                    <!--textarea class="w3-input w3-border ht_30" type="text" id="contract_invoice_Loading" name="Days" style=" resize : none;"> </textarea-->
+
+                    <select id="contract_invoice_Loading" class="bootstrap3 w3-small">                            
+                        <option value="1">ANY CHINESE or INDIAN PORT</option>
+                        <option value="2">ANY CHINESE POLT</option>
+                        <option value="3">ANY CHINESE PORT</option>
+                        <option value="4">ANY INDIAN PORT</option>
+                        <option value="5">ANY INDONESIAN PORT</option>
+                        <option value="6">ANY KOREAN PORT</option>
+                        <option value="7">ANY PORT , MALAYSIA</option>
+                        <option value="8">ANY PORT IN INDONESIA</option>
+                        <option value="9">ANY PORT IN KOREA</option>
+                        <option value="10">ANY PORT, CHINA</option>
+                        <option value="11">ANY TAIWAN PORT</option>
+                        <option value="12">ANY THAILAND PORT</option>
+                        <option value="13">ANY VIETNAM PORT</option>
+                        <option value="14">CHIN</option>
+                        <option value="15">VIET</option>
+                        <option value="16">VIETN</option>
+                    </select>
+
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Final Destination
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="contract_invoice_Destination" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Vessel/Flight
+                    </div>
+
+                    <select id="contract_invoice_Vessel" class="bootstrap3 w3-small readonly">
+                        <option value="0">By Sea</option>                        
+                        <option value="1">By Air</option>                        
+                        <option value="2">By Sea & Air</option>                        
+                    </select>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i> Sailing on or about
+                    </div>
+                    <input type="text" id="date_contract_invoice_sailing" class="w3-input ht_25 max_width_200">
+                </div>
+
+            </div>
+            <div class="w3-half">
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> No. date of invoice
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_invoice_invoice" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+                    <input type="text" id="date_contract_invoice_invoice" class="w3-input ht_25 max_width_200">
+                </div>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Terms of delivery and payment
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="contract_invoice_term" name="Days" style=" resize : none; height:50px;"> </textarea>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> *TRANSSHIPMENT
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_invoice_trans" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> *PARTTIAL SHIPMENT
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_invoice_ship" name="Days">
+                </div>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Remark
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="contract_invoice_remark" name="Days" style=" resize : none; height:100px;"> </textarea>
+            </div>
+        </div>
+        <!-- end of second row -->
+        <hr>
+        <br>
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <div class="w3-col">
+                <div class="w3-col row1_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Marks and numbers
+                </div>
+                <div class="w3-col row2_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Description of goods
+                </div>
+                <div class="w3-col row3_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Quantity/Unit
+                </div>
+
+                <div class="w3-col row1_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Unit price
+                </div>
+
+                <div class="w3-col row1_text_color " style="color:#d96868;font-weight:bold ;width:20%">
+                    <i class="fa fa-pencil"></i> Amount
+                </div>
+            </div>
+            <div class="w3-col">
+                <div class="w3-col row3_text_color" style="width:20%">
+                    AS SELLER'S OPTION
+                </div>
+                <div class="w3-col row2_text_color" style="width:20%">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_1" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_2" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_3" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_4" name="Days">
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_5" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_6" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_7" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_8" name="Days">
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_9" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_10" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_11" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_goods_12" name="Days">
+                    <br>
+                    <div class="row4_text_color w3-center"> TOTAL </div>
+                </div>
+                <div class="w3-col row3_text_color" style="width:20%">
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_quantity_1" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_quantity_2" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_quantity_3" name="Days">
+                    <br> <br> <br> <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_quantity_total" name="Days">
+                </div>
+                <div class="w3-col row1_text_color" style="width:20%">
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_price_1" name="Days">
+                    <br> <br> <br> <br>
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_price_2" name="Days">
+                    <br> <br> <br> <br>
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_price_3" name="Days">
+                </div>
+
+                <div class="w3-col row1_text_color " style="color:#1a0f80;font-weight:bold ;width:20%">
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_amount_1" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_amount_2" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_amount_3" name="Days">
+                    <br> <br> <br> <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract_amount_total" name="Days">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end of w3-container -->
+
+<img src="../static/images/00001.bmp" id='doimage3' class="w3-hide">
+<img src="../static/images/002.bmp" id='doimage6' class="w3-hide">
+
+<script>
+    $(document).ready(function() {
+        var data2;
+        "{% for item in contract_invoice_data %}"
+        data2 = String("{{item}}");
+        "{% endfor %}"
+
+        $('#contract_invoice_shipper').val(data2);
+    });
+</script>
+
+<script>
+    contract_invoice_Loading = $('#contract_invoice_Loading').selectize({})[0].selectize;
+    contract_invoice_Loading.addItem("ANY KOREAN PORT");
+    contract_invoice_Loading.setValue(6);
+
+    $(function() {
+        $("#date_comm_invoice_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_comm_invoice_invoice").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_comm_invoice_LC").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+
+
+    function pdfPrint_contract_invoice() {
+        // set variable
+
+        var loc = $("#contract_invoice_Vessel").val();
+        var textvessel = $("#contract_invoice_Vessel")[0].selectize.options[loc].text;
+
+        var nodata = $("#contract_invoice_invoice").val();
+        var invoicedata = $("#date_contract_invoice_invoice").val();
+        var no_invoice = String(nodata) + '    ' + String(invoicedata);
+
+        var bankdata = '* TRANSSHIPMETN : ' + String($("#contract_invoice_trans").val()) + ' \n * PARTIAL SHIPMENT : ' + String($("#contract_invoice_ship").val()) + ' \n * +/-10% MORE OR LESS FOR Q\'TY \nAND AMOUNT SHOULD BE ALLOWED'
+
+        var goodsitem = String($("#contract_goods_1").val()) + '\n' + String($("#contract_goods_2").val()) + '\n' + String($("#contract_goods_3").val()) + '\n' + String($("#contract_goods_4").val()) + '\n';
+        if (String($("#contract_goods_5").val()) != '') {
+            goodsitem += '\n' + String($("#contract_goods_5").val()) + '\n' + String($("#contract_goods_6").val()) + '\n' + String($("#contract_goods_7").val()) + '\n' + String($("#contract_goods_8").val()) + '\n';
+        }
+        if (String($("#contract_goods_9").val()) != '') {
+            goodsitem += '\n' + String($("#contract_goods_9").val()) + '\n' + String($("#contract_goods_10").val()) + '\n' + String($("#contract_goods_11").val()) + '\n' + String($("#contract_goods_12").val()) + '\n';
+        }
+
+        var qtyitem = 'ABOUT\n' + String($("#contract_quantity_1").val()) + '\n';
+        if (String($("#contract_quantity_2").val()) != '') {
+            qtyitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract_quantity_2").val()) + '\n';
+        }
+        if (String($("#contract_quantity_3").val()) != '') {
+            qtyitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract_quantity_3").val()) + '\n';
+        }
+
+        var priceitem = '\n' + String($("#contract_price_1").val()) + '\n';
+        if (String($("#contract_price_2").val()) != '') {
+            priceitem += '\n' + '\n' + '\n' + '\n' + String($("#contract_price_2").val()) + '\n';
+        }
+        if (String($("#contract_price_3").val()) != '') {
+            priceitem += '\n' + '\n' + '\n' + '\n' + String($("#contract_price_3").val()) + '\n';
+        }
+
+        var amountitem = 'ABOUT\n' + String($("#contract_amount_1").val()) + '\n';
+        if (String($("#contract_amount_2").val()) != '') {
+            amountitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract_amount_2").val()) + '\n';
+        }
+        if (String($("#contract_amount_3").val()) != '') {
+            amountitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract_amount_3").val()) + '\n';
+        }
+
+        let portofloading = $("#contract_invoice_Loading").val();
+        let textportofloading = $("#contract2_loading")[0].selectize.options[portofloading].text;
+
+        var canvas = document.createElement('canvas');
+        var img = document.getElementById('doimage3');
+
+        if (check_company == 'DB')
+            img = document.getElementById('doimage3');
+        else if (check_company == 'EI')
+            img = document.getElementById('doimage6');
+
+        canvas.height = img.naturalHeight;
+        canvas.width = img.naturalWidth;
+        var ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var base64String2 = canvas.toDataURL();
+
+        //var totalamount = 'TOTAL : ' + $("#contract_quantity_total").val() + $("#contract_amount_total").val();
+        var docDefinition2 = {
+            content: [{
+                        alignment: 'center',
+                        text: '\PROFORMA INVOICE\n',
+                        bold: true,
+                        fontSize: 25
+                    }, {
+                        color: '#444',
+                        table: {
+                            widths: [125, 125, '*'],
+                            heights: [25, 25, 30, 30, 30, 30, 30],
+                            body: [
+                                [{
+                                    border: [true, true, true, false],
+                                    colSpan: 2,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Shipper/Exporter\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: $("#contract_invoice_shipper").val()
+                                    }]
+                                }, '', {
+                                    colSpan: 1,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'No. & date of invoice \n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: no_invoice
+                                    }]
+                                }],
+                                ['', '', ''],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'For Account & Risk of Messrs. \n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: $("#contract_invoice_account").val()
+                                    }]
+                                }, '', {
+                                    colSpan: 1,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Terms of delivery and payment \n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: $("#contract_invoice_term").val()
+                                    }]
+                                }],
+                                ['', '', ''],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Notify party\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: 'SAME AS ABOVE'
+                                    }]
+                                }, '', {
+                                    colSpan: 1,
+                                    rowSpan: 3,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Advising Bank ',
+                                    }, {
+                                        fontSize: 9,
+                                        color: 'blue',
+                                        text: ' KEBHANA BANK, GONGDUKDONG BRANCH, SEOUL, KOREA (SWIFT CODE : KOEXKRSE)\n'
+                                    }, {
+                                        fontSize: 10,
+                                        text: bankdata
+                                    }]
+                                }],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Port of Loading\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: textportofloading
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Final destination\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: $("#contract_invoice_Destination").val()
+                                    }]
+                                }, ''],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Vessel / Flight\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: textvessel
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Sailing on or about\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: $("#date_contract_invoice_sailing").val()
+                                    }]
+                                }, '']
+                            ]
+                        } // table layout
+                    }, {
+                        color: 'gray',
+                        table: {
+                            widths: [125, 125, 75, 75, '*'],
+                            heights: [250],
+                            body: [
+                                [{
+                                    border: [true, true, true, true],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Marks and numbers\n\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: 'AS SELLER\'S OPTION'
+                                    }]
+                                }, {
+                                    border: [true, true, true, true],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Description of goods\n\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: goodsitem
+                                    }]
+                                }, {
+                                    border: [true, true, true, true],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Quantity/Unit\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: qtyitem
+                                    }]
+                                }, {
+                                    border: [true, true, true, true],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Unit price\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: priceitem
+                                    }]
+                                }, {
+                                    border: [true, true, true, true],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Amout\n',
+                                    }, {
+                                        fontSize: 10,
+                                        text: amountitem
+                                    }]
+                                }, ]
+
+                            ]
+                        } // table layout
+                    }, {
+                        text: [{
+                            alignment: 'center',
+                            text: '============================================\n',
+                            bold: true,
+                            fontSize: 20
+                        }]
+                    }, {
+
+                        table: {
+                            widths: [125, 125, 75, 75, '*'],
+                            heights: [25],
+                            body: [
+                                [{
+                                    border: [false, false, false, false],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        fontSize: 10,
+                                        text: ''
+                                    }]
+                                }, {
+                                    border: [false, false, false, false],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        alignment: 'center',
+                                        fontSize: 10,
+                                        text: 'TOTAL : '
+                                    }]
+                                }, {
+                                    border: [false, false, false, false],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        fontSize: 10,
+                                        text: $("#contract_quantity_total").val()
+                                    }]
+                                }, {
+                                    border: [false, false, false, false],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        fontSize: 10,
+                                        text: ''
+                                    }]
+                                }, {
+                                    border: [false, false, false, false],
+                                    colSpan: 1,
+                                    rowSpan: 1,
+                                    text: [{
+                                        fontSize: 10,
+                                        text: $("#contract_amount_total").val()
+                                    }]
+                                }]
+                            ]
+                        }
+                    }, {
+
+
+                        image: base64String2,
+                        width: 200,
+                        height: 100,
+                        absolutePosition: {
+                            x: 380,
+                            y: 680
+                        }
+                    }
+
+
+
+                ] // end of content
+        }; // end of docDefinition2
+
+        var pdf_name = 'Commercial_invoice.pdf';
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+    } // end of pdfPrint()
+</script>
+
+
+
+
+<script>
+    ContractDB = $('#ContractDB').selectize({
+        placeholder: "Select item",
+        //valueField:'name',
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+    contract_invoice_Vessel = $('#contract_invoice_Vessel').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    contract_invoice_Vessel.setValue(0, true);
+
+    $(function() {
+        $("#date_contract_invoice_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>

@@ -1,0 +1,716 @@
+<div class="w3-container w3-hide" id="contract2_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>EXPORT SALES CONTRACT</b>
+        </h5>
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>PDF</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+            <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_contract2_invoice()" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="contract2" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="contract2_invoice_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="contract2_invoice_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    <u>MESSRS</u>
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="contract2_invoice_shipper" name="Days" style=" resize : none;"> </textarea>
+
+                <div class="w3-col">
+                    <div class="row1_text_color">
+                        <i class="fa fa-list-ul"></i> SHIPMENT
+                    </div>
+                    <div class="w3-full">
+                        &ensp;
+                        <i class="fa fa-calendar-check-o"></i> &ensp;Time of shipment:
+                        <input type="text" id="date_contract2_ship" class="w3-input w3-border ht_25">
+                    </div>
+                    <div class="w3-full">
+                        &ensp;
+                        <i class="fa fa-list-ul row3_text_color"></i> &ensp;Port of Loading :
+
+                        <select id="contract2_loading" class="bootstrap3 w3-small">                            
+                            <option value="1">ANY CHINESE or INDIAN PORT</option>
+                            <option value="2">ANY CHINESE POLT</option>
+                            <option value="3">ANY CHINESE PORT</option>
+                            <option value="4">ANY INDIAN PORT</option>
+                            <option value="5">ANY INDONESIAN PORT</option>
+                            <option value="6">ANY KOREAN PORT</option>
+                            <option value="7">ANY PORT , MALAYSIA</option>
+                            <option value="8">ANY PORT IN INDONESIA</option>
+                            <option value="9">ANY PORT IN KOREA</option>
+                            <option value="10">ANY PORT, CHINA</option>
+                            <option value="11">ANY TAIWAN PORT</option>
+                            <option value="12">ANY THAILAND PORT</option>
+                            <option value="13">ANY VIETNAM PORT</option>
+                            <option value="14">CHIN</option>
+                            <option value="15">VIET</option>
+                            <option value="16">VIETN</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="w3-col">
+                    <div class="row1_text_color">
+                        <i class="fa fa-list-ul"></i>
+                        <u>PACKING</u>
+                    </div>
+                    <div class="w3-col ">
+                        <div class="row3_text_color">
+                            &ensp;EXPORT STANDARD PACKING
+                        </div>
+                    </div>
+
+                </div>
+                <div class="w3-col">
+                    <div class="row1_text_color">
+                        <i class="fa fa-list-ul"></i>
+                        <u>INSURANCE</u>
+                    </div>
+                    <div class="w3-full">
+                        &ensp;TO BE COVERED BY:
+                        <input type="text" id="contract2_insurance" class="w3-input w3-border ht_25">
+                    </div>
+                </div>
+            </div>
+            <div class="w3-half">
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i> CONTRACT DATE
+                    </div>
+                    <input type="text" id="date_contract2_contract_date" class="w3-input ht_25 max_width_200">
+
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i> CONTRACT NO
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_no" name="Days">
+                </div>
+                <div class="w3-full">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> BUYER'S REFERENCE NO
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_reference" name="Days">
+                </div>
+                <div class="w3-full">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Discharging
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_discharging" name="Days">
+                </div>
+                <div class="w3-full">
+                    <div class="w3-full">
+                        <div class="row1_text_color">
+                            <i class="fa fa-pencil"></i> Transshipment
+                        </div>
+                        <input class="w3-input w3-border ht_25" type="text" id="contract2_trans" name="Days" readonly>
+                    </div>
+                    <div class="w3-full">
+                        <div class="row1_text_color">
+                            <i class="fa fa-pencil"></i> Partial shipment
+                        </div>
+                        <input class="w3-input w3-border ht_25" type="text" id="contract2_shipment" name="Days" readonly>
+                    </div>
+                    <div class="w3-full">
+                        <div class="row1_text_color">
+                            <i class="fa fa-pencil"></i>
+                            <u>PAYMENT</u>
+                        </div>
+                        <input class="w3-input w3-border ht_25" type="text" id="contract2_payment" name="Days">
+                    </div>
+                    <div class="w3-full">
+                        <div class="row1_text_color">
+                            <i class="fa fa-pencil"></i>
+                            <u>INSPECTION:</u>
+                        </div>
+                        MILL'S INSPECTION TOBE FINAL
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-row row1_text_color">
+                <i class="fa fa-pencil"></i> Remark
+            </div>
+            <textarea class="w3-input w3-border ht_100" type="text" id="contract2_remark" name="Days" style=" resize : none; height:100px;"> </textarea>
+        </div>
+        <!-- end of second row -->
+        <hr>
+
+
+
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <div class="w3-col w3-half w3-right">
+                TERM / 도착지
+                <input class="w3-input w3-border ht_25 " type="text" id="contract2_term" name="Days">
+            </div>
+
+            <div class="w3-col">
+                <div class="w3-col row1_text_color" style="width:25%">
+                    <i class="fa fa-pencil"></i> COMMODITY DESCRIPTION
+                </div>
+                <div class="w3-col row2_text_color" style="width:25%">
+                    <i class="fa fa-pencil"></i> QUANTITY
+                </div>
+                <div class="w3-col row3_text_color" style="width:25%">
+                    <i class="fa fa-pencil"></i> UNIT PRICE
+                </div>
+
+                <div class="w3-col row1_text_color" style="width:25%">
+                    <i class="fa fa-pencil"></i> AMOUNT
+                </div>
+
+            </div>
+            <div class="w3-col">
+
+                <div class="w3-col row2_text_color" style="width:25%">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_1" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_2" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_3" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_4" name="Days">
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_5" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_6" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_7" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_8" name="Days">
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_9" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_10" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_11" name="Days">
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_goods_12" name="Days">
+                    <br>
+                    <div class="row4_text_color w3-center"> TOTAL </div>
+                </div>
+                <div class="w3-col row3_text_color" style="width:25%">
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_quantity_1" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_quantity_2" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_quantity_3" name="Days">
+                    <br> <br> <br> <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_quantity_total" name="Days">
+                </div>
+                <div class="w3-col row1_text_color" style="width:25%">
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_price_1" name="Days">
+                    <br> <br> <br> <br>
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_price_2" name="Days">
+                    <br> <br> <br> <br>
+                    <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_price_3" name="Days">
+                </div>
+
+                <div class="w3-col row1_text_color " style="color:#1a0f80;font-weight:bold ;width:25%">
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_amount_1" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_amount_2" name="Days">
+                    <br> <br> <br> <br>
+                    <div class="row4_text_color"> ABOUT </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_amount_3" name="Days">
+                    <br> <br> <br> <br>
+                    <input class="w3-input w3-border ht_25" type="text" id="contract2_amount_total" name="Days">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end of w3-container -->
+
+
+<img src="../static/images/00001.bmp" id='doimage2' class="w3-hide">
+<img src="../static/images/002.bmp" id='doimage5' class="w3-hide">
+
+<script>
+    $(function() {
+        $("#date_comm_invoice_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_comm_invoice_invoice").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_comm_invoice_LC").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+
+
+    function pdfPrint_contract2_invoice() {
+        // set variable
+        //var attn = document.getElementById('comm_invoice_lastnotes').value;
+
+        console.log('test pdf contract2');
+
+        var goodsitem = '\n' + String($("#contract2_goods_1").val()) + '\n' + String($("#contract2_goods_2").val()) + '\n' + String($("#contract2_goods_3").val()) + '\n' + String($("#contract2_goods_4").val()) + '\n';
+        if (String($("#contract2_goods_5").val()) != '') {
+            goodsitem += '\n' + String($("#contract2_goods_5").val()) + '\n' + String($("#contract2_goods_6").val()) + '\n' + String($("#contract2_goods_7").val()) + '\n' + String($("#contract2_goods_8").val()) + '\n';
+        }
+        if (String($("#contract2_goods_9").val()) != '') {
+            goodsitem += '\n' + String($("#contract2_goods_9").val()) + '\n' + String($("#contract2_goods_10").val()) + '\n' + String($("#contract2_goods_11").val()) + '\n' + String($("#contract2_goods_12").val()) + '\n';
+        }
+
+        var qtyitem = '\n' + 'ABOUT\n' + String($("#contract2_quantity_1").val()) + '\n';
+        if (String($("#contract2_quantity_2").val()) != '') {
+            qtyitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract2_quantity_2").val()) + '\n';
+        }
+        if (String($("#contract2_quantity_3").val()) != '') {
+            qtyitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract2_quantity_3").val()) + '\n';
+        }
+
+        //console.log('contract2_+term', $("#contract2_term").val());
+        var priceitem = String($("#contract2_term").val()) + '\n' + String($("#contract2_price_1").val()) + '\n';
+        if (String($("#contract2_price_2").val()) != '') {
+            priceitem += '\n' + '\n' + '\n' + '\n' + String($("#contract2_price_2").val()) + '\n';
+        }
+        if (String($("#contract2_price_3").val()) != '') {
+            priceitem += '\n' + '\n' + '\n' + '\n' + String($("#contract2_price_3").val()) + '\n';
+        }
+
+        var amountitem = '\n' + 'ABOUT\n' + String($("#contract2_amount_1").val()) + '\n';
+        if (String($("#contract2_amount_2").val()) != '') {
+            amountitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract2_amount_2").val()) + '\n';
+        }
+        if (String($("#contract2_amount_3").val()) != '') {
+            amountitem += '\n' + '\n' + '\n' + 'ABOUT\n' + String($("#contract2_amount_3").val()) + '\n';
+        }
+
+        var shipmentstr = 'Time of Shipment : ' + String($("#date_contract2_ship").val());
+
+
+        var loc = $("#contract2_loading").val();
+        var textport = $("#contract2_loading")[0].selectize.options[loc].text;
+        var portstr = 'Port of Loading : ' + String(textport);
+
+        var finaltextport = '\n' + portstr;
+        shipmentstr += finaltextport;
+
+        // port of discharging
+        var strdischarge = String($("#contract2_discharging").val()) + '\n';
+
+        // insurance 
+        var strInsurance = $("#contract2_insurance").val();
+        if (strInsurance.search("Seller") != -1) // 있으면
+        {
+            strInsurance = 'TO BE COVERED BY SELLER';
+        } else {
+            let tempinsure = 'TO BE COVERED BY ';
+            strInsurance = tempinsure + strInsurance;
+        }
+        // contact date
+
+        var strContractdate = $("#date_contract2_contract_date").val();
+
+
+        // image 
+        var canvas = document.createElement('canvas');
+        var img = document.getElementById('doimage2');
+
+        if (check_company == 'DB')
+            img = document.getElementById('doimage2');
+        else if (check_company == 'EI')
+            img = document.getElementById('doimage5');
+
+        //console.log(img);
+        canvas.height = img.naturalHeight;
+        canvas.width = img.naturalWidth;
+        var ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var base64String2 = canvas.toDataURL();
+
+        var companystr = '';
+        if (check_company == 'DB')
+            companystr = 'DO BEST';
+        else if (check_company == 'EI')
+            companystr = 'EIN Textile';
+
+        var docDefinition2 = {
+            //pageMargins: [15, 15, 15, 15],
+            content: [{
+                    alignment: 'center',
+                    text: companystr + ' CO. LTD.\n',
+                    bold: true,
+                    fontSize: 25
+                }, {
+                    columns: [{
+                        width: 'auto',
+                        alignment: 'left',
+                        text: companystr + ' CO. LTD.\n 4F, 232 TOJEONG-RO, MAPO-GU, SEOUL, REPUBLIC OF KOREA #04091\n T)82.2.3271.3800\n',
+                        fontSize: 10
+
+                    }, {
+                        alignment: 'right',
+                        text: 'TEL :(02), 3271-3800\n FAX:(02) 3271-3899\n EMail:dobest@dobest.co.kr',
+                        fontSize: 10
+                    }]
+                }, {
+                    alignment: 'center',
+                    decoration: 'underline',
+                    text: 'EXPORT SALES CONTRACT\n',
+                    fontSize: 20
+                }, {
+                    fontSize: 9,
+                    text: companystr + ' CO. LTD., as Seller, hereby confirms having concluded the sales contract with you (Your Company), as Buyer, to sell following goods on the date and on the terms and conditions hereinafter set forth;\n'
+                }, {
+                    color: '#444',
+                    table: {
+                        widths: [250, 125, '*'],
+                        heights: [25, 25],
+                        body: [
+                            [{
+                                border: [true, true, true, false],
+                                colSpan: 1,
+                                rowSpan: 2,
+                                text: [{
+                                    bold: true,
+                                    text: 'MESSRS:\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#contract2_invoice_shipper").val()
+                                }]
+                            }, {
+                                border: [true, true, true, false],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'CONTRACT DATE:\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#date_contract2_contract_date").val()
+                                }]
+                            }, {
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'CONTRACT NO:\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#contract2_no").val()
+                                }]
+                            }],
+                            ['', {
+                                border: [true, true, true, false],
+                                colSpan: 2,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'BUYER\'S REFERENCE NO:\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#contract2_reference").val()
+                                }]
+                            }, '']
+                        ]
+                    } // table layout
+                }, {
+                    color: 'gray',
+                    table: {
+                        widths: [250, 80, 80, '*'],
+                        heights: [10, 170, 10],
+                        body: [
+                            [{
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    alignment: 'center',
+                                    bold: true,
+                                    text: 'COMMODITY DESCRIPTION',
+                                }]
+                            }, {
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    alignment: 'center',
+                                    bold: true,
+                                    text: 'QUANTITY',
+                                }]
+                            }, {
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    alignment: 'center',
+                                    bold: true,
+                                    text: 'UNIT PRICE',
+                                }]
+                            }, {
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    alignment: 'center',
+                                    bold: true,
+                                    text: 'AMOUNT',
+                                }]
+                            }],
+                            [{
+                                text: [{
+                                    fontSize: 10,
+                                    text: goodsitem
+                                }]
+                            }, {
+                                text: [{
+                                    fontSize: 10,
+                                    text: qtyitem
+                                }]
+                            }, {
+                                text: [{
+                                    fontSize: 10,
+                                    text: priceitem
+                                }]
+                            }, {
+                                text: [{
+                                    fontSize: 10,
+                                    text: amountitem
+                                }]
+                            }],
+                            [{
+                                alignment: 'center',
+                                text: 'TOTAL'
+                            }, {
+                                text: [{
+                                    fontSize: 10,
+                                    text: $("#contract2_quantity_total").val()
+                                }]
+                            }, {
+                                text: [{
+                                    fontSize: 10,
+                                    text: $("#contract2_term").val()
+                                }]
+                            }, {
+                                text: [{
+                                    fontSize: 10,
+                                    text: $("#contract2_amount_total").val()
+                                }]
+                            }]
+                        ]
+                    } // table layout
+                }, {
+                    color: 'gray',
+                    table: {
+                        widths: [250, '*'],
+                        heights: [30, 30, 30, 60, 30],
+                        body: [
+                            [{
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'SHIPMENT:\n',
+                                }, {
+                                    fontSize: 10,
+                                    //text: finaltextport
+                                    text: shipmentstr
+                                }]
+                            }, {
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'Port of Discharging: ',
+
+                                }, {
+                                    fontSize: 10,
+                                    text: strdischarge
+                                }, {
+                                    text: 'Transhipment: '
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#contract2_trans").val()
+                                }, {
+                                    text: '\nPartial shipment: '
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#contract2_shipment").val()
+                                }]
+                            }],
+                            [{
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'PACKING:\n',
+                                }, {
+                                    fontSize: 10,
+                                    alignment: 'center',
+                                    text: 'EXPORT STANDARD PACKING'
+                                }]
+                            }, {
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'PAYMENT:\n',
+                                }, {
+                                    fontSize: 10,
+                                    alignment: 'center',
+                                    text: $("#contract2_payment").val()
+                                }]
+                            }],
+                            [{
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'INSURANCE:\n',
+                                }, {
+                                    fontSize: 10,
+                                    alignment: 'center',
+                                    text: strInsurance
+                                }]
+                            }, {
+                                border: [true, true, true, true],
+                                colSpan: 1,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'INSPECTION:\n',
+                                }, {
+                                    fontSize: 10,
+                                    alignment: 'center',
+                                    text: 'MILL\'S INSPECTION TO BE FINAL'
+                                }]
+                            }],
+                            [{
+                                border: [true, true, true, true],
+                                colSpan: 2,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'OTHER TERMS AND CONDITIONS:\n',
+                                }, {
+                                    fontSize: 9,
+                                    text: '1) Claim : Any Claim shall be notified by buyer to seller within forty five(45) days after the arrival of the goods at destination stipulated on the contract\n'
+                                }, {
+                                    fontSize: 9,
+                                    text: '2) Governing Law & arbitration : Governing Law : The laws of Korea.\n'
+                                }, {
+                                    fontSize: 9,
+                                    text: 'Any dispute out of or in  connection with this contract shall be finally settled by arbitration in accordance with the international Arbitration Rules of the Korean Commercial Arbitration Board.'
+                                }]
+                            }, ''],
+                            [{
+                                border: [true, true, true, true],
+                                colSpan: 2,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'Remark:\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: $("#contract2_remark").val()
+                                }]
+                            }, '']
+                        ]
+                    } // table layout
+                }, {
+                    fontSize: 9,
+                    text: 'Refer to General Terms and Conditions on the reverse side hereof which are incorporated herein and make a part of this contract\n'
+                }, {
+                    columns: [{
+                        bold: true,
+                        alignment: 'left',
+                        text: 'Accepted by\n (Buyer)\n(Signature)\n_________________________________________\n(Name & Title)\n\nDate\n_________________________________________',
+                        fontSize: 10.5
+                    }, {
+
+                        text: [{
+                            bold: true,
+                            alignment: 'left',
+                            text: companystr + ' CO. LTD.\n (Seller)\n(Signature)\n_________________________________________\n(Name & Title)\n\nDate :  ',
+                            fontSize: 10.5
+                        }, {
+                            alignment: 'left',
+                            text: strContractdate,
+                            fontSize: 10.5
+                        }, {
+                            text: '\n_________________________________________',
+                        }]
+                    }]
+                }, {
+
+
+                    image: base64String2,
+                    width: 120,
+                    height: 60,
+                    absolutePosition: {
+                        x: 380,
+                        y: 710
+                    }
+                }, ] // end of content
+        }; // end of docDefinition2
+
+        var pdf_name = 'Commercial_contract.pdf';
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+    } // end of pdfPrint()
+</script>
+
+
+<script>
+    contract2_loading = $('#contract2_loading').selectize({})[0].selectize;
+    contract2_loading.addItem("ANY KOREAN PORT");
+    contract2_loading.setValue(6);
+
+
+    $(function() {
+        $("#date_contract2_ship").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>

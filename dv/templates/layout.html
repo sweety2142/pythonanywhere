@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <title>Do Best Ledger Manager Site</title> -->
+
+    {% if check_comp == 'DB' %}
+    <title>Do Best Ledger Manager Site</title>
+    {% elif check_comp == 'EI' %}
+    <title>EIN Textile Ledger Manager Site</title>
+    {% endif %}
+
+    <link rel="icon" href="{{ url_for('static', filename='images/ledger.png') }}">
+    <link href="{{ url_for('static', filename='css/_bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_bootstrap_select_min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/w3.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_STYLE.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/selectizejs/normalize.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/stylesheet.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/selectize.bootstrap3.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectjs/selectize.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pdfmake.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vfs_fonts.js') }}"></script>
+
+    <!--script src='https://unpkg.com/jspdf@2.5.1/dist/jspdf.es.min.js'></script-->
+    <!--script src='https://unpkg.com/jspdf-autotable@3.5.25/dist/jspdf.plugin.autotable.js'></script-->
+
+    <!--script type="text/javascript" src="{{ url_for('static', filename='js/jspdf.js') }}"></script-->
+
+
+
+
+</head>
+
+<body class="w3-light-grey">
+    <div class=page style="overflow:hidden">
+
+
+
+        <!-- contents -->
+        <!-- login page -->
+        {% if session.logged_in %} {% if AD %} {% block ma %}{% endblock %} {% else %}
+        <!-- navigation -->
+        {% if session.admin == 'admin' or session.admin == 'member' %} {% include 'navigation.html' %} {% include 'contents/0_readyJs.html' %}
+
+        <div class="w3-main w3-light-grey" style="margin-left:320px">
+            <i class="fa fa-bars w3-button w3-light-grey w3-hide-large w3-xlarge w3-margin-top" onclick="w3_open()"></i>
+            <div class="w3-content w3-margin-top" style="max-width:2000px;margin-left:20px;width:100%">
+                <div class="w3-twothird" style="width:90%">
+                    {% include 'contents/c_order.html' %} {% include 'contents/d_shipment.html' %} {% include 'contents/e_nego.html' %} {% include 'contents/f_local.html' %} {% include 'contents/g_fta.html' %} {% include 'contents/ship_advice.html' %} {% include 'contents/packing_list.html'
+                    %} {% include 'contents/commercial_invoice.html' %} {% include 'contents/contract.html' %} {% include 'contents/contract2.html' %} {% include 'contents/shipping_docs.html' %} {% include 'contents/shipping_packing_list.html' %} {% include
+                    'contents/shipping_commercial_invoice.html' %} {% include 'contents/shipping_certificate_of_origin.html' %} {% include 'contents/shipping_request.html' %} {% include 'contents/delivery_order.html' %} {% include 'contents/VGM.html'
+                    %} {% include 'contents/standing_payment_inst.html' %} {% include 'contents/standing_payment_inst_buyer.html' %} {% include 'contents/order_sheet.html' %} {% include 'contents/h_footer.html' %}
+                </div>
+            </div>
+        </div>
+        {% endif %} {% include 'info.html' %} {% block body %}{% endblock %} {% endif %} {% else %} {% include 'loginPage.html' %} {% endif %}
+
+</body>
+
+</html>

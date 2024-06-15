@@ -1,0 +1,156 @@
+{% extends "admin.html" %}
+{% block main %}
+
+<style>
+    .edit_user,.remove_user{
+     background-color:none;
+     border:none;
+     cursor:pointer;
+    }
+    .users{
+     display:none;
+    }
+</style>
+<form action="{{ url_for('users.users') }}" method=post>
+    <div class="" style="overflow:scroll;max-width:600px;">
+        <div class="w3-container">
+            <table class="w3-table-all w3-card-4" id="tableSPL" style="font-size:8pt">
+                <tr>
+                    <th>num</th>
+                    <th>name</th>
+                    <th>mail</th>
+                    <th>creation date</th>
+                    <th>authority</th>
+                    <th>edit</th>
+                    <th>remove</th>
+                </tr>
+                {% for item in user_list %}
+                <tr>
+                    <td>{{ item.num }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.mail }}</td>
+                    <td>{{ item.creation_date }}</td>
+                    <td>{{ item.authority }}</td>
+                    <td>
+                        <button type="button" class="edit_user" value={{ loop.index }}>
+                            <i class="fa fa-edit w3-text-blue fa-2x"></i>
+                        </button>    
+                    </td>
+                    <td>
+                        <button type="button" class="remove_user" value={{ item.num }}>
+                            <i class="fa fa-trash w3-text-red fa-2x"></i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tbody></tbody>
+            </table>
+        </div>
+        <br>
+    </div>
+
+    <br><br>
+    
+    <div class="users w3-card-4 w3-center" style="margin-left:20px;max-width:300px;">
+        <header class="w3-container w3-light-grey local_grad">
+            <span class="w3-large">Edit</>
+        </header>
+        <br>
+        <form action="{{ url_for('users.users') }}" method=post>
+        <div class="w3-container w3-small w3-center">
+            <span class="w3-cell">DB number&emsp;&emsp;</span>
+            <span class="w3-cell">
+                <input type="text" class="w3-input w3-border" name="num" disabled></input>
+            </span>
+            <p></p>
+            <span class="w3-cell">name&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;</span>
+            <span class="w3-cell">
+                <input type="text" class="w3-input w3-border" name="name"></input>
+            </span>
+            <p></p>
+            <span class="w3-cell">mail&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;</span>
+            <span class="w3-cell">
+                <input type="text" class="w3-input w3-border" name="mail"></input>
+            </span> 
+           <p></p>
+           <span class="w3-cell">pw&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;</span>
+           <span class="w3-cell">
+                <input type="password" class="w3-input w3-border" name="pw"></input>
+            </span>
+            <p></p>
+           <span class="w3-cell">authority&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;</span>
+           <span class="w3-cell">
+                <select class="w3-input w3-border" name="authority">
+                <option>client</option>
+                <option>member</option>
+                <option>admin</option>
+                </select>
+            </span>
+            <p></p>
+        </div>
+        <button class="w3-button w3-blue" id="submit_edit_user">submit</button>
+        </form>
+        <br><br>
+    </div>
+    <br>
+
+</form>
+<br>
+<script>
+    $('.edit_user').click(function(){
+        $(".users").show();
+        $.ajax({
+            type:"GET",
+            url: "{{ url_for('users.users') }}",
+            contentType: "application/json;charset=utf-8",
+            data: { index: $(this).val() },
+            success: function(data){
+                $('input[name="num"]').val(data.num);
+                $('input[name="name"]').val(data.name);
+                $('input[name="mail"]').val(data.mail);
+                $('input[name="pw"]').val(data.password);
+                $('select[name="authority"]').val(data.authority);
+            },
+            error:function(){alert("err");}
+           
+        });
+    });
+    
+    $("#submit_edit_user").click(function(){
+        var datas ={
+            num: $('input[name="num"]').val(),
+            name: $('input[name="name"]').val(),
+            mail: $('input[name="mail"]').val(),
+            pw: $('input[name="pw"]').val(),
+            authority: $('select[name="authority"]').val()
+        };
+        console.log(datas);
+        $.ajax({
+            type:"POST",
+            url:"{{ url_for('users.edit') }}",
+            contentType: "application/json;charset=utf-8",
+            data:JSON.stringify(datas),
+            success:function(){
+                location.reload();
+            }
+        });
+    });
+    
+    $(".remove_user").click(function(){
+        var confirmed = confirm("Are you sure to delete user?");
+        if(confirmed){
+            $.ajax({
+                type:"POST",
+                url:"{{ url_for('users.delete') }}",
+                contentType:"application/json;charset=utf-8",
+                data:JSON.stringify({ index: $(this).val() }),
+                success: function(){ alert("Complete"); location.reload(); },
+                error:function(){ alert("Err_delete"); }
+            });
+        }
+    });
+  
+    
+</script>
+
+{% endblock %}

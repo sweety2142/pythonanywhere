@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Search Weekly Nego Schedule</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/ledger.png') }}">
+    <link href="{{ url_for('static', filename='css/_bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_bootstrap_select_min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/w3.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/_STYLE.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/selectizejs/normalize.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/stylesheet.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectizejs/selectize.bootstrap3.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectizejs/selectize.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+
+    <!-- tablesorter -->
+    <link href="{{ url_for('static', filename='tablesorter/theme.bootstrap_3.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tablesorter/prettify.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tablesorter/jquery-ui.min.css') }}" rel="stylesheet">
+    <!--link href="{{ url_for('static', filename='tablesorter/css/month_bootstrap3/theme.bootstrap.css') }}" rel="stylesheet"-->
+    <link href="{{ url_for('static', filename='tablesorter/jquery.tablesorter.pager.min.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tablesorter.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tablesorter.widgets.min.js') }}"></script>
+    <!-- Widget output -->
+    <link href="{{ url_for('static', filename='tablesorter/jq.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tablesorter/tipsy.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/prettify.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tipsy.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-output.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/docs.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.tablesorter.pager.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-cssStickyHeaders.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-columnSelector.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-pager.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-chart.min.js') }}"></script>
+    <!--script type="text/javascript" src="{{ url_for('static', filename='tablesorter/css/month_bootstrap3/bootstrap.min.js') }}"></script-->
+
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/parser-input-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/jquery.mark.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-mark.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-editable.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tablesorter/widget-math.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pdfmake.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vfs_fonts.js') }}"></script>
+
+
+    <style>
+        .tn {
+            background-color: transpatent;
+            border: none;
+        }
+    </style>
+    <style>
+        .red {
+            color: red;
+        }
+        
+        .accordion a {
+            color: #2A6496;
+        }
+        
+        .dropdown-menu {
+            min-width: 320px;
+            font-size: 12px;
+            padding: 10px;
+        }
+        
+        .dropdown-menu h5 {
+            text-align: right;
+            margin-right: 4px;
+        }
+        
+        .dropdown-menu li div {
+            margin-bottom: 5px;
+        }
+        
+        .output-separator,
+        .output-replacequotes,
+        .output-quotes {
+            font-family: Tahoma, Geneva, sans-serif;
+            min-width: 18px;
+            height: 22px;
+        }
+        
+        .output-separator-input,
+        .output-replacequotes {
+            width: 26px;
+        }
+        
+        pre {
+            /* override bootstrap setting */
+            overflow-y: hidden !important;
+        }
+    </style>
+    <style id="css">
+        table.tablesorter tbody tr.odd.checked td {
+            background: #8080c0;
+            color: #fff;
+        }
+        
+        table.tablesorter tbody tr.even.checked td {
+            background: #a0a0e0;
+            color: #fff;
+        }
+    </style>
+
+    <style id="css">
+        table.tablesorter {
+            font-family: arial;
+            background-color: #CDCDCD;
+            margin: 10px 0pt 15px;
+            font-size: 8pt;
+            width: 100%;
+            text-align: left;
+        }
+        
+        table.tablesorter thead tr th,
+        table.tablesorter tfoot tr th {
+            background-color: #e6EEEE;
+            border: 1px solid #FFF;
+            font-size: 8pt;
+            padding: 4px;
+        }
+        
+        table.tablesorter2 {
+            font-family: arial;
+            background-color: rgb(206, 200, 200);
+            margin: 10px 0pt 15px;
+            font-size: 8pt;
+            width: 100%;
+            text-align: left;
+        }
+        
+        table.tablesorter2 thead tr th,
+        table.tablesorter2 tfoot tr th {
+            background-color: rgb(247, 239, 247);
+            border: 1px solid rgb(87, 84, 233);
+            font-size: 8pt;
+            padding: 4px;
+        }
+        
+        .columnSelectorWrapper {
+            position: relative;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        
+        .columnSelector,
+        .hidden {
+            display: none;
+        }
+        
+        .columnSelectorButton {
+            background: #99bfe6;
+            border: #888 1px solid;
+            color: #111;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        #colSelect1:checked+label {
+            background: #5797d7;
+            border-color: #555;
+        }
+        
+        #colSelect1:checked~#columnSelector {
+            display: block;
+        }
+        
+        .columnSelector {
+            width: 220px;
+            position: absolute;
+            top: 30px;
+            padding: 10px;
+            background: #fff;
+            border: #99bfe6 1px solid;
+            border-radius: 5px;
+        }
+        
+        .columnSelector label {
+            display: block;
+        }
+        
+        .columnSelector label:nth-child(1) {
+            border-bottom: #99bfe6 solid 1px;
+            margin-bottom: 5px;
+        }
+        
+        .columnSelector input {
+            margin-right: 5px;
+        }
+        
+        .columnSelector .disabled {
+            color: #ddd;
+        }
+        
+        .#popover-target label {
+            margin: 0 5px;
+            display: block;
+        }
+        
+        #popover-target input {
+            margin-right: 5px;
+        }
+        
+        #popover-target .disabled {
+            color: #ddd;
+        }
+    </style>
+
+</head>
+
+<body class="w3-light-grey">
+
+    <div class="w3-container">
+        <h3> weekly nego schedule </h3>
+
+        <div class="w3-bar w3-light-blue">
+            <button class="w3-bar-item w3-button tablink w3-blue" onclick="openTabs(event, 's_alldata')">weekly nego schedule</button>
+        </div>
+        <br>
+
+        <div class="w3-container w3-card-4 w3-border tabs" id="s_alldata" style="max-width:1900;border:1px solid #a6a6a6;overflow:auto;">
+            <div class="group1">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default reset">Reset</button>
+                    <!-- targeted by the "filter_reset" option -->
+                    <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_shippingcommercial()"> Print </button>
+                    <!-- Split button -->
+                    <button type="button" class="btn btn-success" onclick="exportTableToExcel('table1')">Export Table Data To Excel File</button>
+                    <button type="button" class="btn btn-default download">Output</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <h5><strong>Output options</strong></h5>
+                        </li>
+                        <li>
+                            <label>Separator: <input class="output-separator-input" type="text" size="2" value="," /></label>
+                            <button type="button" class="output-separator btn btn-default btn-xs active" title="comma">,</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="semi-colon">;</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="tab">&#x21e5;</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="space">&#x2423;</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="output JSON">json</button>
+                            <button type="button" class="output-separator btn btn-default btn-xs" title="output Array (see note)">array</button>
+                        </li>
+                        <li>
+                            <label>Send to:</label>
+                            <div class="btn-group output-download-popup" data-toggle="buttons" title="Download file or open in Popup window">
+
+                                <label class="btn btn-default btn-sm active">
+                            <input type="radio" name="delivery1" class="output-download" checked> Download
+                        </label>
+                            </div>
+                        </li>
+                        <li>
+                            <label>Include:</label>
+                            <div class="btn-group output-filter-all" data-toggle="buttons" title="Output only filtered, visible, selected, selected+visible or all rows">
+                                <label class="btn btn-default btn-sm active">
+                            <input type="radio" name="getrows1" class="output-filter" checked="checked"> Filtered
+                        </label>
+                                <!--
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-visible"> Visible
+                        </label>
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-selected"> Selected
+                        </label>
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-sel-vis"> Sel+Vis
+                        </label>
+                        <label class="btn btn-default btn-sm">
+                            <input type="radio" name="getrows1" class="output-all"> All
+                        </label>
+                        -->
+                            </div>
+                        </li>
+                        <li>
+                            <button class="output-header btn btn-default btn-sm active" title="Include table header">Header</button>
+                            <button class="output-footer btn btn-default btn-sm" title="Include table footer">Footer</button>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <label>Replace quotes: <input class="output-replacequotes" type="text" size="2" value="'" /></label>
+                            <button type="button" class="output-quotes btn btn-default btn-xs active" title="single quote">'</button>
+                            <button type="button" class="output-quotes btn btn-default btn-xs" title="left double quote">&#x201c;</button>
+                            <button type="button" class="output-quotes btn btn-default btn-xs" title="escaped quote">\"</button>
+                        </li>
+                        <li><label title="Remove extra white space from each cell">Trim spaces: <input class="output-trim" type="checkbox" checked /></label></li>
+                        <li><label title="Include HTML from cells in output">Include HTML: <input class="output-html" type="checkbox" /></label></li>
+                        <li><label title="Wrap all values in quotes">Wrap in Quotes: <input class="output-wrap" type="checkbox" /></label></li>
+                        <li><label title="Choose a download filename">Filename: <input class="output-filename" type="text" size="15" value="mytable.csv"/></label></li>
+                    </ul>
+
+                    <div class="w3-container w3-cell w3-right" style="width:300px">
+                        <input type="text" name="keyword" class="w3-input w3-border w3-animate-input w3-border-cyan" style="width:75%" data-column="all" placeholder="search all columns">
+                    </div>
+                </div>
+
+                <div class="custom-popup" style="z-index:9999">
+                    <div class="columnSelectorWrapper">
+                        <input id="colSelect1" type="checkbox" class="hidden">
+                        <label class="w3-button w3-white w3-border w3-border-blue w3-round-large w3-text-blue w3-tiny" for="colSelect1">Select Column</label>
+                        <div id="columnSelector" class="columnSelector w3-small" style="z-index:9999"></div>
+                    </div>
+                </div>
+
+
+                <table class="tablesorter cpp" id="table1">
+                    <thead>
+                        <tr>
+                            <th colspan="24" class="ts-pager form-inline">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-defalut first" style="color:black">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                        </button>
+                                    <button type="button" class="btn btn-defalut prev">
+                            <span class="glyphicon glyphicon-backward"></span>
+                        </button>
+                                </div>
+                                <span class="pagedisplay"></span>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-defalut next">
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </button>
+                                    <button type="button" class="btn btn-defalut last">
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </button>
+                                </div>
+                                <select class="form-control input-sm pagesize" title="Select page size">
+                        <option selected="selected" value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="all">All rows</option>
+                    </select>
+                                <select class="gotoPage form-control input-sm pagenum" title="Select page number"></select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="sorter-checkbox filter-false" data-priority="critical">&nbsp;</th>
+                            {% for item in db_data %}
+                            <th style="min-width:70px" data-priority="3" class="columnSelector-true">{{ item }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th class="sorter-checkbox filter-false" data-priority="critical">&nbsp;</th>
+                            {% for item in db_data %}
+                            <th>{{ item }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th colspan="24" class="ts-pager form-inline">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-default first" style="color:black">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                        </button>
+                                    <button type="button" class="btn btn-defalut prev">
+                            <span class="glyphicon glyphicon-backward"></span>
+                        </button>
+                                </div>
+                                <span class="pagedisplay"></span>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-defalut next">
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </button>
+                                    <button type="button" class="btn btn-defalut last">
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </button>
+                                </div>
+                                <select class="form-control input-sm pagesize" title="Select page size">
+                        <option selected="selected" value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="all">All rows</option>
+                    </select>
+                                <select class="gotoPage form-control input-sm pagenum" title="Select page number"></select>
+                            </th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody class="w3-small">
+                        {% for item in total_db %}
+                        <tr>
+                            {% for i in range(24) %}
+                            <td>{{ item[i] if item[i]!=None }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- btn-group-->
+
+        </div>
+        <br><br><br>
+        <div class="w3-container w3-card-4 w3-border" style="max-width:1900;border:1px solid #a6a6a6;overflow:auto;">
+            <div class="group2">
+                <div class="btn-group">
+                    Currency Summation
+                    <table class="tablesorter2 cpp2" id="table2">
+                        <thead>
+                            <tr>
+                                <th class="filter-true">단위</th>
+                                <!-- 0-->
+                                <th class="filter-false">금액</th>
+                                <!-- 1-->
+                            </tr>
+                        </thead>
+
+                        <tbody class="w3-small">
+                            {% for item in curdata %}
+                            <tr>
+                                <td>{{ item[0] }}</td>
+                                <!-- 0-->
+                                <td>{{ item[1] }}</td>
+                                <!-- 1-->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                    <br><br>
+                </div>
+                <!-- btn-group-->
+            </div>
+        </div>
+
+        <br>
+        <div class="w3-container w3-card-4 w3-border" style="max-width:1900;border:1px solid #a6a6a6;overflow:auto;">
+            <div class="group2">
+                <div class="btn-group">
+                    Bank + Currency Summation
+                    <table class="tablesorter2 cpp2" id="table3">
+                        <thead>
+                            <tr>
+                                <th class="filter-true">은행</th>
+                                <!-- 0-->
+                                <th class="filter-false">단위</th>
+                                <!-- 1-->
+                                <th class="filter-false">금액</th>
+                                <!-- 1-->
+                            </tr>
+                        </thead>
+
+                        <tbody class="w3-small">
+                            {% for item in bankdata %}
+                            <tr>
+                                <td>{{ item[0] }}</td>
+                                <!-- 0-->
+                                <td>{{ item[1][0] }}</td>
+                                <!-- 1-->
+                                <td>{{ item[1][1] }}</td>
+                                <!-- 1-->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                    <br><br>
+                </div>
+                <!-- btn-group-->
+            </div>
+        </div>
+
+    </div>
+
+    <script id="js">
+        $(function() {
+            $('.group1 table, .cpp').tablesorter({
+                theme: 'bootstrap',
+                checkboxClass: 'checked',
+                widthFixed: true,
+                fixedHeight: false,
+                ignoreCase: false,
+                delayInt: true,
+                sortList: [
+                    [0, 0]
+                ],
+                headerTemplate: '{content} {icon}',
+                sortLocaleCompare: true,
+
+                widgets: ["zebra", "filter", "uitheme", "output", "mark", "editable", "columns", "columnSelector", "math"],
+                widgetOptions: {
+                    stickyHeaders_offst: 50,
+                    filter_filteredRow: 'filtered',
+                    filter_reset: '.group1 .reset',
+                    filter_searchDelay: 500,
+                    filter_external: 'input[name="keyword"]',
+
+                    mark_tsUpdate: 'markUpdate',
+                    mark_tslgnore: {
+                        l: true
+                    },
+                    mark_accuracy: 'partially',
+                    mark_caseSensitive: false,
+                    mark_diacritics: true,
+                    mark_separateWordSearch: true,
+                    mark_synonyms: {},
+                    mark_acrossElements: false,
+                    mark_className: '',
+                    mark_debug: false,
+                    mark_element: 'mark',
+                    mark_exclude: [],
+                    mark_iframes: false,
+                    mark_log: console,
+                    mark_done: function(totalMatches) {},
+                    mark_each: function(element) {},
+                    mark_filter: function(node, term, totalMatches, matches) {
+                        return true;
+                    },
+                    mark_noMatch: function(termNotFound) {},
+
+                    output_separator: ',',
+                    output_ignoreColumns: [0],
+                    output_hiddenColumns: false,
+                    output_includeFooter: true,
+                    output_includeHeader: false,
+                    output_headerRows: false,
+                    output_dataAttrib: 'data-name',
+                    output_delivery: 'p',
+                    output_saveRows: 'f',
+                    output_duplicateSpans: true,
+                    output_replaceQuote: '\u201c;',
+                    output_includeHTML: true,
+                    output_trimSpaces: false,
+                    output_wrapQuotes: false,
+                    output_popupStyle: 'width=700,height=700',
+                    output_saveFileName: 'OrderSearch.csv',
+                    output_formatContent: function(config, widgetOptions, data) {
+                        // data.isHeader (boolean) = true if processing a header cell
+                        // data.$cell = jQuery object of the cell currently being processed
+                        // data.content = processed cell content (spaces trimmed, quotes added/replaced, etc)
+                        // data.columnIndex = column in which the cell is contained
+                        // data.parsed = cell content parsed by the associated column parser
+                        return data.content;
+                    },
+                    // callback executed when processing completes
+                    output_callback: function(config, data, url) {
+                        // return false to stop delivery & do something else with the data
+                        // return true OR modified data (v2.25.1) to continue download/output
+                        return true;
+                    },
+                    // callbackJSON used when outputting JSON & any header cells has a colspan - unique names required
+                    output_callbackJSON: function($cell, txt, cellIndex) {
+                        return txt + '(' + cellIndex + ')';
+                    },
+                    // the need to modify this for Excel no longer exists
+                    output_encoding: 'data:application/octet-stream;charset=utf8,',
+                    // override internal save file code and use an external plugin such as
+                    // https://github.com/eligrey/FileSaver.js
+                    output_savePlugin: null
+                        /* function(config, widgetOptions, data) {
+                                           var blob = new Blob([data], {type: widgetOptions.output_encoding});
+                                           saveAs(blob, widgetOptions.output_saveFileName);
+                                       } */
+                        ,
+
+                    editable_columns: [2],
+                    editable_enterToAccept: true,
+                    editable_autoAccept: true,
+                    editable_autoResort: false,
+                    editable_validate: null,
+                    editable_focused: function(txt, columnIndex, $element) {
+                        $element.addClass('focused');
+                    },
+                    editable_selectAll: function(txt, columnIndex, $element) {
+                        return /^b/i.test(txt) && columnIndex === 0;
+                    },
+                    editable_wrapContent: '<div>',
+                    editable_trimConten: true,
+                    editable_noEdit: 'no-edit',
+                    editable_editComplete: 'editComplete',
+                    columnSelector_container: $('#columnSelector'),
+                    columnSelector_columns: {
+                        0: 'disable'
+                    },
+                    columnSelector_saveColumns: true,
+                    columnSelector_layout: '<label><input type="checkbox">{name}</label>',
+                    columnSelector_layoutCustomizer: null,
+                    columnSelector_name: 'data-selector-name',
+                    columnSelector_mediaquery: true,
+                    columnSelector_mediaqueryName: 'Auto:',
+                    columnSelector_mediaqueryState: true,
+                    columnSelector_mediaqueryHidden: true,
+                    columnSelector_maxVisible: null,
+                    columnSelector_minVisible: null,
+                    columnSelector_priority: 'data-priority',
+                    columnSelector_cssChecked: 'checked',
+                    columnSelector_classHasSpan: 'hasSpan',
+                    columnSelector_updated: 'columnUpdate',
+
+                    math_data: 'math',
+                    math_ignore: [0, 1],
+                    math_none: 'N/A',
+                    math_complete: function($cell, wo, result, value, arry) {
+                        var txt = '<span class="align-decimal">' + (value === wo.math_none ? '' : '') + result + '</span>';
+                        if ($cell.attr('data-math') === 'all-sum') {
+                            return txt + '(Sum of' + arry.length + ' cells)';
+                        }
+                        return txt;
+                    },
+                    math_completed: function(c) {},
+                    math_textAttr: '',
+                    math_mask: '',
+                    math_prefix: '',
+                    math_suffix: '',
+                    math_event: 'recalculate',
+                    math_priority: ['row', 'above', 'below', 'col'],
+                    math_rowFilter: ''
+
+                } //WidgetOptions
+            }).tablesorterPager({
+                container: $('.ts-pager'),
+                output: '{startRow}-{endRow} / {filteredRows} ({totalRows})',
+                page: 0,
+                size: 20
+            });
+
+            $('.group2 table, .cpp2').tablesorter({
+                theme: 'bootstrap',
+                checkboxClass: 'checked',
+                widthFixed: true,
+                fixedHeight: false,
+                ignoreCase: false,
+                delayInt: true,
+                sortList: [
+                    [0, 0]
+                ],
+                headerTemplate: '{content} {icon}',
+                sortLocaleCompare: true,
+
+                widgets: ["zebra", "filter", "uitheme", "mark", "editable", "columns", "math"],
+                widgetOptions: {
+                    stickyHeaders_offst: 50,
+                    filter_filteredRow: 'filtered',
+                    filter_reset: '.group2 .reset',
+                    filter_searchDelay: 500,
+                    filter_external: 'input[name="keyword"]',
+
+                    mark_tsUpdate: 'markUpdate',
+                    mark_tslgnore: {
+                        l: true
+                    },
+                    mark_accuracy: 'partially',
+                    mark_caseSensitive: false,
+                    mark_diacritics: true,
+                    mark_separateWordSearch: true,
+                    mark_synonyms: {},
+                    mark_acrossElements: false,
+                    mark_className: '',
+                    mark_debug: false,
+                    mark_element: 'mark',
+                    mark_exclude: [],
+                    mark_iframes: false,
+                    mark_log: console,
+                    mark_done: function(totalMatches) {},
+                    mark_each: function(element) {},
+                    mark_filter: function(node, term, totalMatches, matches) {
+                        return true;
+                    },
+                    mark_noMatch: function(termNotFound) {},
+                    /*
+                    output_separator:',',
+                    output_ignoreColumns:[0,1],
+                    output_hiddenColumns:false,
+                    output_includeFooter:true,
+                    output_includeHeader:false,
+                    output_headerRows:false,
+                    output_dataAttrib:'data-name',
+                    output_delivery:'p',
+                    output_saveRows:'f',
+                    output_duplicateSpans:true,
+                    output_replaceQuote:'\u201c;',
+                    output_includeHTML:true,
+                    output_trimSpaces:false,
+                    output_wrapQuotes:false,
+                    output_popupStyle:'width=700,height=700',
+                    output_saveFileName:'mytable.txt',
+                    */
+                    editable_columns: [2],
+                    editable_enterToAccept: true,
+                    editable_autoAccept: true,
+                    editable_autoResort: false,
+                    editable_validate: null,
+                    editable_focused: function(txt, columnIndex, $element) {
+                        $element.addClass('focused');
+                    },
+                    editable_selectAll: function(txt, columnIndex, $element) {
+                        return /^b/i.test(txt) && columnIndex === 0;
+                    },
+                    editable_wrapContent: '<div>',
+                    editable_trimConten: true,
+                    editable_noEdit: 'no-edit',
+                    editable_editComplete: 'editComplete',
+
+                    math_data: 'math',
+                    math_ignore: [0, 1],
+                    math_none: 'N/A',
+                    math_complete: function($cell, wo, result, value, arry) {
+                        var txt = '<span class="align-decimal">' + (value === wo.math_none ? '' : '') + result + '</span>';
+                        if ($cell.attr('data-math') === 'all-sum') {
+                            return txt + '(Sum of' + arry.length + ' cells)';
+                        }
+                        return txt;
+                    },
+                    math_completed: function(c) {
+
+                    },
+                    math_textAttr: '',
+                    math_mask: '',
+                    math_prefix: '',
+                    math_suffix: '',
+                    math_event: 'recalculate',
+                    math_priority: ['row', 'above', 'below', 'col'],
+                    math_rowFilter: ''
+
+                }
+            }).tablesorterPager({
+                container: $('.ts-pager'),
+                output: '{startRow}-{endRow} / {filteredRows} ({totalRows})',
+                page: 0,
+                size: 20
+            });
+
+            var demos = ['.group1'];
+
+            $.each(demos, function(groupIndex) {
+                var $this = $(demos[groupIndex]);
+
+                $this.find('.dropdown-toggle').click(function(e) {
+                    // this is needed because clicking inside the dropdown will close
+                    // the menu with only bootstrap controlling it.
+                    $this.find('.dropdown-menu').toggle();
+                    return false;
+                });
+                // make separator & replace quotes buttons update the value
+                $this.find('.output-separator').click(function() {
+                    $this.find('.output-separator').removeClass('active');
+                    var txt = $(this).addClass('active').html();
+                    $this.find('.output-separator-input').val(txt);
+                    $this.find('.output-filename').val(function(i, v) {
+                        // change filename extension based on separator
+                        var filetype = (txt === 'json' || txt === 'array') ? 'js' :
+                            txt === ',' ? 'csv' : 'txt';
+                        return v.replace(/\.\w+$/, '.' + filetype);
+                    });
+                    return false;
+                });
+                $this.find('.output-quotes').click(function() {
+                    $this.find('.output-quotes').removeClass('active');
+                    $this.find('.output-replacequotes').val($(this).addClass('active').text());
+                    return false;
+                });
+                // header/footer toggle buttons
+                $this.find('.output-header, .output-footer').click(function() {
+                    $(this).toggleClass('active');
+                });
+                // clicking the download button; all you really need is to
+                // trigger an "output" event on the table
+                $this.find('.download').click(function() {
+                    var typ,
+                        $table = $this.find('table'),
+                        wo = $table[0].config.widgetOptions,
+                        val = $this.find('.output-filter-all :checked').attr('class');
+                    wo.output_saveRows = val === 'output-filter' ? 'f' :
+                        val === 'output-visible' ? 'v' :
+                        // checked class name, see table.config.checkboxClass
+                        val === 'output-selected' ? '.checked' :
+                        val === 'output-sel-vis' ? '.checked:visible' :
+                        'a';
+                    val = $this.find('.output-download-popup :checked').attr('class');
+                    wo.output_delivery = val === 'output-download' ? 'd' : 'p';
+                    wo.output_separator = $this.find('.output-separator-input').val();
+                    wo.output_replaceQuote = $this.find('.output-replacequotes').val();
+                    wo.output_trimSpaces = $this.find('.output-trim').is(':checked');
+                    wo.output_includeHTML = $this.find('.output-html').is(':checked');
+                    wo.output_wrapQuotes = $this.find('.output-wrap').is(':checked');
+                    wo.output_saveFileName = $this.find('.output-filename').val();
+
+                    // first example buttons, second has radio buttons
+                    if (groupIndex === 0) {
+                        wo.output_includeHeader = $this.find('button.output-header').is(".active");
+                    } else {
+                        wo.output_includeHeader = !$this.find('.output-no-header').is(':checked');
+                        wo.output_headerRows = $this.find('.output-headers').is(':checked');
+                    }
+                    // footer not included in second example
+                    wo.output_includeFooter = $this.find('.output-footer').is(".active");
+
+                    $table.trigger('outputTable');
+                    return false;
+                });
+
+                // add tooltip
+                $this.find('.dropdown-menu [title]').tipsy({
+                    gravity: 's'
+                });
+            });
+        });
+
+        $.tablesorter.equations['custom'] = function(arry) {
+            // (a+b+c)*d - (e/f)*100
+            return (arry[0] + arry[1]);
+        };
+    </script>
+
+    <!--/div> end of w3-container -->
+
+    <script>
+        $("table1").tablesorter({
+            // define a custom text extraction function
+            textExtraction: function(node) {
+                // extract data from markup and return it 
+                return node.childNodes[0].childNodes[0].innerHTML;
+            }
+        });
+
+
+        function setReadyCalculation(input) {
+            input = String(input);
+            if (input == '')
+                input = '0';
+
+            input = input.replace(/[^0-9.]/g, "");
+
+            return input;
+        }
+
+        var decodeHtmlEntity = function(str) {
+            return str.replace(/&#(\d+);/g, function(match, dec) {
+                return String.fromCharCode(dec);
+            });
+        };
+
+
+
+        function exportTableToExcel(tableID, filename = '') {
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+            // Create download link element
+            downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+        }
+
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        var vt = window.location.search;
+        var v1 = getUrlVars(vt);
+
+        //console.log(v1['departdate']);
+        //console.log(v1['returndate']);
+
+
+        function openTabs(evt, tabName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("tabs");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+    </script>
+
+    <script>
+        //items =['num','InvNo','DueDate','Buyer','Agent','LCNo','item','DN','LF','LS','a','b','c']
+
+        $(window).on('load', function() {
+            //init_table();
+            //init_table_buyer();
+        });
+        $(document).on('keypress', 'input', function(e) {
+            if (e.keyCode == 13) {
+                $(this).next('input').focus();
+            }
+        })
+
+        $(document).on('click', 'button[name="pagination"]', function() {
+            data = String($(this).val());
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('viewDB') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    inx: data
+                }),
+                success: function(out) {
+                    if (out["db_name"] == 'alldata') {
+                        $("#nt").empty();
+                        add_table(out, "OrderNo", "#nt", "InvNo");
+                    } else if (out["db_name"] == 'BUYER') {
+                        $("#nt_buy").empty();
+                        add_table(out, "Buyer", "#nt_buy", "Buyer");
+                    }
+                },
+                error: function() {
+                    alert("err");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        var company_ch;
+        String.prototype.splice = function(idx, rem, str) {
+            return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+        };
+
+
+        var numsid = new Array();
+        var numsid_unit = new Array();
+        $.get({
+            type: "GET",
+            url: "{{ url_for('get_check_company') }}",
+            contentType: "application/json;",
+            async: false,
+            success: function(com) {
+                company_ch = com['out'];
+                $.post({
+                    type: "POST",
+                    url: "{{ url_for('remakeSelect') }}",
+                    contentType: "application/json;",
+                    data: JSON.stringify(company_ch),
+
+                    success: function(out) {
+                        let sss = out['all_data'];
+
+                        var il = sss.length;
+
+                        for (var i = 0; i < il; i++) {
+
+                            sss[i].splice(7, 0, '_');
+                            sss[i] = sss[i].slice(0, 9);
+
+                            numsid[i] = sss[i];
+
+                            $.post({
+                                type: "POST",
+                                url: "{{ url_for('get_id_unit') }}",
+                                contentType: "application/json;",
+                                data: JSON.stringify(numsid[i]),
+                                async: false,
+
+                                success: function(out) {
+                                    numsid_unit[i] = out['PRCorder'];
+                                    console.log(numsid_unit[i]);
+                                },
+                                error: function(out) {
+                                    alert(out['msg']);
+                                }
+                            }); //end of ajax 
+                        }
+
+                    },
+                    error: function(out) {
+                        alert('error in getting data');
+                    }
+                }); //end of ajax 
+
+
+            },
+            error: function(out) {
+                alert('error in getting company_ch');
+            }
+        }); //end of ajax 
+
+        console.log(numsid_unit[1]);
+        //console.log(company_ch);
+    </script>
+
+    <script>
+        function pdfPrint_shippingcommercial() {
+            // set variable
+
+            pdfMake.fonts = {
+                Cour: {
+                    normal: 'cour.ttf',
+                    bold: 'courbd.ttf',
+                    italics: 'couri.ttf',
+                    bolditalics: 'courbi.ttf'
+                },
+                Roboto: {
+                    normal: 'Roboto-Regular.ttf',
+                    bold: 'Roboto-Medium.ttf',
+                    italics: 'Roboto-Italic.ttf',
+                    bolditalics: 'Roboto-MediumItalic.ttf'
+                },
+                D2C: {
+                    normal: 'D2Coding.ttf',
+                    bold: 'D2CodingBold.ttf'
+                }
+
+            }
+
+
+
+
+            var rows = [];
+            var vt = window.location.search;
+            var v1 = getUrlVars(vt);
+
+            //console.log(v1['departdate']);
+            //console.log(v1['returndate']);
+            var vstart = v1['departdate'];
+            var vstartarr = vstart.split('-');
+            var vend = v1['returndate'];
+            var vendarr = vend.split('-');
+
+            //table
+            //var ths2 =$( document ).getElementById('table2');
+            var ths = document.getElementById('table2');
+            //console.log(ths.rows.length)
+            //console.log(String(ths.rows[3].cells[1]));
+            //console.log(ths[1].text());
+
+
+            var rows = [];
+            var table3 = document.getElementById('table1');
+            //  table = document.getElementById("shippingdocs_tableSPL");
+            //rowCount = table.rows.length;
+            //      colCount = table.rows[0].cells.length;
+
+            var i = 0
+            $('#table1 tr').each(function() {
+                if (i > 3) {
+                    var td = $(this).children();
+
+
+                    var v1 = td.eq(1).text();
+                    var v2 = td.eq(2).text();
+                    var v3 = td.eq(3).text();
+
+                    let tmpv3 = v3.splice(7, 0, '_');
+
+
+
+
+
+                    var v4 = td.eq(4).text();
+                    var v5 = td.eq(5).text();
+                    var v6 = td.eq(6).text();
+                    var v7 = td.eq(7).text();
+                    var v8 = td.eq(9).text();
+                    var v9 = td.eq(10).text();
+                    var v10 = td.eq(11).text();
+                    var v11 = td.eq(12).text();
+                    var v12 = td.eq(13).text();
+                    var v13 = td.eq(14).text();
+                    var v14 = td.eq(16).text();
+                    var v15 = td.eq(18).text();
+                    var v16 = td.eq(19).text();
+                    var v17 = td.eq(15).text();
+
+
+                    for (let j = 0; j < numsid.length; j++) {
+                        if (numsid[j] === tmpv3) {
+
+                            v8 = numsid_unit[j] + v8;
+                            v13 = numsid_unit[j] + v13;
+                            break;
+                        } else {
+
+                        }
+                    }
+
+
+                    rows.push([v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17]);
+                }
+
+
+                i++;
+
+            });
+
+
+
+
+            var dd = {
+
+                table: {
+                    //widths: [30, 30, 30, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 30, 30, 30, '*'],
+                    widths: [40, 30, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 30, 30, 40, '*'],
+                    fontSize: 8,
+                    font: 'D2C',
+                    alignment: 'center',
+                    margin: [0, 0, 0, 0],
+                    body: rows
+                },
+                fontSize: 8,
+                font: 'D2C',
+                alignment: 'center',
+                //layout: 'noBorders',
+                margin: [0, 0, 0, 0]
+            }
+
+            var docDefinition2 = {
+                pageOrientation: 'Landscape',
+                pageMargins: [20, 60, 20, 60],
+                content: [{
+                            alignment: 'center',
+                            text: '\주간 NEGO SCHEDULE\n',
+                            bold: true,
+                            font: 'D2C',
+                            fontSize: 20
+                        }, {
+                            absolutePosition: {
+                                x: 550,
+                                y: 30
+                            },
+                            color: '#444',
+                            alignment: 'center',
+                            table: {
+                                widths: [30, 30, 30, 30, 30, 30],
+                                heights: [10, 20],
+                                body: [
+                                    [{
+                                            text: [{
+                                                bold: true,
+                                                font: 'D2C',
+                                                text: '담 당',
+                                                fontSize: 8
+                                            }]
+                                        }, {
+                                            font: 'D2C',
+                                            text: '대 리',
+                                            bold: true,
+                                            fontSize: 8
+                                        }, {
+                                            font: 'D2C',
+                                            text: '과 장',
+                                            bold: true,
+                                            fontSize: 8
+                                        }, {
+                                            text: '부 장',
+                                            font: 'D2C',
+                                            bold: true,
+                                            fontSize: 8
+                                        }, {
+                                            text: '이 사',
+                                            font: 'D2C',
+                                            bold: true,
+                                            fontSize: 8
+                                        }, {
+                                            text: '사 장',
+                                            font: 'D2C',
+                                            bold: true,
+                                            fontSize: 8
+                                        }
+
+                                    ],
+                                    ['', '', '', '', '', '']
+                                ]
+                            } // table layout
+                        }, {
+                            font: 'D2C',
+                            alignment: 'center',
+                            text: '(' + vstartarr[0] + '년' + vstartarr[1] + '월' + vstartarr[2] + '일 부터 ' + vendarr[0] + '년' + vendarr[1] + '월' + vendarr[2] + '일 까지)'
+                        }, {
+                            color: '#444',
+                            alignment: 'center',
+                            table: {
+                                widths: [40, 30, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 30, 30, 40, '*'],
+                                heights: [20, 20],
+                                body: [
+                                    [{
+                                        margin: [0, 10, 0, 0],
+                                        rowSpan: 2,
+                                        text: [{
+                                            font: 'D2C',
+                                            text: 'NEGO\n월일',
+                                            fontSize: 10,
+
+                                        }]
+
+                                    }, {
+                                        margin: [0, 13, 0, 0],
+                                        rowSpan: 2,
+                                        text: [{
+                                            font: 'D2C',
+                                            text: '담당자',
+                                            fontSize: 10
+                                        }]
+                                    }, {
+                                        margin: [0, 5, 0, 0],
+                                        colSpan: 8,
+                                        text: [{
+                                            text: 'NEGO',
+                                            fontSize: 10
+                                        }]
+                                    }, '', '', '', '', '', '', '', {
+                                        margin: [0, 5, 0, 0],
+                                        colSpan: 3,
+                                        text: [{
+                                            text: 'LOCAL',
+                                            fontSize: 10
+                                        }]
+                                    }, '', '', {
+                                        margin: [0, 5, 0, 0],
+                                        colSpan: 4,
+                                        text: [{
+                                            font: 'D2C',
+                                            text: '선임외',
+                                            fontSize: 10
+                                        }]
+                                    }, '', '', ''],
+                                    ['', '', {
+                                        margin: [0, 2, 0, 0],
+                                        text: [{
+                                            text: 'InvoiceNo',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'BUYER',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'ITEM',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'Qty',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'PRX',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'AMOUNT',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'TERM',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'BANK',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            font: 'D2C',
+                                            text: '상호',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            font: 'D2C',
+                                            text: '단가',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'AMOUNT',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            font: 'D2C',
+                                            text: '선박\n회사',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            font: 'D2C',
+                                            text: '선임',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'INV Board',
+                                            fontSize: 8
+                                        }]
+                                    }, {
+                                        text: [{
+                                            text: 'L/C No',
+                                            fontSize: 8
+                                        }]
+                                    }]
+                                ]
+                            } // table layout
+                        }, dd
+
+                    ] // end of content
+            }; // end of docDefinition2
+
+            var pdf_name = 'Commercial_invoice.pdf';
+            var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+        } // end of pdfPrint()
+    </script>
+
+</body>
+
+</html>

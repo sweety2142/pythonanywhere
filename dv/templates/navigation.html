@@ -1,0 +1,676 @@
+<!-- Top navication bar -->
+<div class="w3-top" style="z-index:100000">
+    <div class="w3-bar nav_grad w3-mobile">
+        <a href="{{ url_for('main') }}" class="w3-bar-item w3-button w3-left w3-large">
+            <i class="fa fa-home" style="font-size:16pt;color:white"></i>HOME
+        </a>
+
+
+
+
+        <div class="w3-dropdown-hover">
+            <button class="w3-button w3-text-white w3-small">Contract</button>
+            <div class="w3-dropdown-content w3-bar-block w3-dark-grey" style="z-index:99999">
+                <a href="#" class="w3-bar-item w3-button w3-small" onclick="link_contract_1();">Invoice</a>
+                <a href="#" class="w3-bar-item w3-button w3-small" onclick="link_contract_2();">Contract</a>
+            </div>
+        </div>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button w3-text-white w3-small">조회</button>
+            <div class="w3-dropdown-content w3-bar-block w3-dark-grey" style="z-index:99999">
+                <a href="#" class="w3-bar-item w3-button w3-small" onclick="window.open( {{ url_for('search') }} , '_blank')">Order 현황</a>
+                <a href="#" class="w3-bar-item w3-button w3-small" onclick="window.open( {{ url_for('search2') }} , '_blank')">Nego 현황</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="window.open( {{ url_for('search3') }} , '_blank')">New Local 현황</a>
+            </div>
+        </div>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button w3-text-white w3-small">Shipping Docs</button>
+            <div class="w3-dropdown-content w3-bar-block w3-dark-grey" style="z-index:99999">
+                <a href="#" class="w3-bar-item w3-button w3-small" onclick="link_1();">Shipping Advice</a>
+                <a href="#" class="w3-bar-item w3-button w3-small" onclick="link_2();">Packing List</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_3();">Commercial Invoice</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_4();">Shipping Docs</a>
+            </div>
+        </div>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button w3-text-white w3-small">기타 서류</button>
+            <div class="w3-dropdown-content w3-bar-block w3-dark-grey" style="z-index:9999">
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="window.open( {{ url_for('search_jugan') }} , '_blank')">주간 NEGO SCHEDULE</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_etc_8();">DELIVERY ORDER</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_etc_10();">원산지 증명서</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_etc_11();">VGM</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_etc_12();">Payment Instruction for Nego</a>
+                <a href="#" class="w3-bar-item w3-buuton w3-small" onclick="link_etc_13();">Payment Instruction for Buyer</a>
+
+            </div>
+        </div>
+
+        <div class="w3-bar-item w3-small">
+            <!-- <input class="w3-radio w3-small" type="radio" name="companycheck" value="DB" id="radio_db" checked> -->
+            {% if check_comp == 'EI' %}
+            <input class="w3-radio w3-small" type="radio" name="companycheck" value="DB" id="radio_db"> {% else %}
+            <input class="w3-radio w3-small" type="radio" name="companycheck" value="DB" id="radio_db" checked> {% endif %} 두베스트 {% if check_comp == 'DB' %}
+            <input class="w3-radio w3-small" type="radio" name="companycheck" value="EI" id="radio_ei"> {% else %}
+            <input class="w3-radio w3-small" type="radio" name="companycheck" value="EI" id="radio_ei" checked> {% endif %} 아인합성
+        </div>
+
+
+
+
+        <div class="w3-bar-item w3-small">
+            <!--i class="fa fa-suitcase w3-third"></i-->
+            <!--Dollor Exchange (KEB)-->
+            <!--input class="w3-input w3-light-gray ht_25 w3-third" type="text" id="exchange_result"  readonly-->
+            <!--input class="w3-input w3-light-gray ht_25 w3-third" type="text" id="exchange_result_USEU"  readonly-->
+            <div class="w3-col">
+                <div class="w3-col row4_text_color" style="width:30%">
+                    <i class="fa fa-pencil"></i> Date Exchange
+                    <input type="text" id="datepicker_ex" class="w3-input ht_25">
+
+                </div>
+                <div class="w3-col row2_text_color" style="width:30%">
+                    <i class="fa fa-pencil"></i> Dollor Exchange(KEB)
+                    <input class="w3-input w3-light-gray ht_25 w3-border-left" type="text" id="exchange_result" readonly>
+
+                </div>
+                <div class="w3-col row3_text_color" style="width:30%">
+                    <i class="fa fa-pencil"></i> EU/US
+                    <input class="w3-input w3-light-gray ht_25  w3-border-left" type="text" id="exchange_result_USEU" readonly>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br>
+
+
+        <a href="#" class="w3-bar-item w3-button w3-right fta_color w3-text-white w3-large" onclick="fnMove('Fta')">F</a>
+        <a href="#" class="w3-bar-item w3-button w3-right local_color w3-text-white w3-large" onclick="fnMove('Local')">L</a>
+        <a href="#" class="w3-bar-item w3-button w3-right nego_color w3-text-white w3-large" onclick="fnMove('Nego')">N</a>
+        <a href="#" class="w3-bar-item w3-button w3-right shipment_color w3-text-white w3-large" onclick="fnMove('Shipment')">S</a>
+        <a href="#" class="w3-bar-item w3-button w3-right order_color w3-text-white w3-large" onclick="fnMove('Order')">O</a>
+
+    </div>
+</div>
+
+
+<br><br>
+<!--
+<div class="w3-top" style="z-index:9998">
+    <div class="w3-bar nav_grad w3-top">
+        <a href="{{ url_for('main') }}" class="w3-bar-item w3-button w3-left">
+            <i class="fa fa-home" style="font-size:16pt;color:white"></i>
+        </a>
+
+        <div class="w3-dropdown-hover">
+            <button onclick="myFunc('test_demo')" class="w3-button w3-text-white">Shipping Docs</button>
+        <div id="test_demo" class="w3-dropdown-content w3-bar-block w3-card-4 w3-top w3-dark-grey" style="z-index:9999">
+            <a href="#" class="w3-bar-item w3-button" onclick="link_1();">Shipping Advice</a>
+            <a href="#" class="w3-bar-item w3-button" onclick="link_2();">Packing List</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_3();">Commercial Invoice</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_3();">Shipping Docs</a>
+        </div>
+        </div>
+
+
+        <div class="w3-dropdown-hover">
+            <button onclick="myFunc('test_demo2')" class="w3-button w3-text-white">기타 서류</button>
+        <div id="test_demo2" class="w3-dropdown-content w3-bar-block w3-card-4 w3-top">
+            <a href="#" class="w3-bar-item w3-button" onclick="link_etc_1();">PENDING ORDER</a>
+            <a href="#" class="w3-bar-item w3-button" onclick="link_etc_2();">출고내역</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_3();">PAYMENT</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_4();">LESS</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_5();">지출결의서</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_6();">선(미)지급 현황</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_7();">주간 NEGO SCHEDULE</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_8();">DELIVERY ORDER</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_9();">수입 LC 오픈</a>
+            <a href="#" class="w3-bar-item w3-buuton" onclick="link_etc_10();">원산지 증명서</a>
+        </div>
+        </div>
+
+        <a href="#" class="w3-bar-item w3-button w3-right fta_color w3-text-white" onclick="fnMove('Fta')">F</a>
+        <a href="#" class="w3-bar-item w3-button w3-right local_color w3-text-white" onclick="fnMove('Local')">L</a>
+        <a href="#" class="w3-bar-item w3-button w3-right nego_color w3-text-white" onclick="fnMove('Nego')">N</a>
+        <a href="#" class="w3-bar-item w3-button w3-right shipment_color w3-text-white" onclick="fnMove('Shipment')">S</a>
+        <a href="#" class="w3-bar-item w3-button w3-right order_color w3-text-white" onclick="fnMove('Order')">O</a>
+
+    </div>
+</div>
+<br>
+-->
+<br>
+<!-- Side Navigation -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card" style="z-index:3;width:320px;" id="mySidebar">
+    <div class="w3-display-container">
+        <img src="../static/images/IMG_0897.jpeg" style="width:100%">
+    </div>
+    <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu" class="w3-bar-item w3-button w3-hide-large w3-large w3-right-align">Close <i class="fa fa-remove"></i>
+  </a>
+    <a href="{{ url_for('main') }}" class="w3-bar-item w3-dark-grey w3-button w3-left">
+        <i class="fa fa-home" style="font-size:16pt;color:white"></i> HOME
+    </a>
+    <a id="userInfoBtn" onclick="myFunc('user_info')" href="javascript:void(0)" class="w3-bar-item w3-button w3-blue-gray">
+        <i class="fa fa-inbox w3-margin-right"></i>User infomation<i class="w3-margin-left fa fa-caret-down"></i>
+    </a>
+
+    <div id="user_info" class="w3-hide w3-animate-left">
+        <div class="w3-container">
+            <p></p>
+            <img class="w3-round w3-margin-right" src="../static/images/man.png" style="width:15%;">
+            <span class="w3-opacity w3-large">{{ name }}</span>&emsp;<span class="w3-tag w3-teal w3-round">{{ adm }}</span>
+            <h6>&emsp;{{ mail }}</h6>
+        </div>
+    </div>
+    <br>
+    <hr> {% if adm=='ADMIN' %}
+    <a href="{{ url_for('admin.admin') }}" class="w3-bar-item w3-button w3-center w3-large">
+        <span style="color:#4f8be0">
+    <i class="fa fa-user-o" style="font-size:16pt"></i>
+      ADMIN
+    </span>
+    </a>
+    <hr> {% endif %}
+
+    <a href="#" onclick="window.open( {{ url_for('viewDB') }} , '_blank')" class="w3-bar-item w3-button w3-center w3-xlarge">
+        <span class="w3-tag fta_color" style="width:200px;font-size:14pt;">
+          Database
+      </span>
+    </a>
+    <hr>
+
+    <a href="{{ url_for('logout') }}" class="w3-bar-item w3-button w3-center w3-xlarge">
+        <span class="w3-tag shipment_color" style="width:200px;font-size:14pt;">
+          LogOut
+      </span>
+    </a>
+    <br>
+</nav>
+
+
+<!-- Modal that pops up when you click on "New Message" -->
+<div id="id01" class="w3-modal" style="z-index:4">
+    <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-padding w3-red">
+            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-right w3-xxlarge">
+           <i class="fa fa-remove"></i>
+       </span>
+            <h2>Change password</h2>
+        </div>
+        <div class="w3-panel">
+            <label>To</label>
+            <input class="w3-input w3-border w3-margin-bottom" type="text">
+            <label>From</label>
+            <input class="w3-input w3-border w3-margin-bottom" type="text">
+            <label>Subject</label>
+            <input class="w3-input w3-border w3-margin-bottom" type="text">
+            <input class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="What's on your mind?">
+            <div class="w3-section">
+                <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
+                <a class="w3-button w3-right" onclick="document.getElementById('id01').style.display='none'">Send  <i class="fa fa-paper-plane"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay effect when opening the side navigation on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="Close Sidemenu" id="myOverlay"></div>
+
+
+
+<script>
+    $("#datepicker_ex").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "yy-mm-dd"
+    });
+    $("#datepicker_ex").on('change', function() {
+        var value1 = this.value;
+
+        var afterStr = this.id.split('_');
+
+        console.log(this);
+        console.log(afterStr[2]);
+        var aftern = afterStr[2];
+        if (value1 !== '') {
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('get_exchange') }}",
+                contentType: "application/json;",
+                data: JSON.stringify(value1),
+
+                success: function(out) {
+                    var str2 = 'exchange_result';
+                    eval(str2).value = out['return'];
+                    var str3 = 'exchange_result_USEU'
+                    eval(str3).value = out['ret2'];
+                },
+                error: function(out) {
+                    alert("Please check..");
+                }
+            }); //end of ajax 
+        }
+    });
+    // radio button default 
+
+
+
+    var list1 = ['divOrder', 'HeaderData', 'orderBtn', 'shipmentBtn', 'divShipment', 'divNego', 'negoBtn', 'divLocal', 'localBtn', 'divFta', 'ftaBtn'];
+    var list2 = ['ship_advice_header', 'ship_advice', 'packing_list_header', 'packing_list', 'comm_invoice_header', 'comm_invoice', 'contract_header',
+        'contract', 'contract2_header', 'contract2', 'contractdb_header', 'shippingdocsdb_header', 'shippingdocs', 'shipping_packing_list',
+        'shipping_packing_list_header', 'shipping_comm_invoice_header', 'shipping_comm_invoice',
+        'shipping_certificate_header', 'shipping_certificate', 'shipping_request_header', 'shipping_request',
+        'delivery_order_header', 'delivery_order', 'delivery_order_db_header', 'VGM_header', 'VGM', 'VGM_db_header',
+        'standing_payment_inst_header', 'standing_payment_inst_db_header', 'standing_payment_inst',
+        'standing_payment_inst_buyer_header', 'standing_payment_inst_buyer_db_header', 'standing_payment_inst_buyer_body'
+
+    ];
+    var listbutton = ['myBtn', 'myBtn_shipping_advice', 'myBtn_packing_list', 'myBtn_commercial_invoice', 'myBtn_shipping_docs', 'myBtn_contract_invoice', 'myBtn_contract_contract', 'myBtn_delivery_order',
+        'myBtn_order_sheet'
+    ];
+
+    function link_1() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_shipping_advice');
+        myFuncShow('ship_advice_header');
+        myFuncShow('ship_advice');
+    }
+
+    function link_2() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_packing_list');
+        myFuncShow('packing_list_header');
+        myFuncShow('packing_list');
+    }
+
+    function link_3() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_commercial_invoice');
+        myFuncShow('comm_invoice_header');
+        myFuncShow('comm_invoice');
+    }
+
+    function link_4() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_shipping_docs');
+        myFuncShow('shippingdocsdb_header');
+        myFuncShow('shippingdocs');
+
+
+        // selection color 
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < 5; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-pale-blue", "");
+            if (i == 0)
+                tablinks[i].className = tablinks[i].className += " w3-pale-blue";
+        }
+    }
+
+    function link_contract_1() {
+
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('contractdb_header');
+
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_contract_invoice');
+        myFuncShow('contract_header');
+        myFuncShow('contract');
+    }
+
+    function link_contract_2() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('contractdb_header');
+
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_contract_contract');
+        myFuncShow('contract2_header');
+        myFuncShow('contract2');
+    }
+
+    function link_etc_8() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('delivery_order_db_header'); // db search
+
+        myFuncShow('myBtn_home');
+        myFuncShow('myBtn_delivery_order');
+        myFuncShow('delivery_order_header');
+        myFuncShow('delivery_order');
+    }
+
+    function link_etc_11() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('VGM_db_header'); // db search
+
+        myFuncShow('myBtn_home');
+        myFuncShow('VGM_header');
+        myFuncShow('VGM');
+    }
+
+    function link_etc_12() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('standing_payment_inst_db_header'); // db search
+
+        myFuncShow('myBtn_home');
+        myFuncShow('standing_payment_inst_header');
+        myFuncShow('standing_payment_inst');
+    }
+
+    function link_etc_13() {
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('standing_payment_inst_buyer_db_header'); // db search
+
+        myFuncShow('myBtn_home');
+        myFuncShow('standing_payment_inst_buyer_header');
+        myFuncShow('standing_payment_inst_buyer_body');
+    }
+
+    function link_etc_14() {
+
+        for (var i = 0; i < list1.length; i++) {
+            myFuncHide(list1[i]);
+        }
+        for (var i = 0; i < list2.length; i++) {
+            myFuncHide(list2[i]);
+        }
+        for (var i = 0; i < listbutton.length; i++) {
+            myFuncHide(listbutton[i]);
+        }
+
+        myFuncShow('order_sheet_db_header'); // db search
+
+        myFuncShow('myBtn_home');
+        myFuncShow('order_sheet_header');
+        myFuncShow('order_sheet_body');
+    }
+
+    // 조회 nego 현황 
+    function link_search_1() {
+
+    }
+
+    showShipDoc = 0;
+    $("#userInfoBtn").click();
+
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+
+    function myFunc(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            showShipDoc = 1;
+            //   x.previousElementSibling.className += " w3-blue-grey";
+        } else {
+            showShipDoc = 0;
+            x.className = x.className.replace(" w3-show", "");
+            //  x.previousElementSibling.className = 
+            //  x.previousElementSibling.className.replace(" w3-blue-grey", "");
+        }
+    }
+
+
+    function myFuncShowHide(id, back = 0) {
+        var x = document.getElementById(id);
+        if (showShipDoc) {
+            if (back == 0)
+                x.className += " w3-show";
+            else {
+                x.className = x.className.replace(" w3-show", "");
+                x.className += " w3-hide";
+            }
+        } else {
+            if (back == 0) {
+                x.className = x.className.replace(" w3-show", "");
+                x.className += " w3-hide";
+            } else
+                x.className += " w3-show";
+        }
+
+    }
+
+    function myFuncHide(id) {
+        var x = document.getElementById(id);
+        x.className = x.className.replace(/ w3-show/gi, "");
+        x.className += " w3-hide";
+    }
+
+    function myFuncShow(id) {
+        var x = document.getElementById(id);
+        x.className = x.className.replace(/ w3-hide/gi, "");
+        x.className += " w3-show";
+    }
+
+
+    function pad(n, width) {
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+    }
+
+    function changeDBName(data) {
+        // current date
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+
+        var char = '';
+        if (y >= 2020)
+            char = 'C'
+        else if (y >= 2030)
+            char = 'D'
+        else if (y >= 2040)
+            char = 'E'
+        else if (y >= 2050)
+            char = 'F'
+        else if (y >= 2060)
+            char = 'G'
+        else if (y >= 2070)
+            char = 'H'
+
+
+        //document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+        var c = data['order_gubun'][0];
+        var c2 = data['order_DBB'][0];
+
+        console.log('order_DBB' + c2);
+        //alert ('order_gubun'+ c );
+        //alert ('order_DBB'+ c2 );
+
+        var r = /\d+/;
+        var str = /[A-E]/gi;
+        var value = (c2.match(r));
+        value = parseFloat(value) + 1;
+        value = pad(value, 4);
+
+        var string = c2.match(str);
+        var newstring = '';
+        //for(var i =0 ; i < string.length; i++)
+        //{
+        // if( i != 2)
+        //  newstring+=string[i];
+        //else if (i ==2)
+        //newstring+=char;
+        //}
+        newstring = check_company + char;
+        newstring += String(value);
+        //document.getElementById('saveDB_1').value = newstring;
+        //document.getElementById('saveDB_2').value = c;
+        // modal
+        document.getElementById('id02').style.display = 'block';
+        document.getElementById('saveDB_ID').value = newstring;
+        document.getElementById('saveDB_GB').value = c;
+    }
+
+    function testSave() {
+        // current date
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+
+        var char = '';
+        if (y >= 2020)
+            char = 'C'
+        else if (y >= 2030)
+            char = 'D'
+        else if (y >= 2040)
+            char = 'E'
+        else if (y >= 2050)
+            char = 'F'
+        else if (y >= 2060)
+            char = 'G'
+        else if (y >= 2070)
+            char = 'H'
+
+        console.log('char:', char);
+
+        var data = [check_company, char];
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('get_max_DBB') }}",
+            contentType: "application/json;",
+            data: JSON.stringify(data),
+
+            success: function(out) {
+                changeDBName(out)
+            },
+            error: function(out) {
+                alert("Please check..")
+            }
+        }); //end of ajax
+    }
+
+    $(document).on('change', '#radio_db,#radio_ei', function() {
+        var radio_val = $('input[name=companycheck]:checked').val(); // 82 radio button
+        //alert(radio_val);
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('set_check_company') }}",
+            contentType: "application/json;",
+            data: JSON.stringify(radio_val),
+
+            success: function(out) {
+                //alert('Changed Company Mode [' + out['msg'] + ']');
+                check_company = out['msg'];
+                SelectionChange(check_company);
+
+            },
+            error: function(out) {
+                alert('[error] change company mode');
+            }
+        }); //end of ajax
+
+    });
+
+    var check_company = 'DB'
+
+    // 처음 구동할때 DB 인지 EI 인지 구분 
+    $(window).on('load', function() {
+        $("#radio_db").trigger("change");
+        //testNew();
+    });
+</script>

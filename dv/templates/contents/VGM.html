@@ -1,0 +1,148 @@
+
+<div class="w3-container w3-hide" id="VGM_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Delivery Order</b>
+        </h5>
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Excel</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+            <button type="button" class="w3-button w3-blue w3-round w3-padding-small w3-bar-item " onclick="exportExcel();" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-hide" id="VGM_db_header" style="width:100%;max-width:1000px">
+    <label class="w3-small row2_text_color">Search DataBase</label>
+    <select id="VGMDB" class="w3-small w3-pale-yellow w3-card bootstrap3">
+        <option value=""></option>
+        
+        {% for item in all_data %}
+        <option style='background-color:yellow'; z-index:10000; value="{{ item }}"> {{ item }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right " id="VGM" style="max-width:1000px;">
+    <div class="w3-container">        
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="VGM_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="VGM_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    컨테이너 번호
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" id="VGM_cont" name="">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    검증된 총중량
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" id="VGM_total" name="">
+                <div class="row1_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    중량 단위
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" id="VGM_unit" name="">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    총중량 검증방법
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" id="VGM_val" name="">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    제출책임자
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" id="VGM_charge" name="">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i>
+                    B/K No.
+                </div>
+                <input class="w3-input w3-border ht_25" type="text" id="VGM_BK" name="">
+            </div>               
+          
+        </div>
+    </div><!-- end of second row -->   
+
+</div>
+
+
+
+<script>
+   
+    VGMDB = $('#VGMDB').selectize({
+        placeholder:"Select item",
+        //valueField:'name',
+        searchField:['name'],
+        score: function(search) {
+        var score = this.getScoreFunction(search);
+          return function(item) {
+            if( item.text.toLowerCase().indexOf(search.toLowerCase()) > -1){ return 1; }else{ return 0; }
+          };
+        },
+        sortField:[{ field: 'name', direction:'asc'}],
+        onDropdownOpen: function($dropdown){
+            this.$input.get(0).selectize.clear(true);
+            }
+    })[0].selectize;
+
+
+
+    function exportExcel()
+    {
+        var i1 = $('#VGM_cont').val();
+        var i2 = $('#VGM_total').val();
+        var i3 = $('#VGM_unit').val();
+        var i4 = $('#VGM_val').val();
+        var i5 = $('#VGM_charge').val();
+        var i6 = $('#VGM_BK').val();       
+        /////////////////////////////////////////////////
+        TotalData=[]
+        TotalData.push(i1)
+        TotalData.push(i6)        
+        
+        $.ajax({
+          type:"POST",
+          url:"{{ url_for('excel_VGM') }}",
+          contentType:"application/json;",
+          data:JSON.stringify(TotalData),
+
+          success:function(out){
+            alert(out['msg']);
+         
+            let link = document.createElement('a');
+            link.href = "{{url_for('static',filename='test.xlsx')}}";
+            link.target = '_self';
+            link.download = 'VGM.xlsx';
+            link.click();
+
+
+          },
+          error: function(out){
+            alert("Please check..")
+          }
+        });//end of ajax
+
+      
+   
+    }
+
+</script>

@@ -1,0 +1,83 @@
+   .nav_grad{
+       background: linear-gradient(90deg, rgba(3,29,69, .8), rgba(141,214,217,.9)) fixed;
+   }
+       
+    .shipment_grad{
+       background: linear-gradient(100deg, rgba(255,107,107, .9), rgba(255,239,186,.7)) fixed;
+    }
+      
+    .order_grad{
+       background: linear-gradient(100deg, rgba(51,161,141, .9), rgba(255,239,186,.4)) fixed;
+    }
+     
+    .nego_grad{
+       background: linear-gradient(90deg, rgba(255,212,41, .9), rgba(255,239,186,.4)) fixed;
+    }
+    
+    .local_grad{
+       background: linear-gradient(100deg, rgba(42,132,201, .9), rgba(255,239,186,.4)) fixed;
+    }
+    
+    .fta_grad{
+       background: linear-gradient(100deg, rgba(93,84,184, .9), rgba(255,239,186,.4)) fixed;
+    }
+    .shipment_color{
+      background-color:#ff6b6b;
+      }
+    .order_color{
+      background-color:#33a18d;
+      }
+    .nego_color{
+      background-color:#ffd429;
+      }
+    .local_color{
+      background-color:#2a84c9;
+      }
+    .fta_color{
+      background-color:#5d54b8;
+      }
+      
+      .row1_text_color{
+       color:#877254;
+       }
+       .row2_text_color{
+       color:#625487;
+       }
+       .row3_text_color{
+       color:#548187;
+       }
+       .min_width_70{
+        min-width:70px;
+       }
+       .min_width_100{
+        min-width:130px;
+       }
+       .min_width_130{
+        min-width:130px;
+       }
+       .min_width_150{
+        min-width:150px;
+       }
+       .ht_25{
+       height:25px;
+       }
+       
+       .max_width_100{
+       max-width:100px;
+       }
+       .max_width_200{
+       max-width:200px;
+       }
+       .max_width_500{
+       max-width:500px;
+       }
+       .max_width_700{
+       max-width:700px;
+       }
+       .max_width_800{
+       max-width:800px;
+       }
+       .max_width_900{
+       max-width:900px;
+       }
+       

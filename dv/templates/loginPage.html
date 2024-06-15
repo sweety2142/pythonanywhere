@@ -1,0 +1,184 @@
+<style>
+    body,
+    html {
+        height: 100%;
+        background: linear-gradient(110deg, rgba(90, 97, 173, .4), rgba(255, 250, 158, .6)) fixed, url('../static/images/IMG_0900.jpeg') fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .bgimg {
+        vertical-align: middle;
+        margin-top: 300px;
+    }
+</style>
+</div>
+<div class="bgimg w3-display-container w3-animate-opacity">
+    <div class="w3-display-middle" style="min-width:350px;max-width:450px;">
+
+
+
+        {% if check_comp == 'DB' %}
+        <h3 class="w3-tag w3-dark-gray w3-text-gray">Do Best Ledger Manager Site</h3>
+        {% elif check_comp == 'EI' %}
+        <h3 class="w3-tag w3-dark-gray w3-text-gray">EIN Textile Ledger Manager Site</h3>
+        {% endif %}
+
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'login')">Login</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'register')">Register</button>
+        </div>
+
+        <div id="login" class="w3-container w3-border city w3-white w3-text-grey w3-card-4" style="min-height:450px">
+            <h1>Login</h1>
+            <br>
+            <p>Welcome back<br>Please login to your account</p>
+            <br>
+
+            <div class="card-body">
+
+                <div>
+                    <i class="fa fa-user prefix white-text"></i>
+                    <input type="text" id="i-name" class="form-control" name="name" autofocus required placeholder="Your name">
+                    <label for="orangeForm-name"></label>
+                </div>
+                <!--div class="md-form"  >
+                    <i class="fa fa-envelope prefix white-text" ></i>
+                    <input type="email" id="i-email" class="form-control" name="mail" placeholder="E-mail" >
+                    <label for="orangeForm-email" ></label>
+                  </div-->
+                <div class="md-form">
+                    <i class="fa fa-lock prefix white-text"></i>
+                    <input type="password" id="i-password" class="form-control" name="password" required placeholder="password">
+                    <label for="orangeForm-pass"></label>
+                </div>
+            </div>
+            <br>
+            <div class="text-center">
+                <button name="btn_login" class="w3-button w3-tag w3-khaki w3-round w3-large w3-text-grey w3-padding-large" value="Login" style="border:none">Login</button>
+            </div>
+
+
+
+        </div>
+
+
+        <div id="register" class="w3-container w3-border city w3-white w3-text-grey" style="display:none;min-height:450px">
+            <h1>Register</h1>
+            <br>
+            <p>Lets get you on board</p>
+
+            <br><br>
+            <div class="md-form">
+                <i class="fa fa-user prefix"></i>
+                <input type="text" id="register_name" name="name" class="form-control" placeholder="Your name" autofocus required>
+            </div>
+            <label></label>
+
+            <!--div class="md-form">
+                        <i class="fa fa-envelope prefix"></i>
+                        <input type="email" id="register_email" name="mail" class="form-control" placeholder="Your email" required>
+                      </div>
+                      <label></label-->
+
+            <div class="md-form">
+                <i class="fa fa-lock prefix"></i>
+                <input type="password" id="register_password" name="password" class="form-control" placeholder="Your password" required>
+            </div>
+            <label></label>
+            <br>
+
+            <div class="text-center">
+                <button name="btn_signup" class="w3-button w3-tag w3-khaki w3-round w3-large w3-text-grey w3-padding-large" value="Sign Up" style="border:none">Sign up</button>
+
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+
+
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+    </script>
+    <script>
+        $(document).on('click', 'button[name="btn_signup"]', function() {
+            var name = $("#register_name").val();
+            var mail = $("#register_email").val();
+            var password = $("#register_password").val();
+            console.log(name);
+            console.log(mail);
+            console.log(password);
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('sign_up') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    "name": name,
+                    "mail": mail,
+                    "password": password
+                }),
+                success: function(out) {
+                    if (out["msg"]) {
+                        alert(out["msg"]);
+                    } else {
+                        alert("Sign-up has been completed");
+                        location.reload();
+                    }
+                },
+                error: function(out) {
+                    alert(out["msg"]);
+                }
+            });
+        });
+
+        $(document).on('click', 'button[name="btn_login"]', function() {
+            var name = $("#i-name").val();
+            var mail = $("#i-email").val();
+            var password = $("#i-password").val();
+            console.log(name);
+            console.log(mail);
+            console.log(password);
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('login_r') }}",
+                contentType: "application/json;charset=utf-8;",
+                data: JSON.stringify({
+                    "name": name,
+                    "mail": mail,
+                    "password": password
+                }),
+                success: function(out) {
+                    if (out["msg"]) {
+                        alert("Incorrenct Username, E-mail or Password");
+                        location.reload();
+                    } else {
+                        location.reload();
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#i-password").keydown(function(key) {
+                if (key.keyCode == 13) {
+                    $("button[name='btn_login']").click();
+                }
+            });
+        });
+    </script>
+
+
+</div>

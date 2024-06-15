@@ -1,0 +1,334 @@
+<style>
+    .notes {
+        background-attachment: local;
+        background-image: linear-gradient(to right, white 10px, transparent 10px), linear-gradient(to left, white 10px, transparent 10px), repeating-linear-gradient(white, white 30px, #ccc 30px, #ccc 31px, white 31px);
+        line-height: 31px;
+        padding: 8px 10px;
+    }
+</style>
+
+<div class="w3-container w3-hide" id="comm_invoice_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Commercial Invoice</b>
+        </h5>
+
+    </div>
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>PDF</b>
+        </h5>
+        <div class="w3-twothird w3-bar">
+            <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_commercial()" style="width:50%"> Print </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="comm_invoice" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="comm_invoice_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="comm_invoice_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Shipper / Exporter
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="comm_invoice_shipper" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> For Account Risk of Messrs / Buyer / Applicant
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="comm_invoice_account" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Notify Party
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="comm_invoice_Notify" name="Days" style=" resize : none;"> </textarea>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Loading
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="comm_invoice_Loading" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Final Destination
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="comm_invoice_Destination" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Vessel/Flight
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="comm_invoice_Vessel" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i> Sailing on or about
+                    </div>
+                    <input type="text" id="date_comm_invoice_sailing" class="w3-input ht_25 max_width_200">
+                </div>
+
+            </div>
+            <div class="w3-half">
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> No. date of invoice
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="comm_invoice_invoice" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+                    <input type="text" id="date_comm_invoice_invoice" class="w3-input ht_25 max_width_200">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> No. date of L/C
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="comm_invoice_LC" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+                    <input type="text" id="date_comm_invoice_LC" class="w3-input ht_25 max_width_200">
+                </div>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> L/C issuing bank
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="comm_invoice_bank" name="Days" style=" resize : none; height:50px;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Terms of delivery and payment
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="comm_invoice_term" name="Days" style=" resize : none; height:50px;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Remark
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="comm_invoice_remark" name="Days" style=" resize : none; height:100px;"> </textarea>
+            </div>
+        </div>
+        <!-- end of second row -->
+        <hr>
+        <br>
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <div class="w3-col">
+                <div class="w3-col row1_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Marks and numbers
+                </div>
+                <div class="w3-col row2_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Description of goods
+                </div>
+                <div class="w3-col row3_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Quantity/Unit
+                </div>
+
+                <div class="w3-col row1_text_color" style="width:20%">
+                    <i class="fa fa-pencil"></i> Unit price
+                </div>
+
+
+                <div class="w3-col row1_text_color " style="color:#d96868;font-weight:bold ;width:20%">
+                    <i class="fa fa-pencil"></i> Amount
+                </div>
+
+                <textarea class="notes" id="comm_invoice_lastnotes" style="resize:none; height:500px;width:1000px;"> </textarea>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end of w3-container -->
+
+<script>
+    $(function() {
+        $("#date_comm_invoice_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_comm_invoice_invoice").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_comm_invoice_LC").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+
+
+    function setspace(size) {
+        text = '\xa0';
+        var a = size;
+        for (var i = 0; i < a; i++) {
+            text += '\xa0';
+        }
+        return text
+    }
+
+    var text1 = 'N/M';
+    var text2 = 'POLYSTER STAPLE FIBER';
+
+    var text3 = '\xa0';
+    for (var i = 0; i < 44; i++) {
+        text3 += '\xa0';
+    }
+
+    var icount1 = 44 - text1.length;
+    var text1space = setspace(icount1);
+
+    document.getElementById("comm_invoice_lastnotes").value = text1 + text1space + text2;
+
+
+
+
+    function pdfPrint_commercial() {
+        // set variable
+        var attn = document.getElementById('comm_invoice_lastnotes').value;
+
+        var datado = '';
+        if (check_company == 'DB')
+            datado = 'DO BEST CO. LTD.\n' + '4F, 232 TOJEONG-RO, MAPO-GU, SEOUL, REPUBLIC OF KOREA #04091\n' + 'T)82.2.3271.3800';
+        else if (check_company == 'EI')
+            datado = 'EIN Textile CO. LTD.\n' + '4F, 232 TOJEONG-RO, MAPO-GU, SEOUL, REPUBLIC OF KOREA #04091\n' + 'T)82.2.3271.3800';
+
+        var docDefinition2 = {
+            content: [{
+                    alignment: 'center',
+                    text: '\nCOMMERCIAL INVOICE\n',
+                    bold: true,
+                    fontSize: 30
+                }, {
+                    color: '#444',
+                    table: {
+                        widths: [150, 150, '*'],
+                        heights: [25, 25, 30, 30, 30, 30, 30],
+                        body: [
+                            [{
+                                border: [true, true, true, false],
+                                colSpan: 2,
+                                rowSpan: 2,
+                                text: [{
+                                    bold: true,
+                                    text: 'Shipper/Exporter\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: datado
+                                }]
+                            }, '', {
+                                bold: true,
+                                text: 'No. & date of invoice'
+                            }],
+                            ['', '', {
+                                bold: true,
+                                text: 'No. & date of L/C'
+                            }],
+                            [{
+                                colSpan: 2,
+                                rowSpan: 2,
+                                text: [{
+                                    bold: true,
+                                    text: 'For Account & Risk of Messrs. /Buyer /Applicant \n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'test'
+                                }]
+                            }, '', {
+                                bold: true,
+                                text: 'L/C issuing bank'
+                            }],
+                            ['', '', {
+                                bold: true,
+                                text: 'Terms of delivery and payment'
+                            }],
+                            [{
+                                colSpan: 2,
+                                rowSpan: 1,
+                                text: [{
+                                    bold: true,
+                                    text: 'Notify party\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'test'
+                                }]
+                            }, '', {
+                                colSpan: 1,
+                                rowSpan: 3,
+                                text: [{
+                                    bold: true,
+                                    text: 'Remark\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'test\n test2'
+                                }]
+                            }],
+                            [{
+                                text: [{
+                                    bold: true,
+                                    text: 'Port of Loading\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'BUSAN KOREA'
+                                }]
+                            }, {
+                                text: [{
+                                    bold: true,
+                                    text: 'Final desitination\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'data here'
+                                }]
+                            }, ''],
+                            [{
+                                text: [{
+                                    bold: true,
+                                    text: 'Vessel / Flight\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'data here'
+                                }]
+                            }, {
+                                text: [{
+                                    bold: true,
+                                    text: 'Sailing on or about\n',
+                                }, {
+                                    fontSize: 10,
+                                    text: 'data here'
+                                }]
+                            }, ''],
+                        ]
+                    } // table layout
+                }] // end of content
+        }; // end of docDefinition2
+
+        var pdf_name = 'Commercial_invoice.pdf';
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+    } // end of pdfPrint()
+</script>

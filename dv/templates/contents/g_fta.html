@@ -1,0 +1,103 @@
+<!-- FTA -------------------------------->
+<a id="ftaBtn" onclick="myFunc('divFta')" href="javascript:void(0)" class="fta_grad w3-bar-item w3-button w3-text-white w3-text-dark-gray" style="width:100%;max-width:1500px">
+    <i class="fa fa-inbox w3-margin-right"></i>FTA<i class="w3-margin-left fa fa-caret-down"></i>
+</a>
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="divFta" style="max-width:1500px;overflow:auto;">
+    <h3 class="w3-text-grey w3-padding-16">
+        <i class="fa fa-money fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>FTA
+    </h3>
+    <div class="w3-container">
+            <!-- start -->
+
+        <!-- 1  row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small ">
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-calendar-check-o"></i>
+                    발급일자
+                </div>
+                <input type="text" id="out_fta" class="w3-input ht_25" placeholder="Select date">
+            </div>
+            <!-- w3-third [3] -->
+            <div class="w3-third">
+                 <div class="row2_text_color">
+                    <i class="fa fa-list-ul"></i>
+                    품목번호
+                </div>
+                <select id="item_fta" class="bootstrap3 w3-small">
+                    <option value="">Select item</option>
+                    {% for item in fta_item_number_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                 <div class="row2_text_color">
+                    <i class="fa fa-list-ul"></i>
+                    원산지
+                </div>
+                <select id="place_fta" class="bootstrap3 w3-small">
+                    <option value="">Select item</option>
+                    {% for item in fta_origin_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div><!-- end of 1 row -->
+
+        <!-- 2  row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small ">
+            <!-- w3-third [2] -->
+            <div class="w3-third">
+                <div class="row2_text_color">
+                    <i class="fa fa-list-ul"></i>
+                    협정명칭 및 원산지 결정 기준
+                </div>
+                <select id="cont_fta" class="bootstrap3 w3-small">
+                    <option value="">Select item</option>
+                    {% for item in convention_data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div><!-- end of 2 row -->
+
+        <br>
+
+        </div>
+    </div><!-- end of w3-container -->
+
+
+
+<script>
+
+</script>
+
+<!-------------------------------------------->
+
+</div><!-- end of ID divShipment -->
+
+
+    <script>
+        item_fta = $('#item_fta').selectize({})[0].selectize;
+        place_fta = $('#place_fta').selectize({})[0].selectize;
+        cont_fta = $('#cont_fta').selectize({})[0].selectize;
+        
+        place_fta.addItem('한국');
+
+    </script>
+
+            <!-- Script of date -->
+    <script>
+        $( function() {
+            $( "#out_fta" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+            });
+
+        });
+    </script>

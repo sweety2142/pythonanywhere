@@ -1,0 +1,962 @@
+<div class="w3-container w3-hide" id="shipping_comm_invoice_header" style="width:100%;max-width:1000px">
+    <div class="w3-half">
+        <h5 class="w3-opacity">
+            <b>Commercial Invoice</b>
+        </h5>
+
+    </div>
+    <div class="w3-half">
+
+        <div class="w3-half w3-bar">
+            <h5 class="w3-opacity">
+                <b>PDF</b>
+            </h5>
+            <button type="button" class="w3-button w3-khaki w3-round w3-padding-small w3-bar-item " onclick="pdfPrint_shippingcommercial()" style="width:50%"> Print </button>
+        </div>
+        <div class="w3-half">
+            <h5 class="w3-opacity">
+                <b>SIGN</b>
+            </h5>
+            <input type="checkbox" id="shipping_commercial_invoice_sign_check">
+        </div>
+    </div>
+</div>
+
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right" id="shipping_comm_invoice" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_comm_invoice_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shipping_comm_invoice_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-half">
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Shipper / Exporter
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_comm_invoice_shipper" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> For Account Risk of Messrs / Buyer / Applicant
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_comm_invoice_account" name="Days" style=" resize : none;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Notify Party
+                </div>
+                <textarea class="w3-input w3-border ht_50" type="text" id="shipping_comm_invoice_Notify" name="Days" style=" resize : none;"> </textarea>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Port of Loading
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_comm_invoice_Loading" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Final Destination
+                    </div>
+                    <textarea class="w3-input w3-border ht_30" type="text" id="shipping_comm_invoice_Destination" name="Days" style=" resize : none;"> </textarea>
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> Vessel/Flight
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="shipping_comm_invoice_Vessel" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i> Sailing on or about
+                    </div>
+                    <input type="text" id="date_shipping_comm_invoice_sailing" class="w3-input ht_25 max_width_200">
+                </div>
+
+            </div>
+            <div class="w3-half">
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> No. date of invoice
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="shipping_comm_invoice_invoice" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+                    <input type="text" id="date_shipping_comm_invoice_invoice" class="w3-input ht_25 max_width_200">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-pencil"></i> No. date of L/C or Contract
+                    </div>
+                    <input class="w3-input w3-border ht_25" type="text" id="shipping_comm_invoice_LC" name="Days">
+                </div>
+                <div class="w3-half">
+                    <div class="row1_text_color">
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+                    <input type="text" id="date_shipping_comm_invoice_LC" class="w3-input ht_25 max_width_200">
+                </div>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> L/C issuing bank
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="shipping_comm_invoice_bank" name="Days" style=" resize : none; height:50px;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Terms of delivery and payment
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="shipping_comm_invoice_term" name="Days" style=" resize : none; height:50px;"> </textarea>
+                <div class="row1_text_color">
+                    <i class="fa fa-pencil"></i> Remark
+                </div>
+                <textarea class="w3-input w3-border ht_100" type="text" id="shipping_comm_invoice_remark" name="Days" style=" resize : none; height:100px;"> </textarea>
+            </div>
+        </div>
+        <!-- end of second row -->
+        <hr>
+        <br>
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <div class="w3-full">
+                <pre><u>Marks and numbers</u>          <u>Description of goods</u>                <u>Quantity/Unit</u>              <u>Unit Price</u>          <u>Amount</u></pre>
+                <textarea class="w3-input w3-border" id="shipping_comm_invoice_lastnotes" style="resize:none;height:200px;width:900px; overflow-x:auto;overflow-y:auto;"></textarea>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end of w3-container -->
+
+<img src="../static/images/00001.bmp" id='doimage_shipping_comm_invoice' class="w3-hide">
+
+<script>
+    $(function() {
+        $("#date_shipping_comm_invoice_sailing").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_comm_invoice_invoice").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function() {
+        $("#date_shipping_comm_invoice_LC").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+
+
+    function setspace(size) {
+        text = '\xa0';
+        var a = size;
+        for (var i = 0; i < a; i++) {
+            text += '\xa0';
+        }
+        return text
+    }
+
+    var text1 = 'N/M';
+    var text2 = 'POLYSTER STAPLE FIBER';
+
+    var text3 = '\xa0';
+    for (var i = 0; i < 33; i++) {
+        text3 += '\xa0';
+    }
+
+    var icount1 = 33 - text1.length;
+    var text1space = setspace(icount1);
+
+    document.getElementById("shipping_comm_invoice_lastnotes").value = text1 + text1space + text2;
+
+
+    function pdfPrint_shippingcommercial() {
+        // set variable
+
+        var v1 = $("#shipping_comm_invoice_shipper").val();
+        var v2 = $("#shipping_comm_invoice_account").val();
+        var v3 = $("#shipping_comm_invoice_Notify").val();
+        var v4 = $("#shipping_comm_invoice_Loading").val();
+        var v5 = $("#shipping_comm_invoice_Destination").val();
+        var v6 = $("#shipping_comm_invoice_Vessel").val();
+        var v7 = $("#date_shipping_comm_invoice_sailing").val();
+        var v8 = $("#shipping_comm_invoice_invoice").val();
+        var v9 = $("#date_shipping_comm_invoice_invoice").val();
+        var v89 = String(v8) + '      ' + String(v9);
+        var v10 = $("#shipping_comm_invoice_LC").val();
+        var v11 = $("#date_shipping_comm_invoice_LC").val();
+        var v1011 = String(v10) + '      ' + String(v11);
+        var v12 = $("#shipping_comm_invoice_bank").val();
+        var v13 = $("#shipping_comm_invoice_term").val();
+        var v14 = $("#shipping_comm_invoice_remark").val();
+        var v15 = $("#shipping_comm_invoice_lastnotes").val();
+
+
+
+
+        var arr = v15.split('\n');
+        var isize = arr.length;
+        var arr1 = [];
+        var arr2 = '';
+
+
+        var arr3 = new Array(isize);
+        for (var i = 0; i < isize; i++) {
+            arr3[i] = new Array;
+        }
+
+        console.log('iSize ', isize);
+        for (var i = 0; i < isize; i++) {
+
+            if (arr[i].search('--') != -1) {
+
+                var str = new Array(88 + 1).join('-');
+
+
+                //arr1.push(str);
+                //arr2 += str + '\n';
+                arr3[i].push(str);
+                console.log(arr3[i]);
+            } else {
+
+                let arr_temp2 = '';
+                let arr_temp = arr[i].split('  ');
+                // 배열로 쪼개기
+
+
+                for (var j = 0; j < arr_temp.length; j++) {
+                    if (arr_temp[j].length) {
+                        console.log("arr_temp[j]:", arr_temp[j]);
+                        if ((j == 0) && (arr_temp[j] == 'NM')) {
+                            console.log("case 1 ", arr_temp[j]);
+                            arr3[i].push(arr_temp[j]);
+                        } else if ((arr3[i].length == 0) && (arr_temp[j] != 'NM')) {
+                            console.log("case 2 ", arr_temp[j]);
+                            arr3[i].push(' ');
+                            arr3[i].push(arr_temp[j]);
+                        } else {
+                            console.log("case 3 ", arr_temp[j]);
+                            arr3[i].push(arr_temp[j]);
+                        }
+
+                    }
+                }
+
+                if (arr3[i].length < 5) {
+                    let templ = 5 - arr3[i].length;
+                    for (var j = 0; j < templ; j++) {
+                        arr3[i].push(String(''));
+                    }
+                }
+
+                console.log(arr3[i]);
+            }
+
+
+            /*
+
+            arrt = [];
+            if(arr[i].substr(0,28). search('--') != -1)
+            {
+                arr_ = String('-').padEnd(21,'-');
+                arrt.push(arr_);
+            }
+            else 
+            {
+                arrt.push(arr[i].substr(0,28));
+            }
+
+            if(arr[i].substr(28,37). search('--') != -1)
+            {
+                arr_ = String('-').padEnd(32,'-');
+                arrt.push(arr_);
+            }
+            else{
+                arrt.push(arr[i].substr(28,37));
+            }
+
+            if(arr[i].substr(65,26). search('--') != -1)
+            {
+                arr_ = String('-').padEnd(11,'-');
+                arrt.push(arr_);
+            }
+            else{
+                arrt.push(arr[i].substr(65,26));
+            }
+        
+            if(arr[i].substr(91,20). search('--') != -1)
+            {
+                arr_ = String('-').padEnd(10,'-');
+                arrt.push(arr_);
+            }
+            else{
+                arrt.push(arr[i].substr(91,20));
+            }
+
+            if(arr[i].substr(111,20). search('--') != -1)
+            {
+                arr_ = String('-').padEnd(20,'-');
+                arrt.push(arr_);
+            }
+            else{
+                arrt.push(arr[i].substr(111,20));
+            }
+            arr1.push(arrt);
+            */
+
+        }
+
+        console.log(arr3);
+
+        // var rows = [];
+        // for (var i = 0; i < isize; i++) {
+        //     rows.push([arr1[i][0], arr1[i][1], arr1[i][2], arr1[i][3], arr1[i][4]]);
+        // }
+
+        // var dd = {
+
+        //     table: {
+        //         widths: [70, 200, 60, 60, '*'],
+        //         fontSize: 8,
+        //         alignment: 'center',
+        //         margin: [0, 0, 0, 0],
+        //         body: rows
+        //             //body:arr1
+        //     },
+        //     fontSize: 8,
+        //     alignment: 'center',
+        //     layout: 'noBorders',
+        //     margin: [0, 0, 0, 0]
+        // }
+
+        // image 
+        var canvas = document.createElement('canvas');
+        var img = document.getElementById('doimage_shipping_comm_invoice');
+        canvas.height = img.naturalHeight;
+        canvas.width = img.naturalWidth;
+        var ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var base64String2 = canvas.toDataURL();
+
+        var ee = {
+            image: base64String2,
+            width: 200,
+            height: 100,
+            absolutePosition: {
+                x: 380,
+                y: 680
+            }
+        }
+        if (document.getElementById("shipping_commercial_invoice_sign_check").checked == true) {
+            ee = {
+                image: base64String2,
+                width: 200,
+                height: 100,
+                absolutePosition: {
+                    x: 380,
+                    y: 680
+                }
+            }
+        } else {
+            ee = {
+                alignment: 'right',
+                margin: [0, 0, 30, 0],
+                text: 'Signed by '
+            }
+
+        }
+
+        var docDefinition2 = {
+            content: [{
+                        alignment: 'center',
+                        text: '\nCOMMERCIAL INVOICE\n',
+                        bold: true,
+                        fontSize: 30
+                    }, {
+                        color: '#444',
+                        table: {
+                            widths: [120, 120, '*'],
+                            heights: [25, 25, 30, 30, 40, 30, 30],
+                            body: [
+                                [{
+                                    border: [true, true, true, false],
+                                    colSpan: 2,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Shipper/Exporter\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v1
+                                    }]
+                                }, '', {
+                                    text: [{
+                                        bold: true,
+                                        text: 'No. & date of invoice\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v89
+                                    }]
+                                }],
+                                ['', '', {
+                                    text: [{
+                                        bold: true,
+                                        text: 'No. & date of L/C\n'
+                                    }, {
+                                        fontSize: 9,
+                                        text: v1011
+                                    }]
+
+                                }],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 2,
+                                    text: [{
+                                        bold: true,
+                                        fontSize: 10,
+                                        text: 'For Account & Risk of Messrs. /Buyer /Applicant \n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v2
+                                    }]
+                                }, '', {
+                                    text: [{
+                                        bold: true,
+                                        fontSize: 10,
+                                        text: 'L/C issuing bank \n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v12
+                                    }]
+                                }],
+                                //['','',{bold:true,text:'Terms of delivery and payment'}],
+                                ['', '', {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Terms of delivery and payment\n'
+                                    }, {
+                                        fontSize: 9,
+                                        text: v13
+                                    }]
+
+                                }],
+                                [{
+                                    colSpan: 2,
+                                    rowSpan: 1,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Notify party\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v3
+                                    }]
+                                }, '', {
+                                    colSpan: 1,
+                                    rowSpan: 3,
+                                    text: [{
+                                        bold: true,
+                                        text: 'Remark\n',
+                                    }, {
+                                        fontSize: 9,
+                                        alignment: 'justify',
+                                        text: v14
+                                    }]
+                                }],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Port of Loading\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v4
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Final desitination\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v5
+                                    }]
+                                }, ''],
+                                [{
+                                    text: [{
+                                        bold: true,
+                                        text: 'Vessel / Flight\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v6
+                                    }]
+                                }, {
+                                    text: [{
+                                        bold: true,
+                                        text: 'Sailing on or about\n',
+                                    }, {
+                                        fontSize: 9,
+                                        text: v7
+                                    }]
+                                }, ''],
+                            ]
+                        } // table layout
+                    },
+
+                    {
+                        color: '#123',
+                        table: {
+                            widths: [100, 150, 60, 60, '*'],
+                            heights: [15, 100, 40],
+                            body: [
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Marks and numbers\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: 'Description of goods\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Quantity/Unit\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Unit Price\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: 'Amount\n',
+                                        }]
+
+
+                                    }
+
+                                ]
+                            ]
+                        } // table layout
+                    },
+                    //dd, 총 3개 아이템만 적용 가능 
+                    {
+                        color: '#123',
+                        layout: 'noBorders',
+                        table: {
+                            widths: [100, 150, 60, 60, '*'],
+                            heights: [15, 15, 15, 15, 15],
+                            body: [
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[0][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[0][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[0][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[0][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[0][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ],
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[1][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[1][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[1][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[1][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[1][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ],
+
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[2][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[2][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[2][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[2][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[2][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ],
+
+
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[3][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[3][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[3][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[3][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[3][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ],
+
+
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[4][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[4][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[4][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[4][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[4][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ],
+
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[5][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[5][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[5][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[5][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[5][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ],
+
+
+                                [{
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[6][0]) + '\n',
+                                        }]
+                                    }, {
+                                        fontSize: 10,
+                                        alignment: 'center',
+                                        bold: true,
+                                        text: String(arr3[6][1]) + '\n',
+
+
+                                    }, {
+
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[6][2]) + '\n',
+                                        }]
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[6][3]) + '\n',
+                                        }]
+
+
+                                    }, {
+
+
+                                        bold: true,
+                                        text: [{
+                                            fontSize: 10,
+                                            alignment: 'center',
+                                            bold: true,
+                                            text: String(arr3[6][4]) + '\n',
+                                        }]
+
+
+                                    }
+
+                                ]
+
+                            ]
+                        } // table layout
+                    }, {
+                        // text: {
+                        //   text: arr2,
+                        // fontSize: 10,
+                        //                            preserveLeadingSpaces: true
+                        //                      }
+                    },
+
+                    {
+                        text: '\n\n\n\n\n\n\n\n\n                          '
+                    },
+                    ee
+                ] // end of content
+        }; // end of docDefinition2
+
+        var pdf_name = 'Commercial_invoice.pdf';
+        var pdf = pdfMake.createPdf(docDefinition2).download(pdf_name);
+    } // end of pdfPrint()
+</script>

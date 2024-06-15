@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colrolib Templates">
+    <meta name="author" content="colorlib.com">
+    <meta name="keywords" content="Colrolib Templates">
+
+    <!-- Title Page-->
+    <title>Au Form Wizard</title>
+
+    <!-- Icons font CSS-->
+    <link href="{{ url_for('static', filename='search2/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet" media="all">
+    <link href="{{ url_for('static', filename='search2/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet" media="all">    
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <!-- Vendor CSS-->
+    <link href="{{ url_for('static', filename='search2/vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">    
+    <link href="{{ url_for('static', filename='search2/vendor/datepicker/daterangepicker.css') }}" rel="stylesheet" media="all">        
+
+    <!-- Main CSS-->
+    <link href="{{ url_for('static', filename='search2/css/main.css') }}" rel="stylesheet" media="all">            
+</head>
+
+<body>
+    <div class="page-wrapper bg-color-1 p-t-395 p-b-120">
+        <div class="wrapper wrapper--w1070">
+            <div class="card card-7">
+                <div class="card-body">
+                    <fieldset>
+                        <h1>SEARCH NEGO DATA</h1>
+                    </fieldset>
+                    <!--form class="form" method="POST" action="#"-->
+                    <form action="{{ url_for('viewDB_ret_search2') }}" method="GET">
+                        
+                        <div class="input-group input--medium">
+                            <label class="label">From</label>
+                            <input class="input--style-1"  type="text" name="checkin" placeholder="From Date" id="input-start">
+                        </div>
+                        <div class="input-group input--medium">
+                            <label class="label">To</label>
+                            <input class="input--style-1"  type="text" name="checkout" placeholder="To Date" id="input-end">
+                        </div>
+                        
+                        <!--button class="btn-submit" type="submit">search</button-->
+                        <button class="btn-submit" type="button submit" onclick="window.open( {{ url_for('viewDB_ret_search2') }} , '_self')">SEARCH</button>            
+                    </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/jquery/jquery.min.js') }}"></script>    
+    <!-- Vendor JS-->
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/select2/select2.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/jquery-validate/jquery.validate.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/bootstrap-wizard/bootstrap.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/datepicker/moment.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/vendor/datepicker/daterangepicker.js') }}"></script>
+    <!-- Main JS-->
+    <script type="text/javascript" src="{{ url_for('static', filename='search2/js/global.js') }}"></script>
+    
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

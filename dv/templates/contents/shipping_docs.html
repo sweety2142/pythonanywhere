@@ -1,0 +1,381 @@
+<style>
+    .w3-full pre {
+        height: 40px;
+        /*something like 90% would work too if parent's height is specified*/
+        width: 900px;
+        word-wrap: break-word;
+        /*if you want to prevent horizontal scrolling and wrap text instead*/
+    }
+</style>
+
+<div class="w3-container w3-hide" id="shippingdocsdb_header" style="width:100%;max-width:1000px">
+    <label class="w3-small row2_text_color">Search DataBase</label>
+    <select id="shippingdocsDB" class="w3-small w3-pale-blue w3-card bootstrap3">
+    <option value=""></option>
+    
+    {% for item in all_data %}
+    <option style='background-color:yellow'; z-index:10000; value="{{ item }}"> {{ item }}</option>
+    {% endfor %}
+</select>
+
+    <div class="w3-bar w3-dark-grey">
+        <button class="w3-bar-item w3-button tablink w3-pale-blue" id="shipping_button_home" onclick="openCity(event,'shippingdocs');">Basic Form</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'shipping_packing_list');">Packing List</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'shipping_comm_invoice')">Invoice</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'shipping_certificate')">CO</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'shipping_request')">S/R</button>
+    </div>
+
+
+</div>
+
+
+
+
+<div class="w3-container w3-card w3-white w3-margin-bottom w3-hide w3-animate-right  " id="shippingdocs" style="max-width:1000px;overflow:auto">
+    <div class="w3-container">
+        <br>
+        <!-- start -->
+        <!-- First row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-third">
+                <div style="color:#d96868;font-weight:bold">
+                    Order No
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shippingdocs_OrderNo" readonly>
+                </div>
+                <div class="w3-half">
+                    <input class="w3-input w3-light-gray ht_25" type="text" id="shippingdocs_OrderGubun" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="w3-container w3-row-padding w3-margin-bottom w3-small">
+            <!-- w3-third [1] -->
+            <div class="w3-full">
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 1. No._date of invoice (C/I,P/L,C/O)
+                </div>
+                <div class="w3-half">
+                    <div class="w3-half">
+                        <div class="w3-col s2 m2 l2 w3-center">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                        <div class="w3-col s10 m10 l10">
+                            <input class="w3-input w3-border ht_25" type="text" id="shippingdocs_1" name="Days">
+                        </div>
+                    </div>
+                    <div class="w3-half">
+                        <div class="w3-col s2 m2 l2 w3-center">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </div>
+                        <div class="w3-col s10 m10 l10">
+                            <input type="text" id="date_shippingdocs_1" class="w3-input ht_25 max_width_200">
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 2. No._date of L/C (C/I,P/L)
+                </div>
+                <div class="w3-half">
+                    <div class="w3-half">
+                        <div class="w3-col s2 m2 l2 w3-center">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                        <div class="w3-col s10 m10 l10">
+                            <input class="w3-input w3-border ht_25" type="text" id="shippingdocs_2" name="Days">
+                        </div>
+                    </div>
+                    <div class="w3-half">
+                        <div class="w3-col s2 m2 l2 w3-center">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </div>
+                        <div class="w3-col s10 m10 l10">
+                            <input type="text" id="date_shippingdocs_2" class="w3-input ht_25 max_width_200">
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 3. L/C issuing bank (C/I)
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_3" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 4. Terms of delivery and payment (C/I)
+                </div>
+                <div class="w3-half">
+                    <select id="shippingdocs_4" class="bootstrap3 w3-small readonly">
+                        <option value=""></option>
+                        {% for item in term_data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_4_text" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 5. Shipper/Exporter (C/I,S/R,P/L,C/O)
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_5" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 6. For Account _Risk of Messrs. / Buyer (C/I,P/L)
+                </div>
+                <div class="w3-half">
+                    <select id="shippingdocs_6" class="bootstrap3 w3-small readonly">                                                
+                        {% for item in buyer_data %}
+                        <option  value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_6_text" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 7. CONSIGNEE (S/R,C/O)
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_7" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 8. Notify party (C/I,S/R,P/L)
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_8" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 10. Port of loading (C/I,S/R,P/L,C/O)
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_10" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 11. Final Destination (C/I,S/R,P/L,C/O)
+                </div>
+                <div class="w3-half">
+                    <select id="shippingdocs_11" class="bootstrap3 w3-small readonly">                                                
+                        {% for item in destination_data %}
+                        <option  value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_11_text" style="resize:none;line-height:1.6;overflow-y:hidden;">
+                </textarea>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 12. Vessel/Flight (C/I,S/R,P/L,C/O)
+                </div>
+                <div class="w3-half">
+                    <div class="w3-col s2 m2 l2 w3-center">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="w3-col s10 m10 l10">
+                        <input class="w3-input w3-border ht_25" type="text" id="shippingdocs_12" name="Days">
+                    </div>
+                </div>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 13. Sailing on or about
+                </div>
+                <div class="w3-half">
+                    <div class="w3-col s2 m2 l2 w3-center">
+                        <i class="fa fa-calendar-check-o"></i>
+                    </div>
+                    <div class="w3-col s10 m10 l10">
+                        <input type="text" id="date_shippingdocs_13" class="w3-input ht_25 max_width_200">
+                    </div>
+                </div>
+
+                <div class="w3-col s3 m3 l3 row1_text_color">
+                    <i class="fa fa-pencil"></i> 14. Remarks (C/I)
+                </div>
+                <div class="w3-col s1 m1 l1 w3-center">
+                    <i class="fa fa-pencil"></i>
+                </div>
+                <div class="w3-col s8 m8 l8">
+                    <textarea class="w3-input w3-border" id="shippingdocs_14_text" style="resize:none;line-height:1.6;overflow-y:hidden;height:200px;">
+                    </textarea>
+                </div>
+
+                <div class="w3-col s3 m3 l3 row1_text_color">
+                    <i class="fa fa-pencil"></i> 15. Remarks (P/L)
+                </div>
+                <div class="w3-col s1 m1 l1 w3-center">
+                    <i class="fa fa-pencil"></i>
+                </div>
+                <div class="w3-col s8 m8 l8">
+                    <textarea class="w3-input w3-border" id="shippingdocs_15_text" style="resize:none;line-height:1.6;overflow-y:hidden;height:150px;">
+                    </textarea>
+                </div>
+
+                <div class="w3-half row1_text_color">
+                    <i class="fa fa-pencil"></i> 16. Quantity/Unit Prx/Amount(C/I)
+                    <pre><u>Marks and numbers</u>          <u>Description of goods</u>                <u>Quantity/Unit</u>              <u>Unit Price</u>          <u>Amount</u></pre>
+                </div>
+
+                <textarea class="w3-input w3-border" id="shippingdocs_16" style="resize:none;height:200px;width:900px; overflow-x:auto;overflow-y:auto; font-family:Courier 'Courier New', Courier, monospace;letter-spacing: 0px;">
+                </textarea>
+
+                <div class="w3-full row1_text_color">
+                    <i class="fa fa-pencil"></i> 17. Net Weight/Gross Weight/Measurement (S/R,P/L,C/O)
+                    <pre><u>Marks and numbers</u>          <u>Description of goods</u>                <u>Net weight</u>                 <u>Gross weight</u>        <u>Measurement</u></pre>
+                </div>
+                <textarea class="w3-input w3-border" id="shippingdocs_17" style="resize:none;height:200px;width:900px; overflow-x:auto;overflow-y:auto;font-family:Courier 'Courier New', Courier, monospace">
+                </textarea>
+
+                <div class="w3-full row1_text_color">
+                    <i class="fa fa-pencil"></i> 18. Lot No and Cont No (P/L, S/R)
+                    <table class="w3-table-all w3-card-4 w3-small w3-centered" id="shippingdocs_tableSPL">
+                        <tr>
+                            <th class="min_width_100">ContainerNo</th>
+                            <th class="min_width_100">LotNo</th>
+                            <th class="min_width_100">출고일</th>
+                            <th class="min_width_100">출고수량</th>
+                            <th class="min_width_100">선사</th>
+                            <th class="min_width_100">선명</th>
+                            <th class="min_width_100">C/Size</th>
+                            <th class="min_width_100">포워더</th>
+                        </tr>
+                        <tr>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_container0" type="text" placeholder="Enter text"></td>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_lotNo0" type="text" placeholder="Enter text"></td>
+                            <td><input type="text" id="shippingdocs_date_chul0" class="w3-input ht_25" placeholder="Select date"></td>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_amount0" type="text" placeholder="Enter text"></td>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_company0" type="text" placeholder="Enter text"></td>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_name0" type="text" placeholder="Enter text"></td>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_size" type="text" placeholder="Enter text"></td>
+                            <td><input class="w3-input w3-border ht_25" id="shippingdocs_forward" type="text" placeholder="Enter text"></td>
+                        </tr>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- end of second row -->
+
+
+        </div>
+    </div>
+    <!-- end of w3-container -->
+</div>
+
+
+
+<script>
+    shippingdocsDB = $('#shippingdocsDB').selectize({
+        placeholder: "Select item",
+        //valueField:'name',
+        searchField: ['name'],
+        score: function(search) {
+            var score = this.getScoreFunction(search);
+            return function(item) {
+                if (item.text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            };
+        },
+        sortField: [{
+            field: 'name',
+            direction: 'asc'
+        }],
+        onDropdownOpen: function($dropdown) {
+            this.$input.get(0).selectize.clear(true);
+        }
+    })[0].selectize;
+
+    shippingdocs_4 = $('#shippingdocs_4').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    shippingdocs_4.setValue(0, true);
+
+    shippingdocs_6 = $('#shippingdocs_6').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    shippingdocs_6.setValue(0, true);
+
+    shippingdocs_11 = $('#shippingdocs_11').selectize({
+        plugins: ['enter_key_submit']
+    })[0].selectize;
+    shippingdocs_11.setValue(0, true);
+
+    $(function() {
+        $("#date_shippingdocs_1").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#date_shippingdocs_2").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#date_shippingdocs_13").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("#shippingdocs_date_chul0").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+
+<script>
+    function openCity(evt, cityName) {
+
+
+        var i, x, tablinks;
+
+        //myFuncHide('myBtn_shipping_docs');    
+        myFuncHide('shippingdocs');
+
+        myFuncHide('shipping_packing_list_header');
+        myFuncHide('shipping_packing_list');
+
+        myFuncHide('shipping_comm_invoice');
+        myFuncHide('shipping_comm_invoice_header');
+
+        myFuncHide('shipping_certificate');
+        myFuncHide('shipping_certificate_header');
+
+        myFuncHide('shipping_request');
+        myFuncHide('shipping_request_header');
+
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < 5; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-pale-blue", "");
+        }
+        //document.getElementById(cityName).style.display = "block";
+        //myFuncShow(cityName);
+        if (cityName == 'shippingdocs') {
+            myFuncShow(cityName);
+        }
+        if (cityName == 'shipping_packing_list') {
+            myFuncShow('shipping_packing_list_header');
+            myFuncShow('shipping_packing_list');
+        }
+        if (cityName == 'shipping_comm_invoice') {
+            myFuncShow('shipping_comm_invoice_header');
+            myFuncShow('shipping_comm_invoice');
+        }
+        if (cityName == 'shipping_certificate') {
+            myFuncShow('shipping_certificate');
+            myFuncShow('shipping_certificate_header');
+        }
+        if (cityName == 'shipping_request') {
+            myFuncShow('shipping_request');
+            myFuncShow('shipping_request_header');
+        }
+
+        evt.currentTarget.className += " w3-pale-blue";
+    }
+</script>
